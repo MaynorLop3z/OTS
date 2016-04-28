@@ -5,7 +5,7 @@
         <group>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Login.php</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/Empresas.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/Login.php</file>
+            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Administration.php</file>
         </group>
     </open-files>
 </project-private>
