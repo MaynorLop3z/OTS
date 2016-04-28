@@ -21,9 +21,6 @@ and open the template in the editor.
         <script src="../appearance/js/login.js"></script>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
         <div class="container wrapper bg" data-ibg-bg="../appearance/images/bg_login.jpg" >
             <div class="row vertical-offset-100" id="contenedor">
                 <div class="col-md-3"></div>
@@ -43,11 +40,16 @@ and open the template in the editor.
                                 <div class="focusContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-industry fa-fw" aria-hidden="true"></i></span>
-                                        <select class="form-control">
-                                            <option>Buffalo Wings</option>
-                                            <option>Burger King</option>
-                                            <option>McDonalds</option>
-                                            <option>Pizza Hut</option>
+                                        <select class="form-control" name="sEmpresas" id="sEmpresas">
+                                            <?php
+                                                foreach ($Empresas as $empresa) {
+                                                    ?>
+                                                    <option value="<?= $empresa->IdEmpresa ?>">
+                                                        <?= $empresa->Nombre ?>
+                                                    </option>
+                                                    <?php
+                                                }
+                                                ?>
                                         </select>
                                     </div>
                                 </div>
