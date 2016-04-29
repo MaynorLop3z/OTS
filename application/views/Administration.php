@@ -20,8 +20,20 @@ and open the template in the editor.
     <body>
         <div class="container">
             <div class="row">
+                <h1>Nombre empresa</h1>
+            </div>
+            <div class="row">
                 <div class="col-md-1"></div>
-                <div class="col-md-10"></div>
+                <div class="col-md-10">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="productos" class="active"><a href="#productos" aria-controls="productos" role="tab" data-toggle="tab">Producto</a></li>
+                        <li role="usuarios"><a href="#usuarios" aria-controls="usuarios" role="tab" data-toggle="tab">Usuarios</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="productos">...</div>
+                        <div role="tabpanel" class="tab-pane fade" id="usuarios">...</div>
+                    </div>
+                </div>
                 <div class="col-md-1"></div>
             </div>
         </div>

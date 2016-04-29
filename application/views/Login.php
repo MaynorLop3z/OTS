@@ -56,13 +56,13 @@ and open the template in the editor.
                                 <div class="focusContainer">
                                     <div class="input-group margin-bottom-sm">
                                         <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
-                                        <input class="form-control" type="text" placeholder="UserName">
+                                        <input class="form-control" type="text" placeholder="UserName" name="UserAlias" id="UserAlias">
                                     </div>
                                 </div>
                                 <div class="focusContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                                        <input class="form-control" type="password" placeholder="Password">
+                                        <input class="form-control" type="password" placeholder="Password" name="UserPass" id="UserPass">
                                     </div>
                                 </div>
                                 <div class="focusContainer">

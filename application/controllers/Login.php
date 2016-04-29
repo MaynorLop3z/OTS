@@ -8,10 +8,15 @@ class Login extends CI_Controller {
         parent::__construct();
         $this->load->model('Empresas');
     }
-    
+
     public function index() {
-        $data['Empresas'] = $this->Empresas->getEmpresas();
-        $this->load->view('login',$data);
+        $idEmpresa = $this->input->post('UserAlias');
+        if ($idEmpresa != null) {
+            $this->load->view('administration');
+        } else {
+            $data['Empresas'] = $this->Empresas->getEmpresas();
+            $this->load->view('login', $data);
+        }
     }
 
 }
