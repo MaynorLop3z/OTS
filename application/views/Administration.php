@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <?php $this->load->helper('url'); ?>
         <meta charset="UTF-8">
-        <title>Login</title>
+        <title>Administracion</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
@@ -18,9 +18,12 @@ and open the template in the editor.
         <link href="../appearance/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <h1>Nombre empresa</h1>
+                <div class="col-md-1"></div>
+                <div class="col-md-10"><h1>Nombre empresa</h1></div>
+                <div class="col-md-1"></div>
+                
             </div>
             <div class="row">
                 <div class="col-md-1"></div>
@@ -30,8 +33,8 @@ and open the template in the editor.
                         <li role="usuarios"><a href="#usuarios" aria-controls="usuarios" role="tab" data-toggle="tab">Usuarios</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="productos">...</div>
-                        <div role="tabpanel" class="tab-pane fade" id="usuarios">...</div>
+                        <div role="tabpanel" class="tab-pane fade in active" id="productos">Productos</div>
+                        <div role="tabpanel" class="tab-pane fade" id="usuarios">Usuarios</div>
                     </div>
                 </div>
                 <div class="col-md-1"></div>

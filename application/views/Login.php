@@ -33,7 +33,7 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form accept-charset="UTF-8" role="form" class="form-signin">
+                            <form method="POST" action="" accept-charset="UTF-8" role="form" class="form-signin">
                                 <label class="panel-login">
                                     <div class="login_result"></div>
                                 </label>
@@ -56,17 +56,17 @@ and open the template in the editor.
                                 <div class="focusContainer">
                                     <div class="input-group margin-bottom-sm">
                                         <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
-                                        <input class="form-control" type="text" placeholder="UserName" name="UserAlias" id="UserAlias">
+                                        <input type="text" class="form-control"  placeholder="Usuario" name="UserAlias" id="UserAlias" required autofocus>
                                     </div>
                                 </div>
                                 <div class="focusContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                                        <input class="form-control" type="password" placeholder="Password" name="UserPass" id="UserPass">
+                                        <input type="password" name="UserPass" id="UserPass" class="form-control"  placeholder="Contraseña"  required>
                                     </div>
                                 </div>
                                 <div class="focusContainer">
-                                    <input class="btn btn btn-success btn-block" type="submit" id="login" value="Ingresar">
+                                    <button type="submit" class="btn btn-success btn-block">Ingresar</button>
                                 </div>
                             </form>
                         </div>
