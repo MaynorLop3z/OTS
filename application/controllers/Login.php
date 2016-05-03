@@ -12,7 +12,7 @@ class Login extends CI_Controller {
     public function index() {
         $idEmpresa = $this->input->post('UserAlias');
         if ($idEmpresa != null) {
-            $this->load->view('administration');
+            $this->load->view('Orders');
         } else {
             $data['Empresas'] = $this->Empresas->getEmpresas();
             $this->load->view('login', $data);
