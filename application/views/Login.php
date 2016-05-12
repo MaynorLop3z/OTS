@@ -34,22 +34,22 @@ and open the template in the editor.
                         </div>
                         <div class="panel-body">
                             <form method="POST" action="" accept-charset="UTF-8" role="form" class="form-signin">
-                                <label class="panel-login">
-                                    <div class="login_result"></div>
+                                <label class="panel-login col-md-12">
+                                    <?= $ErrorLogin ?>
                                 </label>
                                 <div class="focusContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-industry fa-fw" aria-hidden="true"></i></span>
                                         <select class="form-control" name="sEmpresas" id="sEmpresas">
                                             <?php
-                                                foreach ($Empresas as $empresa) {
-                                                    ?>
-                                                    <option value="<?= $empresa->IdEmpresa ?>">
-                                                        <?= $empresa->Nombre ?>
-                                                    </option>
-                                                    <?php
-                                                }
+                                            foreach ($Empresas as $empresa) {
                                                 ?>
+                                                <option value="<?= $empresa->IdEmpresa ?>">
+                                                    <?= $empresa->Nombre ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>

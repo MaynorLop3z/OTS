@@ -30,7 +30,7 @@ and open the template in the editor.
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
                                 </span>
-                                Maynor Lopez
+                                <?= $this->session->userdata('nombreUser'); ?>
                             </button>
                             <button type="button" class="btn btn-link">
                                 <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Logout
