@@ -28,7 +28,7 @@ and open the template in the editor.
                             <button type="button" class="btn btn-link">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+                                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
                                 </span>
                                 <?= $this->session->userdata('nombreUser'); ?>
                             </button>
