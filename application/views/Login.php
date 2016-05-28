@@ -19,6 +19,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="../appearance/font-awesome/css/font-awesome.min.css">
         <script src="../appearance/js/jquery.interactive_bg.js"></script>
         <script src="../appearance/js/login.js"></script>
+        <script src="../appearance/js/pedidos.js"></script>
     </head>
     <body>
         <div class="container wrapper bg" data-ibg-bg="../appearance/images/bg_login.jpg" >
