@@ -19,7 +19,9 @@ class Login extends CI_Controller {
             if ($UserData != null) {
                 $usuario_data = array('nombreUser' => $UserData->Nombre,'ipUser' => $this->input->ip_address(),'logueado' => TRUE);
                 $this->session->set_userdata($usuario_data);
-                $this->load->view('Orders');
+//                $this->load->view('Orders');
+                $this->load->helper('url');
+                Redirect('Orders');
             } else {
                 $data['Empresas'] = $this->Empresas->getEmpresas();
                 $data['ErrorLogin'] = '<div id="login_error" class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Error!</strong> Usuario o contraseña no validos. </div>';
