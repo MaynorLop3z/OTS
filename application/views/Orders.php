@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <?php $this->load->helper('url'); ?>
@@ -41,7 +36,6 @@ and open the template in the editor.
 
             </div>
             <div class="row">
-                <!--<div class="col-md-1"></div>-->
                 <div class="col-md-8">
                     <!--<form method="POST" action="" accept-charset="UTF-8" role="form">-->
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -60,7 +54,7 @@ and open the template in the editor.
                                         <div class="form-group">
                                             <label for="ClientNumber" class="col-sm-2 control-label">Telefono:</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="ClientNumber" placeholder="Numero de telefono">
+                                                <input type="text" class="form-control" id="ClientNumber" placeholder="Numero de telefono" onkeydown="searchClient(event)">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -96,7 +90,7 @@ and open the template in the editor.
                                         <!--<form method="POST" action="" class="itemMenu">-->
                                         <div class="col-sm-6 col-md-4">
                                             <div class="thumbnail">
-                                                <img src="../appearance/images/1-wings_200x200.png" alt="Wings">
+                                                <img src="../appearance/images/wings_120x120.png" alt="Wings">
                                                 <div class="caption itemMenu1">
                                                     <h3 class="itemName">Wings</h3>
                                                     <p>Tipo de Salsa:<br>
@@ -134,7 +128,7 @@ and open the template in the editor.
                                         <form method="POST" action="" class="itemMenu">
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="thumbnail">
-                                                    <img src="../appearance/images/2-chunks1_200x200.png" alt="Wings">
+                                                    <img src="../appearance/images/chunks_120x120.png" alt="Wings">
                                                     <div class="caption">
                                                         <h3 class="itemName">Chunks</h3>
                                                         <p>Tipo de Salsa:<br>
@@ -147,11 +141,11 @@ and open the template in the editor.
                                                             </select>
                                                             Nivel de Picante:<br>
                                                             <select class="form-control" name="nivelHot">
-                                                                <option>La que no pica</option>
-                                                                <option>La picante</option>
-                                                                <option>La suicida</option>
-                                                                <option>La atomica</option>
-                                                                <option>La 911</option>
+                                                                <option value="1">La que no pica</option>
+                                                                <option value="2">La picante</option>
+                                                                <option value="3">La suicida</option>
+                                                                <option value="4">La atomica</option>
+                                                                <option value="5">La 911</option>
                                                             </select>
                                                             Cantidad:<br>
                                                             <select class="form-control" name="Quantity">
@@ -162,7 +156,7 @@ and open the template in the editor.
                                                         </p>
                                                         <!--<p>-->
                                                         <!--<div onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>-->
-                                                        <button type="submit" onclick="" class=" btn btn-success" name="Aceptar">Agregar</button>
+                                                        <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
                                                         <!--</p>-->
                                                     </div>
                                                 </div>
@@ -319,14 +313,14 @@ and open the template in the editor.
                                             <th>Precio</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
+                                    <tbody id="detailOrder">
+<!--                                        <tr>
                                             <td>Alitas</td>
                                             <td>Hawaina</td>
                                             <td>Picante</td>
                                             <td>10</td>
                                             <td>7.95</td>
-                                        </tr>
+                                        </tr>-->
                                     </tbody>
                                 </table>
                             </div>
