@@ -89,12 +89,50 @@
                                     <div class="row">
                                         <!--<form method="POST" action="" class="itemMenu">-->
                                         <div class="col-sm-6 col-md-4">
-                                            <div class="thumbnail">
-                                                <img src="../appearance/images/wings_120x120.png" alt="Wings">
-                                                <div class="caption itemMenu1">
-                                                    <h3 class="itemName">Wings</h3>
+                                            <!--<div class="thumbnail">-->
+                                                <!--<img src="../appearance/images/wings_120x120.png" alt="Wings">-->
+                                            <div class="caption itemMenu1">
+                                                <h3 class="itemName">Wings</h3>
+                                                <p>Tipo de Salsa:<br>
+                                                    <select class="form-control typeSalsa" name="typeSalsa">
+                                                        <option>La adictiva</option>
+                                                        <option>Teriyaki</option>
+                                                        <option>Ajo Parmesano</option>
+                                                        <option>Wok Plum</option>
+                                                        <option>Hawaiana</option>
+                                                    </select>
+                                                    Nivel de Picante:<br>
+                                                    <select class="form-control nivelHot" name="nivelHot">
+                                                        <option>La que no pica</option>
+                                                        <option>La picante</option>
+                                                        <option>La suicida</option>
+                                                        <option>La atomica</option>
+                                                        <option>La 911</option>
+                                                    </select>
+                                                    Cantidad:<br>
+                                                    <select class="form-control Quantity" name="Quantity">
+                                                        <option value="7.95">10 - $7.95</option>
+                                                        <option value="15.70">20 - $15.70</option>
+                                                        <option value="23.45">30 - $23.45</option>
+                                                    </select>
+                                                </p>
+                                                <p>
+                                                <div id="itemBoton1" onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>
+                                                <!--<button type="submit" onclick="" class=" btn btn-success" name="Aceptar">Agregar</button>-->
+                                                </p>
+                                            </div>
+                                            <!--</div>-->
+                                        </div>
+                                        <!--</form>-->
+
+                                        <form method="POST" action="" class="itemMenu">
+                                            <div class="col-sm-6 col-md-4">
+                                                <!--<div class="thumbnail">-->
+                                                    <!--<img src="../appearance/images/chunks_120x120.png" alt="Wings">-->
+                                                <!--<div class="caption">-->
+                                                    <h3 class="itemName">Chunks</h3>
                                                     <p>Tipo de Salsa:<br>
-                                                        <select class="form-control typeSalsa" name="typeSalsa">
+                                                        <select class="form-control" name="typeSalsa">
                                                             <option>La adictiva</option>
                                                             <option>Teriyaki</option>
                                                             <option>Ajo Parmesano</option>
@@ -102,66 +140,28 @@
                                                             <option>Hawaiana</option>
                                                         </select>
                                                         Nivel de Picante:<br>
-                                                        <select class="form-control nivelHot" name="nivelHot">
-                                                            <option>La que no pica</option>
-                                                            <option>La picante</option>
-                                                            <option>La suicida</option>
-                                                            <option>La atomica</option>
-                                                            <option>La 911</option>
+                                                        <select class="form-control" name="nivelHot">
+                                                            <option value="1">La que no pica</option>
+                                                            <option value="2">La picante</option>
+                                                            <option value="3">La suicida</option>
+                                                            <option value="4">La atomica</option>
+                                                            <option value="5">La 911</option>
                                                         </select>
                                                         Cantidad:<br>
-                                                        <select class="form-control Quantity" name="Quantity">
+                                                        <select class="form-control" name="Quantity">
                                                             <option value="7.95">10 - $7.95</option>
                                                             <option value="15.70">20 - $15.70</option>
                                                             <option value="23.45">30 - $23.45</option>
                                                         </select>
                                                     </p>
-                                                    <p>
-                                                    <div id="itemBoton1" onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>
-                                                    <!--<button type="submit" onclick="" class=" btn btn-success" name="Aceptar">Agregar</button>-->
-                                                    </p>
-                                                </div>
+                                                    <!--<p>-->
+                                                    <!--<div onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>-->
+                                                    <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
+                                                    <!--</p>-->
+                                                <!--</div>-->
+                                                <!--</div>-->
                                             </div>
-                                        </div>
-                                        <!--</form>-->
-
-                                        <form method="POST" action="" class="itemMenu">
-                                            <div class="col-sm-6 col-md-4">
-                                                <div class="thumbnail">
-                                                    <img src="../appearance/images/chunks_120x120.png" alt="Wings">
-                                                    <div class="caption">
-                                                        <h3 class="itemName">Chunks</h3>
-                                                        <p>Tipo de Salsa:<br>
-                                                            <select class="form-control" name="typeSalsa">
-                                                                <option>La adictiva</option>
-                                                                <option>Teriyaki</option>
-                                                                <option>Ajo Parmesano</option>
-                                                                <option>Wok Plum</option>
-                                                                <option>Hawaiana</option>
-                                                            </select>
-                                                            Nivel de Picante:<br>
-                                                            <select class="form-control" name="nivelHot">
-                                                                <option value="1">La que no pica</option>
-                                                                <option value="2">La picante</option>
-                                                                <option value="3">La suicida</option>
-                                                                <option value="4">La atomica</option>
-                                                                <option value="5">La 911</option>
-                                                            </select>
-                                                            Cantidad:<br>
-                                                            <select class="form-control" name="Quantity">
-                                                                <option value="7.95">10 - $7.95</option>
-                                                                <option value="15.70">20 - $15.70</option>
-                                                                <option value="23.45">30 - $23.45</option>
-                                                            </select>
-                                                        </p>
-                                                        <!--<p>-->
-                                                        <!--<div onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>-->
-                                                        <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
-                                                        <!--</p>-->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--</form>-->
+                                        </form>
                                     </div> 
                                     <!--                                            <div class="col-md-6">
                                                                                     <img src="../appearance/images/sshot-15.png" class="img-responsive" alt="Buffalo Wings"/>
@@ -181,6 +181,19 @@
                                                                                     </select>
                                                                                     <h4><span class="label label-primary">$5.79 C/Orden</span></h4>
                                                                                 </div>-->
+                                    <!--                                    <form method="POST" action="" class="itemMenu"><div class="col-sm-6 col-md-4">
+                                                                            <div class="panel panel-success">
+                                                                                <div class="panel-heading">
+                                                                                    <h3 class="panel-title">Panel title</h3>
+                                                                                </div>
+                                                                                <div class="panel-body">
+                                                                                    Panel content
+                                                                                </div>
+                                                                                <div class="panel-footer">Panel footer</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        </form>-->
+
                                 </div>
                             </div>
                         </div>
