@@ -46,8 +46,14 @@ class Orders extends CI_Controller {
         }
         $sauceTypes .= '</select>';
     }
-public function generarProducto($id,$name,$sauce,$dscription){
-    $producto = '<form method="POST" action="" class="itemMenu"><div class="col-sm-6 col-md-4">';
-    $producto .= '<div class="caption">';
+public function generarProducto($id,$name,$sauce,$dscription,$price){
+    $producto = '<form method="POST" action="" class="itemMenu" id="pro'.$id.'"><div class="col-sm-6 col-md-4">';
+    $producto .= '<h3 class="itemName">'.$name.'</h3>';
+    if ($sauce == 't') {
+        $producto .= generarSauceTypes();
+        $producto .= generarHotSpicy();
+    }
+    $producto .= '<button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>';
+    $producto .= '</div></form>';
 }
 }

@@ -91,7 +91,7 @@
                                         <div class="col-sm-6 col-md-4">
                                             <!--<div class="thumbnail">-->
                                                 <!--<img src="../appearance/images/wings_120x120.png" alt="Wings">-->
-                                            <div class="caption itemMenu1">
+                                            <!--<div class="caption itemMenu1">-->
                                                 <h3 class="itemName">Wings</h3>
                                                 <p>Tipo de Salsa:<br>
                                                     <select class="form-control typeSalsa" name="typeSalsa">
@@ -120,7 +120,7 @@
                                                 <div id="itemBoton1" onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>
                                                 <!--<button type="submit" onclick="" class=" btn btn-success" name="Aceptar">Agregar</button>-->
                                                 </p>
-                                            </div>
+                                            <!--</div>-->
                                             <!--</div>-->
                                         </div>
                                         <!--</form>-->
