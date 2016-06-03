@@ -92,34 +92,34 @@
                                             <!--<div class="thumbnail">-->
                                                 <!--<img src="../appearance/images/wings_120x120.png" alt="Wings">-->
                                             <!--<div class="caption itemMenu1">-->
-                                                <h3 class="itemName">Wings</h3>
-                                                <p>Tipo de Salsa:<br>
-                                                    <select class="form-control typeSalsa" name="typeSalsa">
-                                                        <option>La adictiva</option>
-                                                        <option>Teriyaki</option>
-                                                        <option>Ajo Parmesano</option>
-                                                        <option>Wok Plum</option>
-                                                        <option>Hawaiana</option>
-                                                    </select>
-                                                    Nivel de Picante:<br>
-                                                    <select class="form-control nivelHot" name="nivelHot">
-                                                        <option>La que no pica</option>
-                                                        <option>La picante</option>
-                                                        <option>La suicida</option>
-                                                        <option>La atomica</option>
-                                                        <option>La 911</option>
-                                                    </select>
-                                                    Cantidad:<br>
-                                                    <select class="form-control Quantity" name="Quantity">
-                                                        <option value="7.95">10 - $7.95</option>
-                                                        <option value="15.70">20 - $15.70</option>
-                                                        <option value="23.45">30 - $23.45</option>
-                                                    </select>
-                                                </p>
-                                                <p>
-                                                <div id="itemBoton1" onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>
-                                                <!--<button type="submit" onclick="" class=" btn btn-success" name="Aceptar">Agregar</button>-->
-                                                </p>
+                                            <h3 class="itemName">Wings</h3>
+                                            <p>Tipo de Salsa:<br>
+                                                <select class="form-control typeSalsa" name="typeSalsa">
+                                                    <option>La adictiva</option>
+                                                    <option>Teriyaki</option>
+                                                    <option>Ajo Parmesano</option>
+                                                    <option>Wok Plum</option>
+                                                    <option>Hawaiana</option>
+                                                </select>
+                                                Nivel de Picante:<br>
+                                                <select class="form-control nivelHot" name="nivelHot">
+                                                    <option>La que no pica</option>
+                                                    <option>La picante</option>
+                                                    <option>La suicida</option>
+                                                    <option>La atomica</option>
+                                                    <option>La 911</option>
+                                                </select>
+                                                Cantidad:<br>
+                                                <select class="form-control Quantity" name="Quantity">
+                                                    <option value="7.95">10 - $7.95</option>
+                                                    <option value="15.70">20 - $15.70</option>
+                                                    <option value="23.45">30 - $23.45</option>
+                                                </select>
+                                            </p>
+                                            <p>
+                                            <div id="itemBoton1" onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>
+                                            <!--<button type="submit" onclick="" class=" btn btn-success" name="Aceptar">Agregar</button>-->
+                                            </p>
                                             <!--</div>-->
                                             <!--</div>-->
                                         </div>
@@ -130,70 +130,44 @@
                                                 <!--<div class="thumbnail">-->
                                                     <!--<img src="../appearance/images/chunks_120x120.png" alt="Wings">-->
                                                 <!--<div class="caption">-->
-                                                    <h3 class="itemName">Chunks</h3>
-                                                    <p>Tipo de Salsa:<br>
-                                                        <select class="form-control" name="typeSalsa">
-                                                            <option>La adictiva</option>
-                                                            <option>Teriyaki</option>
-                                                            <option>Ajo Parmesano</option>
-                                                            <option>Wok Plum</option>
-                                                            <option>Hawaiana</option>
-                                                        </select>
-                                                        Nivel de Picante:<br>
-                                                        <select class="form-control" name="nivelHot">
-                                                            <option value="1">La que no pica</option>
-                                                            <option value="2">La picante</option>
-                                                            <option value="3">La suicida</option>
-                                                            <option value="4">La atomica</option>
-                                                            <option value="5">La 911</option>
-                                                        </select>
-                                                        Cantidad:<br>
-                                                        <select class="form-control" name="Quantity">
-                                                            <option value="7.95">10 - $7.95</option>
-                                                            <option value="15.70">20 - $15.70</option>
-                                                            <option value="23.45">30 - $23.45</option>
-                                                        </select>
-                                                    </p>
-                                                    <!--<p>-->
-                                                    <!--<div onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>-->
-                                                    <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
-                                                    <!--</p>-->
+                                                <h3 class="itemName">Chunks</h3>
+                                                <p>Tipo de Salsa:<br>
+                                                    <select class="form-control" name="typeSalsa">
+                                                        <option>La adictiva</option>
+                                                        <option>Teriyaki</option>
+                                                        <option>Ajo Parmesano</option>
+                                                        <option>Wok Plum</option>
+                                                        <option>Hawaiana</option>
+                                                    </select>
+                                                    Nivel de Picante:<br>
+                                                    <select class="form-control" name="nivelHot">
+                                                        <option value="1">La que no pica</option>
+                                                        <option value="2">La picante</option>
+                                                        <option value="3">La suicida</option>
+                                                        <option value="4">La atomica</option>
+                                                        <option value="5">La 911</option>
+                                                    </select>
+                                                    Cantidad:<br>
+                                                    <select class="form-control" name="Quantity">
+                                                        <option value="7.95">10 - $7.95</option>
+                                                        <option value="15.70">20 - $15.70</option>
+                                                        <option value="23.45">30 - $23.45</option>
+                                                    </select>
+                                                </p>
+                                                <!--<p>-->
+                                                <!--<div onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>-->
+                                                <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
+                                                <!--</p>-->
                                                 <!--</div>-->
                                                 <!--</div>-->
                                             </div>
                                         </form>
-                                    </div> 
-                                    <!--                                            <div class="col-md-6">
-                                                                                    <img src="../appearance/images/sshot-15.png" class="img-responsive" alt="Buffalo Wings"/>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <div class="checkbox">
-                                                                                        <label>
-                                                                                            <input type="checkbox"> Check me out
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <select class="form-control">
-                                                                                        <option>Atomica</option>
-                                                                                        <option>911</option>
-                                                                                        <option>Tradicional</option>
-                                                                                        <option>BBQ</option>
-                                                                                        <option>Hawaiana</option>
-                                                                                    </select>
-                                                                                    <h4><span class="label label-primary">$5.79 C/Orden</span></h4>
-                                                                                </div>-->
-                                    <!--                                    <form method="POST" action="" class="itemMenu"><div class="col-sm-6 col-md-4">
-                                                                            <div class="panel panel-success">
-                                                                                <div class="panel-heading">
-                                                                                    <h3 class="panel-title">Panel title</h3>
-                                                                                </div>
-                                                                                <div class="panel-body">
-                                                                                    Panel content
-                                                                                </div>
-                                                                                <div class="panel-footer">Panel footer</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        </form>-->
-
+                                        <?php
+                            foreach ($Productos as $producto) {
+                                echo $producto;
+                            }
+                            ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -212,59 +186,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--                        <div class="panel panel-default">
-                                                    <div class="panel-heading" role="tab" id="headingThree">
-                                                        <h4 class="panel-title">
-                                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                                                                Paso #4 - Verificacion de Datos del Cliente
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                        <div class="panel-body">
-                                                            <div class="col-md-6">
-                                                                <strong class="col-md-2">Nombre:</strong>
-                                                                <p id="nombreCliente" class="col-md-10"></p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <strong class="col-md-2">Direccion:</strong>
-                                                                <p id="DireccionCliente" class="col-md-10"></p>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <table class="table table-bordered table-hover table-striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Nombre</th>
-                                                                            <th>Precio (USD)</th>
-                                                                            <th>Cantidad</th>
-                                                                            <th>Subtotal (USD)</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>Alitas con salsa atomica</td>
-                                                                            <td>5.99</td>
-                                                                            <td>1</td>
-                                                                            <td>5.99</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Alitas con salsa hawaiana</td>
-                                                                            <td>5.99</td>
-                                                                            <td>2</td>
-                                                                            <td>11.89</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Vegetales Extra</td>
-                                                                            <td>1.99</td>
-                                                                            <td>3</td>
-                                                                            <td>5.97</td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
                     </div>
                     <button type="submit" class="btn btn-success btn-block"><h4>Crear Pedido</h4></button>
                     </form>
