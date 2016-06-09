@@ -1,4 +1,5 @@
 var codigo;
+var indice = 0;
 function agregarItemMenu(item){
     codigo = item.id;
     console.log(codigo);
@@ -26,22 +27,33 @@ function searchClient(event){
 $(".itemMenu").submit(function(event) {
     event.preventDefault();
     var $form = $(this);
-    var nivelHot = $form.find("select[name='nivelHot']").val();
-    var nivel = $form.find("select[name='nivelHot'] option:selected").text();
     var nameItem = $form.find(".itemName").html();
     var typeSalsa = $form.find("select[name='typeSalsa']").val();
     var salsa = $form.find("select[name='typeSalsa'] option:selected").text();
-    var quantity = $form.find("select[name='Quantity']").val();
-    var precio = $form.find("select[name='Quantity'] option:selected").text().substring(5);
+    var nivelHot = $form.find("select[name='nivelHot']").val();
+    var nivel = $form.find("select[name='nivelHot'] option:selected").text();
+    var quantity = $form.find("input[name='Quantity']").val();
+    var precio = $form.find(".itemPrice").html();
     
-  var fila = "<tr>";
+  var fila = '<tr id="itemDetail'+indice+'">';
   fila += '<td class="Dscription">'+nameItem+'</td>';
-  fila += '<td class="salsa'+typeSalsa+'">'+salsa+'</td>';
+    if (typeSalsa !== null) {
+        fila += '<td class="salsa'+typeSalsa+'">'+salsa+'</td>';
+    }else {
+        fila += '<td class="salsa"></td>';
+    }
   fila += '<td class="picante'+nivelHot+'">'+nivel+'</td>';
   fila += '<td class="cantidad'+quantity+'">'+quantity+'</td>';
   fila += '<td class="Price">'+precio+'</td>';
+  fila +='<td class="Acciones"><button id="itemDEL' + indice + '" onclick="eliminarItem(this)" title="Eliminar Item" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button></td>';
   fila +="</tr>";
   $('#detailOrder').append(fila);
-    
+    indice++;
 });
+function eliminarItem(fila){
+    var codeDetail = fila.id.substring(7);
+   console.log(codeDetail);
+    
+    
+};
 

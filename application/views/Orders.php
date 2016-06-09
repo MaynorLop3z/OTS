@@ -245,6 +245,7 @@
                                             <th>Picante</th>
                                             <th>Cantidad</th>
                                             <th>Precio</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="detailOrder">

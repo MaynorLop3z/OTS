@@ -56,7 +56,8 @@ class Orders extends CI_Controller {
             $producto .= $this->generarSauceTypes();
             $producto .= $this->generarHotSpicy();
         }
-        $producto .= 'Precio:<strong>' . $price . '</strong><br>';
+        $producto .= 'Cantidad:<input type="number" class="form-control" name="Quantity" min="1" max="50" value="1"><br>';
+        $producto .= 'Precio:<strong class="itemPrice">' . $price . '</strong><br>';
         $producto .= '<button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>';
         $producto .= '</div></form>';
         return $producto;
