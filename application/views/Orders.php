@@ -60,7 +60,7 @@
                                         <div class="form-group">
                                             <label for="ClientName" class="col-sm-2 control-label">Nombre:</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="ClientName" placeholder="Nombre del cliente">
+                                                <input type="text" class="form-control" id="ClientName" placeholder="Nombre del cliente" onkeydown="setClient(event)">
                                             </div>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                         <div class="form-group">
                                             <label for="ClientDirection" class="col-sm-2 control-label">Direccion:</label>
                                             <div class="col-sm-10">
-                                                <textarea id="ClientDirection" class="form-control" rows="3" placeholder="Direccion de entrega"></textarea>
+                                                <textarea id="ClientDirection" class="form-control" rows="3" placeholder="Direccion de entrega" onkeydown="setClientDir(event)"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -268,6 +268,7 @@
                                         <option value="23.45">Restaurante 3</option>
                                     </select>
                                 </p>
+                                <button onclick="realizarPedido(this)" title="crearPedido" class="btn btn-success"><span class="glyphicon glyphicon-save"></span>CREAR PEDIDO</button>
                             </div>
                         </div>
                     </div>

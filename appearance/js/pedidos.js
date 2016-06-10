@@ -28,6 +28,27 @@ function searchClient(event) {
     }
 }
 ;
+function setClient(event) {
+    var tecla = event.keyCode || event.which;
+    if (tecla === 9) {
+        $('#nombreCliente').html($('#ClientName').val());
+        console.log("Tecla Tab");
+    }
+}
+;
+function setClientDir(event) {
+    var tecla = event.keyCode || event.which;
+    if (tecla === 9) {
+        $('#DireccionCliente').html($('#ClientDirection').val());
+    }
+}
+;
+//$('#ClientDirection').keydown(function (e) {
+//    var tecla = e.keyCode || e.which;
+//    if (tecla === 9) {
+//        $('#DireccionCliente').html($('#ClientDirection').text());
+//    }
+//});
 $(".itemMenu").submit(function (event) {
     event.preventDefault();
     var $form = $(this);
@@ -58,6 +79,19 @@ function eliminarItem(fila) {
     var codeDetail = fila.id.substring(7);
     $('#detailOrder').find('#itemDetail' + codeDetail).fadeOut("slow");
     $('#detailOrder').find('#itemDetail' + codeDetail).remove();
+}
+;
+
+function realizarPedido(PEDIDO) {
+    $("#detailOrder tr").each(function (index)
+    {
+        $(this).children("td").each(function (index2) {
+            console.log($(this).attr('class') + '-' + $(this).html());
+        });
+    });
+    $("#detailOrder").html('');
+    $('#DireccionCliente').html('');
+    $('#nombreCliente').html('');
 }
 ;
 
