@@ -53,6 +53,7 @@ function setClientDir(event) {
 $(".itemMenu").submit(function (event) {
     event.preventDefault();
     var $form = $(this);
+    var idForm = $form.attr('id').substring(3);
     var nameItem = $form.find(".itemName").html();
     var typeSalsa = $form.find("select[name='typeSalsa']").val();
     var salsa = $form.find("select[name='typeSalsa'] option:selected").text();
@@ -60,9 +61,9 @@ $(".itemMenu").submit(function (event) {
     var nivel = $form.find("select[name='nivelHot'] option:selected").text();
     var quantity = $form.find("input[name='Quantity']").val();
     var precio = $form.find(".itemPrice").html();
-
+console.log(idForm);
     var fila = '<tr id="itemDetail' + indice + '">';
-    fila += '<td class="Dscription">' + nameItem + '</td>';
+    fila += '<td class="Dscription'+idForm+'">' + nameItem + '</td>';
     if (typeSalsa) {
         fila += '<td class="salsa' + typeSalsa + '">' + salsa + '</td>';
     } else {
@@ -89,7 +90,7 @@ function calcularTotal() {
         var precio = $(this).find(".Price").html();
         total += cantidad * precio;
     });
-    $('#totalPedido').html(total);
+    $('#totalPedido').html(totaltoFixed(2));
 }
 ;
 function eliminarItem(fila) {
@@ -103,15 +104,26 @@ function eliminarItem(fila) {
 function realizarPedido(PEDIDO) {
     $("#detailOrder tr").each(function (index)
     {
-        $(this).children("td").each(function (index2) {
-            console.log($(this).attr('class') + '-' + $(this).html());
-        });
+        var producto = 0, salsa = 0, picante = 0, cantidad = 0;
+        producto = $(this).find("td").eq(0).attr('class').substring(10);
+        salsa = $(this).find("td").eq(1).attr('class').substring(5);
+        picante = $(this).find("td").eq(2).attr('class').substring(7);
+        cantidad = $(this).find("td").eq(3).html();
+        console.log(producto+' - '+salsa+' - '+picante+' - '+ cantidad);
+//        $(this).children("td").each(function (index2) {
+//            console.log($(this).attr('class') + '-' + $(this).html());
+//        });
     });
+    limpiarCampos();
+}
+;
+function limpiarCampos(){
     $("#detailOrder").html('');
     $('#DireccionCliente').html('');
     $('#nombreCliente').html('');
     $('#telefonoCliente').html('');
     $('#totalPedido').html('0.00');
-}
-;
-
+    $('#ClientDirection').val('');
+    $('#ClientNumber').val('');
+    $('#ClientName').val('');
+};

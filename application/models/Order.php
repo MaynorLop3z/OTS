@@ -34,6 +34,7 @@ class Order extends CI_Model {
                 . 'Bunch, '
                 . 'SortIndex');
         $this->db->from('Category');
+        $this->db->order_by('SortIndex ASC');
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
