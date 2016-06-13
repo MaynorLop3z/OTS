@@ -87,49 +87,8 @@
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <!--<form method="POST" action="" class="itemMenu">-->
-                                        <div class="col-sm-6 col-md-4">
-                                            <!--<div class="thumbnail">-->
-                                                <!--<img src="../appearance/images/wings_120x120.png" alt="Wings">-->
-                                            <!--<div class="caption itemMenu1">-->
-                                            <h3 class="itemName">Wings</h3>
-                                            <p>Tipo de Salsa:<br>
-                                                <select class="form-control typeSalsa" name="typeSalsa">
-                                                    <option>La adictiva</option>
-                                                    <option>Teriyaki</option>
-                                                    <option>Ajo Parmesano</option>
-                                                    <option>Wok Plum</option>
-                                                    <option>Hawaiana</option>
-                                                </select>
-                                                Nivel de Picante:<br>
-                                                <select class="form-control nivelHot" name="nivelHot">
-                                                    <option>La que no pica</option>
-                                                    <option>La picante</option>
-                                                    <option>La suicida</option>
-                                                    <option>La atomica</option>
-                                                    <option>La 911</option>
-                                                </select>
-                                                Cantidad:<br>
-                                                <select class="form-control Quantity" name="Quantity">
-                                                    <option value="7.95">10 - $7.95</option>
-                                                    <option value="15.70">20 - $15.70</option>
-                                                    <option value="23.45">30 - $23.45</option>
-                                                </select>
-                                            </p>
-                                            <p>
-                                            <div id="itemBoton1" onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>
-                                            <!--<button type="submit" onclick="" class=" btn btn-success" name="Aceptar">Agregar</button>-->
-                                            </p>
-                                            <!--</div>-->
-                                            <!--</div>-->
-                                        </div>
-                                        <!--</form>-->
-
-                                        <form method="POST" action="" class="itemMenu">
+<!--                                        <form method="POST" action="" class="itemMenu">
                                             <div class="col-sm-6 col-md-4">
-                                                <!--<div class="thumbnail">-->
-                                                    <!--<img src="../appearance/images/chunks_120x120.png" alt="Wings">-->
-                                                <!--<div class="caption">-->
                                                 <h3 class="itemName">Chunks</h3>
                                                 <p>Tipo de Salsa:<br>
                                                     <select class="form-control" name="typeSalsa">
@@ -154,19 +113,20 @@
                                                         <option value="23.45">30 - $23.45</option>
                                                     </select>
                                                 </p>
-                                                <!--<p>-->
-                                                <!--<div onclick="agregarItemMenu(this)" title="Agregar al menu" class="btn btn-success">Agregar</div>-->
                                                 <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!--</div>-->
                                             </div>
-                                        </form>
+                                        </form>-->
                                         <?php
-                            foreach ($Productos as $producto) {
-                                echo $producto;
-                            }
-                            ?>
+                                        $clearfix = 0;
+                                        foreach ($Productos as $producto) {
+                                            echo $producto;
+                                            $clearfix++;
+                                            if ($clearfix == 3) {
+                                               $clearfix = 0;
+                                               echo '<div class="clearfix"></div>';
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -229,6 +189,10 @@
                         </div>
                         <div class="panel-body">
                             <div class="col-md-12">
+                                <strong class="col-md-2">Telefono:</strong>
+                                <p id="telefonoCliente" class="col-md-10"></p>
+                            </div>
+                            <div class="col-md-12">
                                 <strong class="col-md-2">Nombre:</strong>
                                 <p id="nombreCliente" class="col-md-10"></p>
                             </div>
@@ -260,15 +224,17 @@
                                 </table>
                             </div>
                             <div class="col-md-12">
+                                <strong class="col-md-2">Total:</strong>
+                                <p id="totalPedido" class="col-md-10"></p>
+                            </div>
+                            <div class="col-md-12">
                                 <strong class="col-md-12">Restaurante:</strong>
                                 <p id="RestaurantePedido" class="col-md-12">
-                                    <select class="form-control" name="Restaurante">
-                                        <option value="7.95">Restaurante 1</option>
-                                        <option value="15.70">Restaurante 2</option>
-                                        <option value="23.45">Restaurante 3</option>
-                                    </select>
+                                    <?php
+                                    echo $Sucursales;
+                                    ?>
                                 </p>
-                                <button onclick="realizarPedido(this)" title="crearPedido" class="btn btn-success"><span class="glyphicon glyphicon-save"></span>CREAR PEDIDO</button>
+                                <button onclick="realizarPedido(this)" title="crearPedido" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>  CREAR PEDIDO</button>
                             </div>
                         </div>
                     </div>

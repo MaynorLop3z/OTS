@@ -25,6 +25,7 @@ function searchClient(event) {
     if (tecla === 9) {
         //event.preventDefault();
         console.log("Tecla Tab");
+        $('#telefonoCliente').html($('#ClientNumber').val());
     }
 }
 ;
@@ -68,12 +69,13 @@ $(".itemMenu").submit(function (event) {
         fila += '<td class="salsa"></td>';
     }
     fila += '<td class="picante' + nivelHot + '">' + nivel + '</td>';
-    fila += '<td class="cantidad' + quantity + '">' + quantity + '</td>';
+    fila += '<td class="cantidad">' + quantity + '</td>';
     fila += '<td class="Price">' + precio + '</td>';
     fila += '<td class="Acciones"><button id="itemDEL' + indice + '" onclick="eliminarItem(this)" title="Eliminar Item" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button></td>';
     fila += "</tr>";
     $('#detailOrder').append(fila);
     indice++;
+    
 });
 function eliminarItem(fila) {
     var codeDetail = fila.id.substring(7);
@@ -85,9 +87,15 @@ function eliminarItem(fila) {
 function realizarPedido(PEDIDO) {
     $("#detailOrder tr").each(function (index)
     {
-        $(this).children("td").each(function (index2) {
-            console.log($(this).attr('class') + '-' + $(this).html());
-        });
+        var cantidad = $(this).find(".cantidad").html();
+        var precio = $(this).find(".Price").html();
+        var total = cantidad * precio;
+        console.log('Cantidad - '+cantidad);
+        console.log('Precio - '+precio);
+        console.log('Total - '+total);
+//        $(this).children("td").each(function (index2) {
+//            console.log($(this).attr('class') + '-' + $(this).html());
+//        });
     });
     $("#detailOrder").html('');
     $('#DireccionCliente').html('');

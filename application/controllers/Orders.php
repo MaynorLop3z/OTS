@@ -22,6 +22,7 @@ class Orders extends CI_Controller {
                 }
             }
             $data['Productos'] = $allProducts;
+            $data['Sucursales']= $this->getSucursales();
             $this->load->view('Orders', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -61,6 +62,16 @@ class Orders extends CI_Controller {
         $producto .= '<button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>';
         $producto .= '</div></form>';
         return $producto;
+    }
+
+    public function getSucursales() {
+        $Sucursales = '<select class="form-control" name="Restaurante">';
+        $agencies = $this->Order->getAgencies();
+        foreach ($agencies as $agency) {
+            $Sucursales .= '<option value="' . $agency->IdAgency . '">' . $agency->Name . '</option>';
+        }
+        $Sucursales .= '</select>';
+        return $Sucursales;
     }
 
 }

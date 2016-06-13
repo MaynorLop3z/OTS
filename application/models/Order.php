@@ -52,6 +52,15 @@ class Order extends CI_Model {
         return $resultado;
     }
 
+    public function getAgencies() {
+        $this->db->select('IdAgency, '
+                . 'Name');
+        $this->db->from('Agency');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+    
     public function getALLProductos() {
         try {
             $consulta = $this->db->query('SELECT "T0"."IdProduct", "T0"."NameProduct", "T0"."Dscription", "T0"."Sauce", "T0"."Price", "T1"."IdCategory", "T1"."NameCategory", "T1"."Bunch" 
