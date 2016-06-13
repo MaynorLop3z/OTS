@@ -87,43 +87,43 @@
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <div class="row">
-<!--                                        <form method="POST" action="" class="itemMenu">
-                                            <div class="col-sm-6 col-md-4">
-                                                <h3 class="itemName">Chunks</h3>
-                                                <p>Tipo de Salsa:<br>
-                                                    <select class="form-control" name="typeSalsa">
-                                                        <option>La adictiva</option>
-                                                        <option>Teriyaki</option>
-                                                        <option>Ajo Parmesano</option>
-                                                        <option>Wok Plum</option>
-                                                        <option>Hawaiana</option>
-                                                    </select>
-                                                    Nivel de Picante:<br>
-                                                    <select class="form-control" name="nivelHot">
-                                                        <option value="1">La que no pica</option>
-                                                        <option value="2">La picante</option>
-                                                        <option value="3">La suicida</option>
-                                                        <option value="4">La atomica</option>
-                                                        <option value="5">La 911</option>
-                                                    </select>
-                                                    Cantidad:<br>
-                                                    <select class="form-control" name="Quantity">
-                                                        <option value="7.95">10 - $7.95</option>
-                                                        <option value="15.70">20 - $15.70</option>
-                                                        <option value="23.45">30 - $23.45</option>
-                                                    </select>
-                                                </p>
-                                                <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
-                                            </div>
-                                        </form>-->
+                                        <!--                                        <form method="POST" action="" class="itemMenu">
+                                                                                    <div class="col-sm-6 col-md-4">
+                                                                                        <h3 class="itemName">Chunks</h3>
+                                                                                        <p>Tipo de Salsa:<br>
+                                                                                            <select class="form-control" name="typeSalsa">
+                                                                                                <option>La adictiva</option>
+                                                                                                <option>Teriyaki</option>
+                                                                                                <option>Ajo Parmesano</option>
+                                                                                                <option>Wok Plum</option>
+                                                                                                <option>Hawaiana</option>
+                                                                                            </select>
+                                                                                            Nivel de Picante:<br>
+                                                                                            <select class="form-control" name="nivelHot">
+                                                                                                <option value="1">La que no pica</option>
+                                                                                                <option value="2">La picante</option>
+                                                                                                <option value="3">La suicida</option>
+                                                                                                <option value="4">La atomica</option>
+                                                                                                <option value="5">La 911</option>
+                                                                                            </select>
+                                                                                            Cantidad:<br>
+                                                                                            <select class="form-control" name="Quantity">
+                                                                                                <option value="7.95">10 - $7.95</option>
+                                                                                                <option value="15.70">20 - $15.70</option>
+                                                                                                <option value="23.45">30 - $23.45</option>
+                                                                                            </select>
+                                                                                        </p>
+                                                                                        <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
+                                                                                    </div>
+                                                                                </form>-->
                                         <?php
                                         $clearfix = 0;
                                         foreach ($Productos as $producto) {
                                             echo $producto;
                                             $clearfix++;
                                             if ($clearfix == 3) {
-                                               $clearfix = 0;
-                                               echo '<div class="clearfix"></div>';
+                                                $clearfix = 0;
+                                                echo '<div class="clearfix"></div>';
                                             }
                                         }
                                         ?>
@@ -224,8 +224,10 @@
                                 </table>
                             </div>
                             <div class="col-md-12">
-                                <strong class="col-md-2">Total:</strong>
-                                <p id="totalPedido" class="col-md-10"></p>
+                                <h4><span class="label label-info">
+                                        <strong>Total: $</strong>
+                                        <strong id="totalPedido">0.00</strong>
+                                    </span></h4>
                             </div>
                             <div class="col-md-12">
                                 <strong class="col-md-12">Restaurante:</strong>

@@ -63,43 +63,55 @@ $(".itemMenu").submit(function (event) {
 
     var fila = '<tr id="itemDetail' + indice + '">';
     fila += '<td class="Dscription">' + nameItem + '</td>';
-    if (typeSalsa !== null) {
+    if (typeSalsa) {
         fila += '<td class="salsa' + typeSalsa + '">' + salsa + '</td>';
     } else {
-        fila += '<td class="salsa"></td>';
+        fila += '<td class="salsa0"></td>';
     }
-    fila += '<td class="picante' + nivelHot + '">' + nivel + '</td>';
+    if (nivelHot) {
+        fila += '<td class="picante' + nivelHot + '">' + nivel + '</td>';
+    } else {
+        fila += '<td class="picante0"></td>';
+    }
     fila += '<td class="cantidad">' + quantity + '</td>';
     fila += '<td class="Price">' + precio + '</td>';
     fila += '<td class="Acciones"><button id="itemDEL' + indice + '" onclick="eliminarItem(this)" title="Eliminar Item" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button></td>';
     fila += "</tr>";
     $('#detailOrder').append(fila);
     indice++;
-    
+    calcularTotal();
 });
+function calcularTotal() {
+    var total = 0;
+    $("#detailOrder tr").each(function (index)
+    {
+        var cantidad = $(this).find(".cantidad").html();
+        var precio = $(this).find(".Price").html();
+        total += cantidad * precio;
+    });
+    $('#totalPedido').html(total);
+}
+;
 function eliminarItem(fila) {
     var codeDetail = fila.id.substring(7);
     $('#detailOrder').find('#itemDetail' + codeDetail).fadeOut("slow");
     $('#detailOrder').find('#itemDetail' + codeDetail).remove();
+    calcularTotal();
 }
 ;
 
 function realizarPedido(PEDIDO) {
     $("#detailOrder tr").each(function (index)
     {
-        var cantidad = $(this).find(".cantidad").html();
-        var precio = $(this).find(".Price").html();
-        var total = cantidad * precio;
-        console.log('Cantidad - '+cantidad);
-        console.log('Precio - '+precio);
-        console.log('Total - '+total);
-//        $(this).children("td").each(function (index2) {
-//            console.log($(this).attr('class') + '-' + $(this).html());
-//        });
+        $(this).children("td").each(function (index2) {
+            console.log($(this).attr('class') + '-' + $(this).html());
+        });
     });
     $("#detailOrder").html('');
     $('#DireccionCliente').html('');
     $('#nombreCliente').html('');
+    $('#telefonoCliente').html('');
+    $('#totalPedido').html('0.00');
 }
 ;
 
