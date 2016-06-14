@@ -147,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block"><h4>Crear Pedido</h4></button>
+                    <!--<button type="submit" class="btn btn-success btn-block"><h4>Crear Pedido</h4></button>-->
                     </form>
                     <!-- Modal -->
                     <div class="modal fade" id="FormaDePago" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

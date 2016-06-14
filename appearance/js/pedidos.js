@@ -90,7 +90,7 @@ function calcularTotal() {
         var precio = $(this).find(".Price").html();
         total += cantidad * precio;
     });
-    $('#totalPedido').html(totaltoFixed(2));
+    $('#totalPedido').html(total.toFixed(2));
 }
 ;
 function eliminarItem(fila) {
