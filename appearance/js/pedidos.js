@@ -61,9 +61,9 @@ $(".itemMenu").submit(function (event) {
     var nivel = $form.find("select[name='nivelHot'] option:selected").text();
     var quantity = $form.find("input[name='Quantity']").val();
     var precio = $form.find(".itemPrice").html();
-console.log(idForm);
+    console.log(idForm);
     var fila = '<tr id="itemDetail' + indice + '">';
-    fila += '<td class="Dscription'+idForm+'">' + nameItem + '</td>';
+    fila += '<td class="Dscription' + idForm + '">' + nameItem + '</td>';
     if (typeSalsa) {
         fila += '<td class="salsa' + typeSalsa + '">' + salsa + '</td>';
     } else {
@@ -109,15 +109,21 @@ function realizarPedido(PEDIDO) {
         salsa = $(this).find("td").eq(1).attr('class').substring(5);
         picante = $(this).find("td").eq(2).attr('class').substring(7);
         cantidad = $(this).find("td").eq(3).html();
-        console.log(producto+' - '+salsa+' - '+picante+' - '+ cantidad);
+        console.log(producto + ' - ' + salsa + ' - ' + picante + ' - ' + cantidad);
 //        $(this).children("td").each(function (index2) {
 //            console.log($(this).attr('class') + '-' + $(this).html());
 //        });
     });
+    var dir = $('#DireccionCliente').html();
+    var tel = $('#telefonoCliente').html();
+    var name = $('#nombreCliente').html();
+    var commen = "TEST";
+    var agency = $("#codagency").val();
+    crearPedido(name, tel, dir, commen, agency);
     limpiarCampos();
 }
 ;
-function limpiarCampos(){
+function limpiarCampos() {
     $("#detailOrder").html('');
     $('#DireccionCliente').html('');
     $('#nombreCliente').html('');
@@ -126,9 +132,23 @@ function limpiarCampos(){
     $('#ClientDirection').val('');
     $('#ClientNumber').val('');
     $('#ClientName').val('');
-};
+}
+;
 
 
-$('#logout').click(function(){
-  alert('Salir'); 
-}); 
+$('#logout').click(function () {
+    alert('Salir');
+});
+
+
+function crearPedido(nameClient, numberClient, directionClient, comments, agency) {
+    var url = "Orders/crearPedido/";
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency});
+    posting.done(function (data) {
+        var obj = jQuery.parseJSON(data);
+        console.log(obj.IdOrder);
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+}

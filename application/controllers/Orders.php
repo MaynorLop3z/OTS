@@ -65,7 +65,7 @@ class Orders extends CI_Controller {
     }
 
     public function getSucursales() {
-        $Sucursales = '<select class="form-control" name="Restaurante">';
+        $Sucursales = '<select class="form-control" name="Restaurante" id="codagency">';
         $agencies = $this->Order->getAgencies();
         foreach ($agencies as $agency) {
             $Sucursales .= '<option value="' . $agency->IdAgency . '">' . $agency->Name . '</option>';
@@ -81,7 +81,8 @@ class Orders extends CI_Controller {
                 $nombre = $this->input->post('nameClient');
                 $direccion = $this->input->post('directionClient');
                 $comentarios = $this->input->post('comments');
-                $arrayData = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios);
+                $sucursal = $this->input->post('agency');
+                $arrayData = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
