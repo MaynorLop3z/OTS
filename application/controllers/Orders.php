@@ -22,7 +22,7 @@ class Orders extends CI_Controller {
                 }
             }
             $data['Productos'] = $allProducts;
-            $data['Sucursales']= $this->getSucursales();
+            $data['Sucursales'] = $this->getSucursales();
             $this->load->view('Orders', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -72,6 +72,21 @@ class Orders extends CI_Controller {
         }
         $Sucursales .= '</select>';
         return $Sucursales;
+    }
+
+    public function crearPedido() {
+        try {
+            if ($this->input->post()) {
+                $numero = $this->input->post('numberClient');
+                $nombre = $this->input->post('nameClient');
+                $direccion = $this->input->post('directionClient');
+                $comentarios = $this->input->post('comments');
+                $arrayData = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
     }
 
 }

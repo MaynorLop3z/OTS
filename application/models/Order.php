@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -61,7 +62,7 @@ class Order extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
-    
+
     public function getALLProductos() {
         try {
             $consulta = $this->db->query('SELECT "T0"."IdProduct", "T0"."NameProduct", "T0"."Dscription", "T0"."Sauce", "T0"."Price", "T1"."IdCategory", "T1"."NameCategory", "T1"."Bunch" 
@@ -77,6 +78,23 @@ class Order extends CI_Model {
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
+    }
+
+    public function insertOrder($numero, $nombre, $direccion, $comentarios) {
+        try {
+            $data = array(
+                "NumberClient" => $numero,
+                "NameClient" => $nombre,
+                "DirectionClient" => $direccion,
+                "Comments" => $comentarios
+            );
+            $this->db->insert('Order', $data);
+            $insert_id = $this->db->insert_id();
+            $data['IdOrder'] = $insert_id;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
     }
 
 }

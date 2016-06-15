@@ -127,3 +127,8 @@ function limpiarCampos(){
     $('#ClientNumber').val('');
     $('#ClientName').val('');
 };
+
+
+$('#logout').click(function(){
+  alert('Salir'); 
+}); 
