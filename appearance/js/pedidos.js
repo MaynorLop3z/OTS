@@ -121,8 +121,13 @@ function realizarPedido(PEDIDO) {
     var commen = "TEST";
     var agency = $("#codagency").val();
     if (dir || tel || name) {
-        crearPedido(name, tel, dir, commen, agency);
-    limpiarCampos();
+        if (items.length > 0) {
+            crearPedido(name, tel, dir, commen, agency, items);
+            limpiarCampos();
+        }else{
+            alert("Debe agregar elementos del menu al pedido.");
+        }
+    
     }else{
         alert("Debe especificar todos los campos");
     }
@@ -158,8 +163,7 @@ function crearPedido(nameClient, numberClient, directionClient, comments, agency
     var url = "Orders/crearPedido/";
     var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items});
     posting.done(function (data) {
-        var obj = jQuery.parseJSON(data);
-        console.log(obj.IdOrder);
+        console.log(data);
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);

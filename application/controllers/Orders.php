@@ -89,8 +89,12 @@ class Orders extends CI_Controller {
                 $direccion = $this->input->post('directionClient');
                 $comentarios = $this->input->post('comments');
                 $sucursal = $this->input->post('agency');
-                $arrayData = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal);
-                echo json_encode($arrayData);
+                $productos = $this->input->post('items');
+                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal);
+                foreach ($productos as $producto) {
+                    $this->Order->insertOrderDetail($producto['producto'], $producto['salsa'], $producto['picante'], $producto['cantidad'], $producto['precio'], $idOrder);
+                }
+                echo $idOrder;
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
