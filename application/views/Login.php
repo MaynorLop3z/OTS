@@ -39,22 +39,6 @@ and open the template in the editor.
                                     <?= $ErrorLogin ?>
                                 </label>
                                 <div class="focusContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-industry fa-fw" aria-hidden="true"></i></span>
-                                        <select class="form-control" name="sEmpresas" id="sEmpresas">
-                                            <?php
-                                            foreach ($Empresas as $empresa) {
-                                                ?>
-                                                <option value="<?= $empresa->IdEmpresa ?>">
-                                                    <?= $empresa->Nombre ?>
-                                                </option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="focusContainer">
                                     <div class="input-group margin-bottom-sm">
                                         <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
                                         <input type="text" class="form-control"  placeholder="Usuario" name="UserAlias" id="UserAlias" required autofocus>

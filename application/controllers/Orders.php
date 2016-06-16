@@ -7,23 +7,30 @@ class Orders extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Order');
+        $this->load->library(array('session'));
     }
 
     public function index() {
         try {
-            $cantidadProductos = 0;
-            $categorias = $this->Order->getCategorias();
-            $allProducts[$cantidadProductos] = '';
-            foreach ($categorias as $cat) {
-                $productos = $this->Order->getProductCatetory($cat->IdCategory);
-                foreach ($productos as $prod) {
-                    $allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
-                    $cantidadProductos++;
+//            $this->session->userdata('indices');
+            if ($this->session->userdata('indices') == 2) {
+                $cantidadProductos = 0;
+                $categorias = $this->Order->getCategorias();
+                $allProducts[$cantidadProductos] = '';
+                foreach ($categorias as $cat) {
+                    $productos = $this->Order->getProductCatetory($cat->IdCategory);
+                    foreach ($productos as $prod) {
+                        $allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
+                        $cantidadProductos++;
+                    }
                 }
+                $data['Productos'] = $allProducts;
+                $data['Sucursales'] = $this->getSucursales();
+                $this->load->view('Orders', $data);
+            } else {
+                 $this->load->helper('url');
+                 Redirect('login');
             }
-            $data['Productos'] = $allProducts;
-            $data['Sucursales'] = $this->getSucursales();
-            $this->load->view('Orders', $data);
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

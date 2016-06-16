@@ -13,7 +13,6 @@ class Usuarios extends CI_Model {
     
     public function Login($username, $password) {
         try {
-            //$this->load->model();
             $this->db->where('Alias', $username);
             $this->db->where('Password', $password);
             $q = $this->db->get('Usuarios');
