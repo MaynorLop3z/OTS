@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/appearance/js/pedidos.js</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Orders.php</file>
+            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/newhtml.html</file>
+            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/Delivery.php</file>
+            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/Orders.php</file>
         </group>
     </open-files>
 </project-private>
