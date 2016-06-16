@@ -11,6 +11,7 @@
         <script src="../appearance/js/jquery-2.2.3.min.js"></script>
         <script src="../appearance/js/bootstrap.min.js"></script>
         <link href="../appearance/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <script src="../appearance/js/common.js"></script>
     </head>
     <body>
         <div class="container-fluid">
@@ -40,5 +41,6 @@
                 </div>
             </div>
         </div>
+        
     </body>
 </html>

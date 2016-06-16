@@ -10,7 +10,7 @@
         <link href="../appearance/css/flatly-bootstrap.min.css" rel="stylesheet">
         <script src="../appearance/js/jquery-2.2.3.min.js"></script>
         <script src="../appearance/js/bootstrap.min.js"></script>
-
+        <script src="../appearance/js/common.js"></script>
         <link href="../appearance/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
@@ -22,7 +22,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="#">
-                                <h4> <i class="fa fa-user fa-1x" aria-hidden="true"></i><?= $this->session->userdata('nombreUser'); ?></h4>
+                                    <h4> <i class="fa fa-user fa-1x" aria-hidden="true"></i><?= $this->session->userdata('nombreUser'); ?></h4>
                                 </a>
                             </li>
                             <li>

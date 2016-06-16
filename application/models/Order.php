@@ -97,5 +97,22 @@ class Order extends CI_Model {
         }
         return $data;
     }
-
+public function insertOrderDetail($IdProduct, $IdSauce, $IdSpicy, $Quantity, $UnitPrice, $IdOrder) {
+        try {
+            $data = array(
+                "IdProduct" => $IdProduct,
+                "IdSauce" => $IdSauce,
+                "IdSpicy" => $IdSpicy,
+                "Quantity" => $Quantity,
+                "UnitPrice" => $UnitPrice,
+                "IdOrder" => $IdOrder
+            );
+            $this->db->insert('DetailOrder', $data);
+            $insert_id = $this->db->insert_id();
+            $data['IdDetail'] = $insert_id;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
+    }
 }

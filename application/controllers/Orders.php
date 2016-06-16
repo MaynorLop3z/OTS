@@ -96,5 +96,21 @@ class Orders extends CI_Controller {
             echo json_encode($ex);
         }
     }
+    public function crearPedidoDetalle() {
+        try {
+            if ($this->input->post()) {
+                $idproducto = $this->input->post('numberClient');
+                $idsalsa = $this->input->post('nameClient');
+                $idpicante = $this->input->post('directionClient');
+                $cantidad = $this->input->post('comments');
+                $precio = $this->input->post('agency');
+                $orden = $this->input->post('orden');
+                $arrayData = $this->Order->insertOrder($idproducto, $idsalsa, $idpicante, $cantidad, $precio, $orden);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
 
 }
