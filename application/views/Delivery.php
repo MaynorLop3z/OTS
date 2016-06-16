@@ -22,7 +22,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="#">
-                                <h4> <i class="fa fa-user fa-1x" aria-hidden="true"></i><?= $this->session->userdata('nombreUser'); ?></h4>
+                                    <h4> <i class="fa fa-user fa-1x" aria-hidden="true"></i><?= $this->session->userdata('nombreUser'); ?></h4>
                                 </a>
                             </li>
                             <li>
@@ -40,35 +40,26 @@
                 </div>
                 <div class="col-md-10">
                     <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Numero</th>
-                    <th>Nombre</th>
-                    <th>Direccion</th>
-                    <th>Comentarios</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody id="OrderList">
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-            </tbody>
-        </table>
+                        <thead>
+                            <tr>
+                                <th>Numero</th>
+                                <th>Nombre</th>
+                                <th>Direccion</th>
+                                <th>Comentarios</th>
+                                <th>Estado</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="OrderList">
+                            <?php
+                                echo $Pedidos;
+                                
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        
+
     </body>
 </html>
