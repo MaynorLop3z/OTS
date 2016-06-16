@@ -37,7 +37,6 @@
             </div>
             <div class="row">
                 <div class="col-md-8">
-                    <!--<form method="POST" action="" accept-charset="UTF-8" role="form">-->
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingOne">
@@ -87,35 +86,6 @@
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <!--                                        <form method="POST" action="" class="itemMenu">
-                                                                                    <div class="col-sm-6 col-md-4">
-                                                                                        <h3 class="itemName">Chunks</h3>
-                                                                                        <p>Tipo de Salsa:<br>
-                                                                                            <select class="form-control" name="typeSalsa">
-                                                                                                <option>La adictiva</option>
-                                                                                                <option>Teriyaki</option>
-                                                                                                <option>Ajo Parmesano</option>
-                                                                                                <option>Wok Plum</option>
-                                                                                                <option>Hawaiana</option>
-                                                                                            </select>
-                                                                                            Nivel de Picante:<br>
-                                                                                            <select class="form-control" name="nivelHot">
-                                                                                                <option value="1">La que no pica</option>
-                                                                                                <option value="2">La picante</option>
-                                                                                                <option value="3">La suicida</option>
-                                                                                                <option value="4">La atomica</option>
-                                                                                                <option value="5">La 911</option>
-                                                                                            </select>
-                                                                                            Cantidad:<br>
-                                                                                            <select class="form-control" name="Quantity">
-                                                                                                <option value="7.95">10 - $7.95</option>
-                                                                                                <option value="15.70">20 - $15.70</option>
-                                                                                                <option value="23.45">30 - $23.45</option>
-                                                                                            </select>
-                                                                                        </p>
-                                                                                        <button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>
-                                                                                    </div>
-                                                                                </form>-->
                                         <?php
                                         $clearfix = 0;
                                         foreach ($Productos as $producto) {
@@ -141,16 +111,75 @@
                             </div>
                             <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                 <div class="panel-body">
-                                    <div id="paymentCash" onclick="showPaymentCash(this)" title="Pago en Efectivo" class="btn btn-warning btn-lg"> <i class="fa fa-money fa-3x"></i> <h3>Pago en Efectivo</h3></div>
-                                    <div id="paymentOnline" onclick="showPaymentOnline(this)" title="Pago en Linea" class="btn btn-warning btn-lg"> <i class="fa fa-cc-visa fa-3x"></i> <h3>Pago Online</h3></div>                                        
+                                    <div id="paymentCash" onclick="showPaymentCash(this)" title="Pago Efectivo" class="btn btn-warning btn-lg"> <i class="fa fa-money fa-3x"></i> <h3>Pago Efectivo</h3></div>
+                                    <div id="paymentOnline" onclick="showPaymentOnline(this)" title="Pago Tarjeta" class="btn btn-warning btn-lg"> <i class="fa fa-cc-visa fa-3x"></i> <h3>Pago Tarjeta</h3></div>                                        
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--<button type="submit" class="btn btn-success btn-block"><h4>Crear Pedido</h4></button>-->
-                    </form>
-                    <!-- Modal -->
-                    <div class="modal fade" id="FormaDePago" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <!-- MODAL EFECTIVO -->
+                    <div id="FormaDePagoEfectivo" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog  modal-lg">
+                            <div class="modal-content">
+                                <div class="container-fluid ">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <form id="frmPagoEfectivo" action="" class="form-horizontal" method="post" >
+                                        <fieldset>
+                                            <legend class="modal-header">
+                                                Forma de Pago:
+                                            </legend>
+                                            <div class="form-group">
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        <input type="radio" name="Factura" value="FAC" />
+                                                        Consumidor Final
+                                                    </label>
+                                                </div>
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        <input type="radio" name="Factura" value="CCF"> 
+                                                        Credito Fiscal
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="PagoNameCash" class="col-lg-3 control-label">Nombre:</label>
+                                                <div class="col-lg-9">
+                                                    <input type="text" class="form-control" name="Nombre" id="PagoNameCash" placeholder="Nombre Factura" maxlength="100" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="PagoNITCash" class="col-lg-3 control-label">NIT:</label>
+                                                <div class="col-lg-9">
+                                                    <input type="text" class="form-control" name="NIT" id="PagoNITCash" placeholder="NIT Cliente">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="PagoRNCCash" class="col-lg-3 control-label">RNC:</label>
+                                                <div class="col-lg-9">
+                                                    <input type="text" class="form-control" name="RNC" id="PagoRNCCash" placeholder="RNC Cliente">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="PagoCashComment" class="col-lg-3 control-label">Comentarios:</label>
+                                                <div class="col-lg-9">
+                                                    <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="PagoCashComment" placeholder="Comentarios acerca del pago"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                <button type="reset" onclick="" class="btn btn-default" name="Limpiar">Limpiar</button>
+                                                <button type="submit" class="btn btn-primary">Guardar Datos</button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MODAL TARJETA -->
+                    <div class="modal fade" id="FormaDePagoTarjeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -174,9 +203,9 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary">Guardar Datos</button>
+                                    <button type="reset" onclick="" class="btn btn-default" name="Limpiar">Limpiar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Datos</button>
                                 </div>
                             </div>
                         </div>

@@ -9,13 +9,13 @@ function showPaymentCash(fila) {
     codigo = fila.id;
     console.log(codigo);
     console.log("Cash");
-    $("#FormaDePago").modal('toggle');
+    $("#FormaDePagoEfectivo").modal('toggle');
 }
 ;
 function showPaymentOnline(fila) {
     codigo = fila.id;
     console.log(codigo);
-    $("#FormaDePago").modal('toggle');
+    $("#FormaDePagoTarjeta").modal('toggle');
 }
 ;
 
