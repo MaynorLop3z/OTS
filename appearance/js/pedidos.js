@@ -114,7 +114,7 @@ function realizarPedido(PEDIDO) {
         var item = {producto: producto, salsa: salsa, picante: picante, cantidad: cantidad, precio: precio};
         items[index] = item;
     });
-    
+
     var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
@@ -122,16 +122,19 @@ function realizarPedido(PEDIDO) {
     var agency = $("#codagency").val();
     if (dir || tel || name) {
         if (items.length > 0) {
-            crearPedido(name, tel, dir, commen, agency, items);
+            var actual = new Date();
+            var fecha = actual.toJSON();
+//            var fecha = actual.getFullYear()+'-'+actual.getMonth()+'-'+actual.getDay();
+//            var hora = actual.getHours()+':'+actual.getMinutes()+':'+actual.getSeconds()+'.'+actual.getMilliseconds();
+            crearPedido(name, tel, dir, commen, agency, items, fecha);
             limpiarCampos();
-        }else{
+        } else {
             alert("Debe agregar elementos del menu al pedido.");
         }
-    
-    }else{
+
+    } else {
         alert("Debe especificar todos los campos");
     }
-    
 }
 ;
 function limpiarCampos() {
@@ -159,9 +162,9 @@ $('#logout').click(function () {
 });
 
 
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha) {
     var url = "Orders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha});
     posting.done(function (data) {
         console.log(data);
     });

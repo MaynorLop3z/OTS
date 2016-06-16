@@ -28,8 +28,8 @@ class Orders extends CI_Controller {
                 $data['Sucursales'] = $this->getSucursales();
                 $this->load->view('Orders', $data);
             } else {
-                 $this->load->helper('url');
-                 Redirect('login');
+                $this->load->helper('url');
+                Redirect('login');
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
@@ -90,7 +90,8 @@ class Orders extends CI_Controller {
                 $comentarios = $this->input->post('comments');
                 $sucursal = $this->input->post('agency');
                 $productos = $this->input->post('items');
-                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal);
+                $fecha = $this->input->post('fecha');
+                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $fecha);
                 foreach ($productos as $producto) {
                     $this->Order->insertOrderDetail($producto['producto'], $producto['salsa'], $producto['picante'], $producto['cantidad'], $producto['precio'], $idOrder);
                 }
@@ -100,6 +101,7 @@ class Orders extends CI_Controller {
             echo json_encode($ex);
         }
     }
+
     public function crearPedidoDetalle() {
         try {
             if ($this->input->post()) {

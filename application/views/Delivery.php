@@ -36,8 +36,36 @@
 
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    Track Pedidos
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-10">
+                    <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Comentarios</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="OrderList">
+                <tr>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>test</td>
+                </tr>
+                <tr>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>test</td>
+                    <td>test</td>
+                </tr>
+            </tbody>
+        </table>
                 </div>
             </div>
         </div>
