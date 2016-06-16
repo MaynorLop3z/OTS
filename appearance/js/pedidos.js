@@ -102,25 +102,31 @@ function eliminarItem(fila) {
 ;
 
 function realizarPedido(PEDIDO) {
+    var items = new Array();
     $("#detailOrder tr").each(function (index)
     {
-        var producto = 0, salsa = 0, picante = 0, cantidad = 0;
+        var producto = 0, salsa = 0, picante = 0, cantidad = 0, precio = 0;
         producto = $(this).find("td").eq(0).attr('class').substring(10);
         salsa = $(this).find("td").eq(1).attr('class').substring(5);
         picante = $(this).find("td").eq(2).attr('class').substring(7);
         cantidad = $(this).find("td").eq(3).html();
-        console.log(producto + ' - ' + salsa + ' - ' + picante + ' - ' + cantidad);
-//        $(this).children("td").each(function (index2) {
-//            console.log($(this).attr('class') + '-' + $(this).html());
-//        });
+        precio = $(this).find("td").eq(4).html();
+        var item = {producto: producto, salsa: salsa, picante: picante, cantidad: cantidad, precio: precio};
+        items[index] = item;
     });
+    
     var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
     var commen = "TEST";
     var agency = $("#codagency").val();
-    crearPedido(name, tel, dir, commen, agency);
+    if (dir || tel || name) {
+        crearPedido(name, tel, dir, commen, agency);
     limpiarCampos();
+    }else{
+        alert("Debe especificar todos los campos");
+    }
+    
 }
 ;
 function limpiarCampos() {
@@ -148,9 +154,9 @@ $('#logout').click(function () {
 });
 
 
-function crearPedido(nameClient, numberClient, directionClient, comments, agency) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items) {
     var url = "Orders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items});
     posting.done(function (data) {
         var obj = jQuery.parseJSON(data);
         console.log(obj.IdOrder);
