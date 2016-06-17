@@ -91,7 +91,8 @@ class Orders extends CI_Controller {
                 $sucursal = $this->input->post('agency');
                 $productos = $this->input->post('items');
                 $fecha = $this->input->post('fecha');
-                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $fecha);
+                $hora = $this->input->post('hora');
+                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $fecha, $hora);
                 foreach ($productos as $producto) {
                     $this->Order->insertOrderDetail($producto['producto'], $producto['salsa'], $producto['picante'], $producto['cantidad'], $producto['precio'], $idOrder);
                 }
@@ -112,6 +113,18 @@ class Orders extends CI_Controller {
                 $precio = $this->input->post('agency');
                 $orden = $this->input->post('orden');
                 $arrayData = $this->Order->insertOrder($idproducto, $idsalsa, $idpicante, $cantidad, $precio, $orden);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
+    }
+    
+    public function searchClient(){
+        try {
+            if ($this->input->post()) {
+                $numero = $this->input->post('numberClient');
+                $arrayData = $this->Order->searchClient($numero);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {

@@ -1,20 +1,19 @@
 var codigo;
 var indice = 0;
+var nit = "";
+var nrc = "";
+var comentarios = "";
 function agregarItemMenu(item) {
     codigo = item.id;
-    console.log(codigo);
 }
 ;
 function showPaymentCash(fila) {
     codigo = fila.id;
-    console.log(codigo);
-    console.log("Cash");
     $("#FormaDePagoEfectivo").modal('toggle');
 }
 ;
 function showPaymentOnline(fila) {
     codigo = fila.id;
-    console.log(codigo);
     $("#FormaDePagoTarjeta").modal('toggle');
 }
 ;
@@ -23,9 +22,22 @@ function showPaymentOnline(fila) {
 function searchClient(event) {
     var tecla = event.keyCode || event.which;
     if (tecla === 9) {
-        //event.preventDefault();
-        console.log("Tecla Tab");
         $('#telefonoCliente').html($('#ClientNumber').val());
+        var telefono = $('#ClientNumber').val();
+        var url = "Orders/searchClient/";
+        var posting = $.post(url, {numberClient: telefono});
+        posting.done(function (data) {
+            var obj = jQuery.parseJSON(data);
+            if (obj.length > 0) {
+                $('#nombreCliente').html(obj[0].NameClient);
+                $('#DireccionCliente').html(obj[0].DirectionClient);
+                $('#ClientName').val(obj[0].NameClient);
+                $('#ClientDirection').val(obj[0].DirectionClient);
+            }
+        });
+        posting.fail(function (xhr, textStatus, errorThrown) {
+            alert("error" + xhr.responseText);
+        });
     }
 }
 ;
@@ -33,7 +45,6 @@ function setClient(event) {
     var tecla = event.keyCode || event.which;
     if (tecla === 9) {
         $('#nombreCliente').html($('#ClientName').val());
-        console.log("Tecla Tab");
     }
 }
 ;
@@ -44,12 +55,6 @@ function setClientDir(event) {
     }
 }
 ;
-//$('#ClientDirection').keydown(function (e) {
-//    var tecla = e.keyCode || e.which;
-//    if (tecla === 9) {
-//        $('#DireccionCliente').html($('#ClientDirection').text());
-//    }
-//});
 $(".itemMenu").submit(function (event) {
     event.preventDefault();
     var $form = $(this);
@@ -61,7 +66,6 @@ $(".itemMenu").submit(function (event) {
     var nivel = $form.find("select[name='nivelHot'] option:selected").text();
     var quantity = $form.find("input[name='Quantity']").val();
     var precio = $form.find(".itemPrice").html();
-    console.log(idForm);
     var fila = '<tr id="itemDetail' + indice + '">';
     fila += '<td class="Dscription' + idForm + '">' + nameItem + '</td>';
     if (typeSalsa) {
@@ -124,9 +128,8 @@ function realizarPedido(PEDIDO) {
         if (items.length > 0) {
             var actual = new Date();
             var fecha = actual.toJSON();
-//            var fecha = actual.getFullYear()+'-'+actual.getMonth()+'-'+actual.getDay();
-//            var hora = actual.getHours()+':'+actual.getMinutes()+':'+actual.getSeconds()+'.'+actual.getMilliseconds();
-            crearPedido(name, tel, dir, commen, agency, items, fecha);
+            var hora = calcularHoraActual();
+            crearPedido(name, tel, dir, commen, agency, items, fecha, hora);
             limpiarCampos();
         } else {
             alert("Debe agregar elementos del menu al pedido.");
@@ -162,13 +165,30 @@ $('#logout').click(function () {
 });
 
 
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora) {
     var url = "Orders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora});
     posting.done(function (data) {
-        console.log(data);
+        alert("Numero de pedido: " + data);
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
 }
+;
+function calcularHoraActual() {
+    var actual = new Date();
+    var hours = actual.getHours(), minutes = actual.getMinutes(), seconds = actual.getSeconds();
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    return hours + ':' + minutes + ':' + seconds;
+
+}
+;

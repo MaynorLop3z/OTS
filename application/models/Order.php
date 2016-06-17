@@ -80,7 +80,7 @@ class Order extends CI_Model {
         }
     }
 
-    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal,$fecha) {
+    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal,$fecha, $hora) {
         try {
             $insert_id =0;
             $data = array(
@@ -90,7 +90,8 @@ class Order extends CI_Model {
                 "Comments" => $comentarios,
                 "IdAgency" => $sucursal,
                 "CreationDate" => $fecha,
-                "Status" => 1
+                "Status" => 1,
+                "CreationTime" => $hora
             );
             $this->db->insert('Order', $data);
             $insert_id = $this->db->insert_id();
@@ -116,5 +117,22 @@ public function insertOrderDetail($IdProduct, $IdSauce, $IdSpicy, $Quantity, $Un
             $ex->getMessage();
         }
         return $data;
+    }
+    
+    public function searchClient($number) {
+        try {
+        $this->db->select( 'NumberClient, '
+                . 'NameClient, '
+                . 'DirectionClient');
+        $this->db->from('Order');
+        $this->db->where('NumberClient', $number);
+        $this->db->order_by("IdOrder", "desc");
+        $this->db->limit(1);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $resultado;
     }
 }
