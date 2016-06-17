@@ -169,7 +169,9 @@ function crearPedido(nameClient, numberClient, directionClient, comments, agency
     var url = "Orders/crearPedido/";
     var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora});
     posting.done(function (data) {
-        alert("Numero de pedido: " + data);
+//        alert("Numero de pedido: " + data);
+        $("#OrderNumber").html(data);
+        $("#modalPedidoExitoso").modal('toggle');
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
