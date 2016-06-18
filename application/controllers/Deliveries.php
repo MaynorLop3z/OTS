@@ -14,7 +14,8 @@ class Deliveries extends CI_Controller {
         try {
             if ($this->session->userdata('indices') == 3) {
                 $Orders = '';
-                $pedidos = $this->Delivery->listarDeliveries(1);
+                $sucursal = $this->session->userdata('sucursal');
+                $pedidos = $this->Delivery->listarDeliveries($sucursal);
                 foreach ($pedidos as $pedido) {
                     $Orders .= '<tr id="' . $pedido->IdOrder . '">';
                     $Orders .='<td>' . $pedido->IdOrder . '</td>';

@@ -21,7 +21,8 @@ public function listarDeliveries($idAgency) {
                 . 'Status,'
                 . 'Total');
         $this->db->from('Order');
-//        $this->db->where('IdAgency', $idAgency);
+        $this->db->where('IdAgency', $idAgency);
+        $this->db->where('Status', 1);
         $this->db->order_by("IdOrder", "desc");
         $consulta = $this->db->get();
         $resultado = $consulta->result();

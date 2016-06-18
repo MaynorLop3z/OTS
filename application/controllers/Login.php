@@ -15,7 +15,7 @@ class Login extends CI_Controller {
             $this->load->model('Usuarios');
             $UserData = $this->Usuarios->Login($Alias, $Password);
             if ($UserData != null) {
-                $usuario_data = array('nombreUser' => $UserData->Nombre,'ipUser' => $this->input->ip_address(),'logueado' => TRUE, 'indices' => $UserData->IdRol);
+                $usuario_data = array('nombreUser' => $UserData->Nombre,'ipUser' => $this->input->ip_address(),'logueado' => TRUE, 'indices' => $UserData->IdRol, 'sucursal' => $UserData->IdAgency);
                 $this->session->set_userdata($usuario_data);
                 $this->load->helper('url');
                 if ($UserData->IdRol == 2) {
