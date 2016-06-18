@@ -29,7 +29,7 @@ class Deliveries extends CI_Controller {
                         $Orders .='<td>Despachado</td>';
                     }
                     $Orders .= '<td>'
-                            . '<button id="Dispatch' . $pedido->IdOrder . '" onclick="despachar(this)" title="Despachar" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>'
+                            . '<button id="Dispatch' . $pedido->IdOrder . '" onclick="viewDispatcher(this)" title="Despachar" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>'
                             . '<button id="viewDetail' . $pedido->IdOrder . '" onclick="viewDetail(this)" title="Ver Detalle" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> </button>'
                             . '</td>';
                     $Orders .='</tr>';
@@ -51,22 +51,25 @@ class Deliveries extends CI_Controller {
             $details = '';
             $codigo = $this->input->post('codigo');
             $detalles = $this->Delivery->getDetalleOrder($codigo);
-//            foreach ($detalles as $detalle) {
-//                $details .= '<tr>';
-//                $details .= '<td>'.$detalle->NameProduct.'</td>';
-//                $details .= '<td>'.$detalle->NameSauce.'</td>';
-//                $details .= '<td>'.$detalle->NameSpicy.'</td>';
-//                $details .= '<td>'.$detalle->Quantity.'</td>';
-//                $details .= '<td>'.$detalle->UnitPrice.'</td>';
-//                $details .= '</tr>';
-//            }
             echo json_encode($detalles);
-//            echo $detalles;
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
         }
         
+    }
+    
+    public function dispatchOrder(){
+        try {
+            if ($this->input->post()) {
+                $codigo = $this->input->post('codigo');
+                $hora = $this->input->post('hora');
+                $arrayData = $this->Delivery->dispatchOrder($codigo, $hora);
+                echo json_encode($arrayData);
+            }
+        } catch (Exception $ex) {
+            echo json_encode($ex);
+        }
     }
 
 }

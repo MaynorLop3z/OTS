@@ -41,5 +41,19 @@ public function listarDeliveries($idAgency) {
             return $exc->getTraceAsString();
         }
     }
+    
+    public function dispatchOrder($codigo, $hora) {
+        try {
+            $data = array(
+                'Status' => 2,
+                'DispatchTime' => $hora
+            );
+            $this->db->where('IdOrder', $codigo);
+            $this->db->update('Order', $data);
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
+    }
 
 }

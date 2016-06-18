@@ -6,19 +6,18 @@ function viewDetail(boton) {
         $("#ModalTittleView").html("Detalle del Pedido #" + codigo);
 
         var obj = jQuery.parseJSON(data);
-        console.log(obj);
         var tabla = "";
         for (x in obj) {
             tabla += '<tr>';
             tabla += '<td>' + obj[x].nameproduct + '</td>';
             if (obj[x].namesauce) {
-              tabla += '<td>' + obj[x].namesauce + '</td>';  
-            }else {
+                tabla += '<td>' + obj[x].namesauce + '</td>';
+            } else {
                 tabla += '<td></td>';
             }
             if (obj[x].namespicy) {
-              tabla += '<td>' + obj[x].namespicy + '</td>';  
-            }else {
+                tabla += '<td>' + obj[x].namespicy + '</td>';
+            } else {
                 tabla += '<td></td>';
             }
 
@@ -31,9 +30,58 @@ function viewDetail(boton) {
         $("#viewDetailModal").modal('toggle');
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+
+}
+;
+
+function viewDispatcher(boton) {
+    var codigo = boton.id.substring(8);
+    $("#OrderNumber").html(codigo);
+    $("#viewDispatchModal").modal('toggle');
+}
+
+function despachar() {
+    var codigo = $("#OrderNumber").html();
+    var url = "Deliveries/dispatchOrder/";
+    var hora = getHoraActual();
+    var posting = $.post(url, {codigo: codigo, hora: hora});
+    posting.done(function (data) {
+        $('#OrderList').find('#' + codigo).fadeOut("slow");
+        $('#OrderList').find('#' + codigo).remove();
+        $("#viewDispatchModal").modal('toggle');
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
         console.log(xhr.responseText);
         alert("error" + xhr.responseText);
     });
+}
+;
+
+
+
+
+
+
+
+
+
+
+
+function getHoraActual() {
+    var actual = new Date();
+    var hours = actual.getHours(), minutes = actual.getMinutes(), seconds = actual.getSeconds();
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    return hours + ':' + minutes + ':' + seconds;
 
 }
 ;
