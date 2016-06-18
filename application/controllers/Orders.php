@@ -92,7 +92,8 @@ class Orders extends CI_Controller {
                 $productos = $this->input->post('items');
                 $fecha = $this->input->post('fecha');
                 $hora = $this->input->post('hora');
-                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $fecha, $hora);
+                $total = $this->input->post('total');
+                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $fecha, $hora, $total);
                 foreach ($productos as $producto) {
                     $this->Order->insertOrderDetail($producto['producto'], $producto['salsa'], $producto['picante'], $producto['cantidad'], $producto['precio'], $idOrder);
                 }

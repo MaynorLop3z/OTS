@@ -18,16 +18,19 @@ public function listarDeliveries($idAgency) {
                 . 'Comments, '
                 . 'IdAgency, '
                 . 'CreationDate, '
-                . 'Status');
+                . 'Status,'
+                . 'Total');
         $this->db->from('Order');
 //        $this->db->where('IdAgency', $idAgency);
+        $this->db->order_by("IdOrder", "desc");
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
     }
-    public function listarDiplomados() {
+    public function getDetalleOrder($codigo) {
         try {
-            $consulta = $this->db->query('SELECT "d"."CodigoDiplomado", "d"."NombreDiplomado", "d"."Descripcion", "d"."Estado", "cd"."NombreCategoriaDiplomado", "d"."Comentarios" FROM "Diplomados" "d" JOIN "CategoriaDiplomados" "cd" ON "d"."CodigoCategoriaDiplomado" = "cd"."CodigoCategoriaDiplomado"');
+            $comando = 'SELECT * FROM getdetailorder ('.$codigo.');';
+            $consulta = $this->db->query($comando);
             if ($consulta != null) {
                 $resultado = $consulta->result();
             } else {

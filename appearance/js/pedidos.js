@@ -129,7 +129,9 @@ function realizarPedido(PEDIDO) {
             var actual = new Date();
             var fecha = actual.toJSON();
             var hora = calcularHoraActual();
-            crearPedido(name, tel, dir, commen, agency, items, fecha, hora);
+            var total = $('#totalPedido').html();
+            console.log(total);
+            crearPedido(name, tel, dir, commen, agency, items, fecha, hora, total);
             limpiarCampos();
         } else {
             alert("Debe agregar elementos del menu al pedido.");
@@ -165,9 +167,9 @@ $('#logout').click(function () {
 });
 
 
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora, total) {
     var url = "Orders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: total});
     posting.done(function (data) {
 //        alert("Numero de pedido: " + data);
         $("#OrderNumber").html(data);
