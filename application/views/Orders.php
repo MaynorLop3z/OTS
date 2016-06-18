@@ -228,6 +228,57 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <!--MODAL DE BUSQUEDA-->
+                    <div id="modalPedidoBusqueda" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Buscar Pedido</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="action" method="POST" class="form-inline">
+                                        <div class="form-group">
+                                        <label for="filtertype" class=" control-label">Tipo de filtro:</label>
+                                        <select class="form-control" name="Restaurante" id="codagency">
+                                            <option value="0">Numero de Telefono</option>
+                                            <option value="1">Nombre Cliente</option>
+                                            <option value="2">Direccion</option>
+                                            <option value="3">Numero de Pedido</option>
+                                        </select>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="filtertext" class="control-label">filtro:</label>
+                                            <input type="text" class="form-control" name="filtro" id="filtertext" placeholder="detalle de filtro" maxlength="100" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar Pedido</button>
+                                    </form>
+                                    <br>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Pedido</th>
+                                                <th>Numero</th>
+                                                <th>Nombre</th>
+                                                <th>Direccion</th>
+                                                <th>Total</th>
+                                                <th>Comentarios</th>
+                                                <th>Estado</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="listaPedidos">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-default">
@@ -284,6 +335,7 @@
                                     ?>
                                 </p>
                                 <button onclick="realizarPedido(this)" title="crearPedido" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>  CREAR PEDIDO</button>
+                                <button onclick="showbuscarPedido()" title="buscarPedido" class="btn btn-success"><span class="glyphicon glyphicon-search"></span>  BUSCAR PEDIDO</button>
                             </div>
                         </div>
                     </div>

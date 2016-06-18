@@ -18,7 +18,6 @@ function showPaymentOnline(fila) {
 }
 ;
 
-
 function searchClient(event) {
     var tecla = event.keyCode || event.which;
     if (tecla === 9) {
@@ -171,7 +170,6 @@ function crearPedido(nameClient, numberClient, directionClient, comments, agency
     var url = "Orders/crearPedido/";
     var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: total});
     posting.done(function (data) {
-//        alert("Numero de pedido: " + data);
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');
     });
@@ -196,3 +194,7 @@ function calcularHoraActual() {
 
 }
 ;
+
+function showbuscarPedido(){
+    $("#modalPedidoBusqueda").modal('toggle');
+};
