@@ -195,6 +195,7 @@ function calcularHoraActual() {
 }
 ;
 
-function showbuscarPedido(){
+function showbuscarPedido() {
     $("#modalPedidoBusqueda").modal('toggle');
-};
+}
+;

@@ -59,16 +59,6 @@ function despachar() {
 }
 ;
 
-
-
-
-
-
-
-
-
-
-
 function getHoraActual() {
     var actual = new Date();
     var hours = actual.getHours(), minutes = actual.getMinutes(), seconds = actual.getSeconds();
@@ -85,3 +75,21 @@ function getHoraActual() {
 
 }
 ;
+
+var veces = 0;
+
+function updatePending() {
+    var url = "Deliveries/getPedingOrders/";
+    var posting = $.post(url, {estado: "pendiente"});
+    posting.done(function (data) {
+//        $('#OrderList').html(data);
+        veces += 1;
+        console.log(veces + "-" + data);
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        console.log(xhr.responseText);
+        alert("error" + xhr.responseText);
+    });
+    setTimeout("updatePending()", 30000);
+}
+updatePending();

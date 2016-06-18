@@ -13,17 +13,26 @@ class Deliveries extends CI_Controller {
     public function index() {
         try {
             if ($this->session->userdata('indices') == 3) {
-                $Orders = '';
+                
+                $data['Pedidos'] = $this->getPedingOrders();
+                $this->load->view('Delivery', $data);
+            } else {
+                $this->load->helper('url');
+                Redirect('login');
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+    public function getPedingOrders(){
+        $Orders = '';
                 $sucursal = $this->session->userdata('sucursal');
                 $pedidos = $this->Delivery->listarDeliveries($sucursal);
                 foreach ($pedidos as $pedido) {
                     $Orders .= '<tr id="' . $pedido->IdOrder . '">';
-                    $Orders .='<td>' . $pedido->IdOrder . '</td>';
-                    $Orders .='<td>' . $pedido->NumberClient . '</td>';
-                    $Orders .='<td>' . $pedido->NameClient . '</td>';
-                    $Orders .='<td>' . $pedido->DirectionClient . '</td>';
-                    $Orders .='<td>$ ' . $pedido->Total . '</td>';
-                    $Orders .='<td>' . $pedido->Comments . '</td>';
+                    $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
+                    $Orders .='<td>' . $pedido->NameClient . '</td><td>' . $pedido->DirectionClient . '</td>';
+                    $Orders .='<td>$ ' . $pedido->Total . '</td><td>' . $pedido->Comments . '</td>';
                     if ($pedido->Status == 1) {
                         $Orders .='<td>Pendiente</td>';
                     } else {
@@ -35,21 +44,12 @@ class Deliveries extends CI_Controller {
                             . '</td>';
                     $Orders .='</tr>';
                 }
-                $data['Pedidos'] = $Orders;
-                $this->load->view('Delivery', $data);
-            } else {
-                $this->load->helper('url');
-                Redirect('login');
-            }
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
+                return $Orders;
     }
 
     public function viewDetailOrder() {
         try {
         if ($this->input->post()) {
-            $details = '';
             $codigo = $this->input->post('codigo');
             $detalles = $this->Delivery->getDetalleOrder($codigo);
             echo json_encode($detalles);
