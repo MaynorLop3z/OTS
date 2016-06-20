@@ -92,7 +92,8 @@ class Order extends CI_Model {
                 "CreationDate" => date("Y-m-d"),
                 "Status" => 1,
                 "CreationTime" => date("H:i:s"),
-                "Total" => $total
+                "Total" => $total,
+                "IdUsuario" => $this->session->userdata('usaurio')
             );
             $this->db->insert('Order', $data);
             $insert_id = $this->db->insert_id();
