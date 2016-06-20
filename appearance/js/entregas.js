@@ -79,12 +79,10 @@ function getHoraActual() {
 var veces = 0;
 
 function updatePending() {
-    var url = "Deliveries/getPedingOrders/";
+    var url = "Deliveries/syncPedingOrders/";
     var posting = $.post(url, {estado: "pendiente"});
     posting.done(function (data) {
-//        $('#OrderList').html(data);
-        veces += 1;
-        console.log(veces + "-" + data);
+        $('#OrderList').html(data);
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         console.log(xhr.responseText);

@@ -129,20 +129,6 @@
                                                 Forma de Pago:
                                             </legend>
                                             <div class="form-group">
-                                                <div class="radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="Factura" value="FAC" />
-                                                        Consumidor Final
-                                                    </label>
-                                                </div>
-                                                <div class="radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="Factura" value="CCF"> 
-                                                        Credito Fiscal
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
                                                 <label for="PagoNameCash" class="col-lg-3 control-label">Nombre:</label>
                                                 <div class="col-lg-9">
                                                     <input type="text" class="form-control" name="Nombre" id="PagoNameCash" placeholder="Nombre Factura" maxlength="100" required>
@@ -188,18 +174,6 @@
                                 </div>
                                 <div class="modal-body">
                                     <form method="POST">
-                                        <div class="radio-inline">
-                                            <label>
-                                                <input type="radio" name="Factura" value="FAC" />
-                                                Consumidor Final
-                                            </label>
-                                        </div>
-                                        <div class="radio-inline">
-                                            <label>
-                                                <input type="radio" name="Factura" value="CCF"> 
-                                                Credito Fiscal
-                                            </label>
-                                        </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -242,7 +216,7 @@
                                     <form action="action" method="POST" class="form-inline">
                                         <div class="form-group">
                                         <label for="filtertype" class=" control-label">Tipo de filtro:</label>
-                                        <select class="form-control" name="Restaurante" id="codagency">
+                                        <select class="form-control" name="tipofiltro" id="codefilter">
                                             <option value="0">Numero de Telefono</option>
                                             <option value="1">Nombre Cliente</option>
                                             <option value="2">Direccion</option>

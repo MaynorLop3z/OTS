@@ -46,7 +46,28 @@ class Deliveries extends CI_Controller {
                 }
                 return $Orders;
     }
-
+public function syncPedingOrders(){
+        $Orders = '';
+                $sucursal = $this->session->userdata('sucursal');
+                $pedidos = $this->Delivery->listarDeliveries($sucursal);
+                foreach ($pedidos as $pedido) {
+                    $Orders .= '<tr id="' . $pedido->IdOrder . '">';
+                    $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
+                    $Orders .='<td>' . $pedido->NameClient . '</td><td>' . $pedido->DirectionClient . '</td>';
+                    $Orders .='<td>$ ' . $pedido->Total . '</td><td>' . $pedido->Comments . '</td>';
+                    if ($pedido->Status == 1) {
+                        $Orders .='<td>Pendiente</td>';
+                    } else {
+                        $Orders .='<td>Despachado</td>';
+                    }
+                    $Orders .= '<td>'
+                            . '<button id="Dispatch' . $pedido->IdOrder . '" onclick="viewDispatcher(this)" title="Despachar" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>'
+                            . '<button id="viewDetail' . $pedido->IdOrder . '" onclick="viewDetail(this)" title="Ver Detalle" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> </button>'
+                            . '</td>';
+                    $Orders .='</tr>';
+                }
+                echo $Orders;
+    }
     public function viewDetailOrder() {
         try {
         if ($this->input->post()) {
