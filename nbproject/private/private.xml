@@ -5,13 +5,8 @@
         <group>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/appearance/js/entregas.js</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/Deliveries.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Login.php</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/appearance/js/pedidos.js</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Delivery.php</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Orders.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/Login.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/Delivery.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/Usuarios.php</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/Orders.php</file>
         </group>
     </open-files>
