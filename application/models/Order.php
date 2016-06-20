@@ -80,18 +80,18 @@ class Order extends CI_Model {
         }
     }
 
-    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal,$fecha, $hora, $total) {
+    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total) {
         try {
-            $insert_id =0;
+            $insert_id = 0;
             $data = array(
                 "NumberClient" => $numero,
                 "NameClient" => $nombre,
                 "DirectionClient" => $direccion,
                 "Comments" => $comentarios,
                 "IdAgency" => $sucursal,
-                "CreationDate" => $fecha,
+                "CreationDate" => date("Y-m-d"),
                 "Status" => 1,
-                "CreationTime" => $hora,
+                "CreationTime" => date("H:i:s"),
                 "Total" => $total
             );
             $this->db->insert('Order', $data);
@@ -101,7 +101,8 @@ class Order extends CI_Model {
         }
         return $insert_id;
     }
-public function insertOrderDetail($IdProduct, $IdSauce, $IdSpicy, $Quantity, $UnitPrice, $IdOrder) {
+
+    public function insertOrderDetail($IdProduct, $IdSauce, $IdSpicy, $Quantity, $UnitPrice, $IdOrder) {
         try {
             $data = array(
                 "IdProduct" => $IdProduct,
@@ -119,21 +120,56 @@ public function insertOrderDetail($IdProduct, $IdSauce, $IdSpicy, $Quantity, $Un
         }
         return $data;
     }
-    
+
     public function searchClient($number) {
         try {
-        $this->db->select( 'NumberClient, '
-                . 'NameClient, '
-                . 'DirectionClient');
-        $this->db->from('Order');
-        $this->db->where('NumberClient', $number);
-        $this->db->order_by("IdOrder", "desc");
-        $this->db->limit(1);
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
+            $this->db->select('NumberClient, '
+                    . 'NameClient, '
+                    . 'DirectionClient');
+            $this->db->from('Order');
+            $this->db->where('NumberClient', $number);
+            $this->db->order_by("IdOrder", "desc");
+            $this->db->limit(1);
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
         } catch (Exception $ex) {
             $ex->getMessage();
         }
         return $resultado;
     }
+
+    public function getDeliveriesBy($option, $filter) {
+        $this->db->select('IdOrder, '
+                . 'NumberClient, '
+                . 'NameClient, '
+                . 'DirectionClient, '
+                . 'Comments, '
+                . 'IdAgency, '
+                . 'CreationDate, '
+                . 'Status,'
+                . 'Total');
+        $this->db->from('Order');
+        switch ($option) {
+            case 0:
+                $this->db->like('NumberClient', $filter);
+                break;
+            case 1:
+                $this->db->like('NameClient', $filter);
+                break;
+            case 2:
+                $this->db->like('DirectionClient', $filter);
+                break;
+            case 3:
+                $this->db->where('IdOrder', $filter);
+                break;
+            default:
+                echo "i no es igual a 0, 1 ni 2";
+        }
+        $this->db->where('CreationDate', date("Y-m-d"));
+        $this->db->order_by("IdOrder", "desc");
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
+
 }

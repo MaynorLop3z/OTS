@@ -125,12 +125,9 @@ function realizarPedido(PEDIDO) {
     var agency = $("#codagency").val();
     if (dir || tel || name) {
         if (items.length > 0) {
-            var actual = new Date();
-            var fecha = actual.toJSON();
-            var hora = calcularHoraActual();
             var total = $('#totalPedido').html();
             console.log(total);
-            crearPedido(name, tel, dir, commen, agency, items, fecha, hora, total);
+            crearPedido(name, tel, dir, commen, agency, items, total);
             limpiarCampos();
         } else {
             alert("Debe agregar elementos del menu al pedido.");
@@ -176,22 +173,6 @@ function crearPedido(nameClient, numberClient, directionClient, comments, agency
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
     });
-}
-;
-function calcularHoraActual() {
-    var actual = new Date();
-    var hours = actual.getHours(), minutes = actual.getMinutes(), seconds = actual.getSeconds();
-    if (hours < 10) {
-        hours = "0" + hours;
-    }
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    return hours + ':' + minutes + ':' + seconds;
-
 }
 ;
 

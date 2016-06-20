@@ -85,8 +85,7 @@ public function syncPedingOrders(){
         try {
             if ($this->input->post()) {
                 $codigo = $this->input->post('codigo');
-                $hora = $this->input->post('hora');
-                $arrayData = $this->Delivery->dispatchOrder($codigo, $hora);
+                $arrayData = $this->Delivery->dispatchOrder($codigo);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {

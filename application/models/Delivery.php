@@ -23,6 +23,7 @@ public function listarDeliveries($idAgency) {
         $this->db->from('Order');
         $this->db->where('IdAgency', $idAgency);
         $this->db->where('Status', 1);
+        $this->db->where('CreationDate', date("Y-m-d"));
         $this->db->order_by("IdOrder", "desc");
         $consulta = $this->db->get();
         $resultado = $consulta->result();
@@ -43,11 +44,11 @@ public function listarDeliveries($idAgency) {
         }
     }
     
-    public function dispatchOrder($codigo, $hora) {
+    public function dispatchOrder($codigo) {
         try {
             $data = array(
                 'Status' => 2,
-                'DispatchTime' => $hora
+                'DispatchTime' => date("H:i:s")
             );
             $this->db->where('IdOrder', $codigo);
             $this->db->update('Order', $data);
