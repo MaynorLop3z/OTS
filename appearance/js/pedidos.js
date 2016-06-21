@@ -180,3 +180,19 @@ function showbuscarPedido() {
     $("#modalPedidoBusqueda").modal('toggle');
 }
 ;
+
+
+$("#searchOrderBy").submit(function(event) {
+   event.preventDefault();
+   var $form = $(this), numberOption = $form.find("select[name='tipofiltro']").val(), filtertext = $form.find("input[name='filtro']").val(),url = $form.attr("action");
+//   console.log(numberOption+' - '+filtertext);
+//   console.log(url);
+   var posting = $.post(url, {numberOption: numberOption, filtertext: filtertext});
+   posting.done(function(data) {
+//       console.log(data);
+       $('#listaPedidos').html(data);
+       });
+    posting.fail(function(xhr, textStatus, errorThrown) {
+         alert("error" + xhr.responseText);
+     });
+});

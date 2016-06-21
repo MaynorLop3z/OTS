@@ -213,7 +213,7 @@
                                     <h4 class="modal-title">Buscar Pedido</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="action" method="POST" class="form-inline">
+                                    <form action="Orders/buscarPedido/" method="POST" class="form-inline" id="searchOrderBy">
                                         <div class="form-group">
                                         <label for="filtertype" class=" control-label">Tipo de filtro:</label>
                                         <select class="form-control" name="tipofiltro" id="codefilter">

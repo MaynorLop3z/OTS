@@ -130,5 +130,34 @@ class Orders extends CI_Controller {
             echo json_encode($ex);
         }
     }
+    
+    public function buscarPedido(){
+        $Orders = '';
+        try {
+            if ($this->input->post()) {
+                $option = $this->input->post('numberOption');
+                $filter = $this->input->post('filtertext');
+                $pedidos = $this->Order->getDeliveriesBy($option,$filter);
+                foreach ($pedidos as $pedido) {
+                    $Orders .= '<tr id="' . $pedido->IdOrder . '">';
+                    $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
+                    $Orders .='<td>' . $pedido->NameClient . '</td><td>' . $pedido->DirectionClient . '</td>';
+                    $Orders .='<td>$ ' . $pedido->Total . '</td><td>' . $pedido->Comments . '</td>';
+                    if ($pedido->Status == 1) {
+                        $Orders .='<td>Pendiente</td>';
+                    } else {
+                        $Orders .='<td>Despachado</td>';
+                    }
+                    $Orders .= '<td>'
+                            . '<button id="viewDetail' . $pedido->IdOrder . '" onclick="viewDetail(this)" title="Ver Detalle" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> </button>'
+                            . '</td>';
+                    $Orders .='</tr>';
+                }
+            }
+        } catch (Exception $ex) {
+            $Orders = json_encode($ex);
+        }
+        echo $Orders;
+    }
 
 }

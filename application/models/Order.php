@@ -164,7 +164,7 @@ class Order extends CI_Model {
                 $this->db->where('IdOrder', $filter);
                 break;
             default:
-                echo "i no es igual a 0, 1 ni 2";
+                $this->db->where('IdOrder', $filter);
         }
         $this->db->where('CreationDate', date("Y-m-d"));
         $this->db->order_by("IdOrder", "desc");
