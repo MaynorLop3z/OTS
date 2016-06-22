@@ -206,7 +206,7 @@ function viewDetail(boton) {
 
         var obj = jQuery.parseJSON(data);
         var tabla = "";
-        for (x in obj) {
+        for (var x in obj) {
             tabla += '<tr>';
             tabla += '<td>' + obj[x].nameproduct + '</td>';
             if (obj[x].namesauce) {
