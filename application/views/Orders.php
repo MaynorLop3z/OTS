@@ -253,7 +253,36 @@
                             </div>
                         </div>
                     </div>
+                    <div id="viewDetailModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="ModalTittleView">Detalle del Pedido</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Salsa</th>
+                                <th>Picante</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="OrderDetail">
+                        </tbody>
+                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -285,13 +314,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="detailOrder">
-<!--                                        <tr>
-                                            <td>Alitas</td>
-                                            <td>Hawaina</td>
-                                            <td>Picante</td>
-                                            <td>10</td>
-                                            <td>7.95</td>
-                                        </tr>-->
                                     </tbody>
                                 </table>
                             </div>
