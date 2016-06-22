@@ -156,6 +156,15 @@ function realizarPedido(PEDIDO) {
     }
 }
 ;
+function comprobarpago(){
+    var comprobacion =0;
+    if (pagoTarjeta === 0) {
+        if (referencia) {
+           comprobacion=1; 
+        }
+    }
+    return comprobacion;
+}
 function limpiarCampos() {
     $("#detailOrder").html('');
     $('#DireccionCliente').html('');
@@ -165,6 +174,9 @@ function limpiarCampos() {
     $('#ClientDirection').val('');
     $('#ClientNumber').val('');
     $('#ClientName').val('');
+    pagoTarjeta = 0;
+    pagoEfectivo = 0;
+    comentarios = "";
 }
 ;
 
@@ -216,13 +228,13 @@ $("#searchOrderBy").submit(function (event) {
 });
 $('#frmPagoEfectivo').submit(function (event) {
     event.preventDefault();
-pagoEfectivo = 1;
-$("#FormaDePagoEfectivo").modal('toggle');
+    pagoEfectivo = 1;
+    $("#FormaDePagoEfectivo").modal('toggle');
 });
 $('#frmPagoTarjeta').submit(function (event) {
     event.preventDefault();
-pagoEfectivo = 1;
-$("#FormaDePagoTarjeta").modal('toggle');
+    pagoEfectivo = 1;
+    $("#FormaDePagoTarjeta").modal('toggle');
 });
 function viewDetail(boton) {
     var codigo = boton.id.substring(10);
