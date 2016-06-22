@@ -126,30 +126,40 @@
                                     <form id="frmPagoEfectivo" action="" class="form-horizontal" method="post" >
                                         <fieldset>
                                             <legend class="modal-header">
-                                                Forma de Pago:
+                                                Pago en efectivo:
                                             </legend>
                                             <div class="form-group">
-                                                <label for="PagoNameCash" class="col-lg-3 control-label">Nombre:</label>
-                                                <div class="col-lg-9">
-                                                    <input type="text" class="form-control" name="Nombre" id="PagoNameCash" placeholder="Nombre Factura" maxlength="100" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="PagoNITCash" class="col-lg-3 control-label">NIT:</label>
-                                                <div class="col-lg-9">
-                                                    <input type="text" class="form-control" name="NIT" id="PagoNITCash" placeholder="NIT Cliente">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="PagoRNCCash" class="col-lg-3 control-label">RNC:</label>
-                                                <div class="col-lg-9">
-                                                    <input type="text" class="form-control" name="RNC" id="PagoRNCCash" placeholder="RNC Cliente">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="PagoCashComment" class="col-lg-3 control-label">Comentarios:</label>
+                                                <label for="PagoCashComment" class="col-lg-3 control-label">¿Necesitara cambio?</label>
                                                 <div class="col-lg-9">
                                                     <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="PagoCashComment" placeholder="Comentarios acerca del pago"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                <button type="reset" onclick="" class="btn btn-warning" name="Limpiar">Limpiar</button>
+                                                <button type="submit" class="btn btn-primary">Guardar Datos</button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MODAL TARJETA -->
+                    <div class="modal fade" id="FormaDePagoTarjeta" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="container-fluid ">
+                                    <form id="frmPagoTarjeta" action="" class="form-horizontal" method="post" >
+                                        <fieldset>
+                                            <legend class="modal-header">
+                                                Pago en efectivo:
+                                            </legend>
+                                            <div class="form-group">
+                                                <label for="PagoTarjetaReferencia" class="col-lg-3 control-label">Nombre:</label>
+                                                <div class="col-lg-9">
+                                                    <input type="text" class="form-control" name="numref" id="PagoTarjetaReferencia" placeholder="Numero de referencia" maxlength="100" required>
                                                 </div>
                                             </div>
 
@@ -160,26 +170,6 @@
                                             </div>
                                         </fieldset>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- MODAL TARJETA -->
-                    <div class="modal fade" id="FormaDePagoTarjeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Datos de Pago</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="POST">
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <button type="reset" onclick="" class="btn btn-default" name="Limpiar">Limpiar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Datos</button>
                                 </div>
                             </div>
                         </div>
@@ -215,16 +205,16 @@
                                 <div class="modal-body">
                                     <form action="Orders/buscarPedido/" method="POST" class="form-inline" id="searchOrderBy">
                                         <div class="form-group">
-                                        <label for="filtertype" class=" control-label">Tipo de filtro:</label>
-                                        <select class="form-control" name="tipofiltro" id="codefilter">
-                                            <option value="0">Numero de Telefono</option>
-                                            <option value="1">Nombre Cliente</option>
-                                            <option value="2">Direccion</option>
-                                            <option value="3">Numero de Pedido</option>
-                                        </select>
+                                            <label for="filtertype" class=" control-label">Tipo de filtro:</label>
+                                            <select class="form-control" name="tipofiltro" id="codefilter">
+                                                <option value="0">Numero de Telefono</option>
+                                                <option value="1">Nombre Cliente</option>
+                                                <option value="2">Direccion</option>
+                                                <option value="3">Numero de Pedido</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                        <label for="filtertext" class="control-label">filtro:</label>
+                                            <label for="filtertext" class="control-label">filtro:</label>
                                             <input type="text" class="form-control" name="filtro" id="filtertext" placeholder="detalle de filtro" maxlength="100" required>
                                         </div>
                                         <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar Pedido</button>
@@ -262,18 +252,18 @@
                                 </div>
                                 <div class="modal-body">
                                     <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Salsa</th>
-                                <th>Picante</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                            </tr>
-                        </thead>
-                        <tbody id="OrderDetail">
-                        </tbody>
-                    </table>
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Salsa</th>
+                                                <th>Picante</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="OrderDetail">
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
@@ -282,7 +272,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">

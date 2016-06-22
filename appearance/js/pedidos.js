@@ -1,20 +1,38 @@
 var codigo;
 var indice = 0;
-var nit = "";
-var nrc = "";
+var pagoTarjeta = 0;
+var pagoEfectivo = 0;
 var comentarios = "";
 function agregarItemMenu(item) {
     codigo = item.id;
 }
 ;
 function showPaymentCash(fila) {
-    codigo = fila.id;
-    $("#FormaDePagoEfectivo").modal('toggle');
+    if (pagoTarjeta === 0) {
+        if (pagoEfectivo === 0) {
+            $("#FormaDePagoEfectivo").modal('toggle');
+        } else {
+            alert("Ya se definio un metodo de pago para el pedido actual.");
+        }
+
+    } else {
+        alert("Ya se establecio el pago con tarjeta como metodo de pago para el pedido actual");
+    }
 }
 ;
 function showPaymentOnline(fila) {
-    codigo = fila.id;
-    $("#FormaDePagoTarjeta").modal('toggle');
+    if (pagoEfectivo === 0) {
+        if (pagoTarjeta === 0) {
+            $("#FormaDePagoTarjeta").modal('toggle');
+        } else {
+            alert("Ya se definio un metodo de pago para el pedido actual.");
+        }
+
+    } else {
+        alert("Ya se establecio el pago en efectivo como metodo de pago para el pedido actual");
+    }
+
+
 }
 ;
 
@@ -182,21 +200,30 @@ function showbuscarPedido() {
 ;
 
 
-$("#searchOrderBy").submit(function(event) {
-   event.preventDefault();
-   var $form = $(this), numberOption = $form.find("select[name='tipofiltro']").val(), filtertext = $form.find("input[name='filtro']").val(),url = $form.attr("action");
+$("#searchOrderBy").submit(function (event) {
+    event.preventDefault();
+    var $form = $(this), numberOption = $form.find("select[name='tipofiltro']").val(), filtertext = $form.find("input[name='filtro']").val(), url = $form.attr("action");
 //   console.log(numberOption+' - '+filtertext);
 //   console.log(url);
-   var posting = $.post(url, {numberOption: numberOption, filtertext: filtertext});
-   posting.done(function(data) {
+    var posting = $.post(url, {numberOption: numberOption, filtertext: filtertext});
+    posting.done(function (data) {
 //       console.log(data);
-       $('#listaPedidos').html(data);
-       });
-    posting.fail(function(xhr, textStatus, errorThrown) {
-         alert("error" + xhr.responseText);
-     });
+        $('#listaPedidos').html(data);
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
 });
-
+$('#frmPagoEfectivo').submit(function (event) {
+    event.preventDefault();
+pagoEfectivo = 1;
+$("#FormaDePagoEfectivo").modal('toggle');
+});
+$('#frmPagoTarjeta').submit(function (event) {
+    event.preventDefault();
+pagoEfectivo = 1;
+$("#FormaDePagoTarjeta").modal('toggle');
+});
 function viewDetail(boton) {
     var codigo = boton.id.substring(10);
     var url = "Deliveries/viewDetailOrder/";
