@@ -159,8 +159,13 @@ function realizarPedido(PEDIDO) {
 function comprobarpago(){
     var comprobacion =0;
     if (pagoTarjeta === 0) {
-        if (referencia) {
+        if ($('#PagoTarjetaReferencia')) {
            comprobacion=1; 
+        }
+    }
+    if (pagoEfectivo === 0) {
+        if ($('#PagoCashComment')) {
+            comprobacion=1;
         }
     }
     return comprobacion;
