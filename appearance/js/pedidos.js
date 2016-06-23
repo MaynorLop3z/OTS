@@ -143,15 +143,11 @@ function realizarPedido(PEDIDO) {
     var commen = $('#PagoCashComment').val();
     var referencia = $('#PagoTarjetaReferencia').val();
     var total = $('#totalPedido').html();
-    //console.log(referencia);
     var agency = $("#codagency").val();
     if (dir || tel || name) {
         if (items.length > 0) {
             if (comprobarpago() === 1) {
-                //console.log("Comprobado");
-                   //console.log(referencia);
                 crearPedido(name, tel, dir, commen, agency, items, total, referencia);
-                //limpiarCampos();
             }
             else {
                 alert("Falta Definir informacion de pago");
@@ -168,8 +164,6 @@ function realizarPedido(PEDIDO) {
 ;
 function comprobarpago() {
     var comprobacion = 0;
-    //console.log("Tarjeta:"+pagoTarjeta+" - "+$('#PagoTarjetaReferencia').val());
-    //console.log("Efectivo:"+pagoEfectivo+" - "+$('#PagoCashComment').val());
     
     if (pagoTarjeta == !0) {
         if ($('#PagoTarjetaReferencia').val()) {
@@ -181,7 +175,6 @@ function comprobarpago() {
             comprobacion = 1;
         }
     }
-    //console.log(comprobacion);
     return comprobacion;
 }
 function limpiarCampos() {
@@ -206,10 +199,9 @@ $('#logout').click(function () {
     var url = "General/logout/";
     var posting = $.post(url);
     posting.done(function (data) {
-        //console.log("Salida del sistema Exitosa.");
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
+        //alert("error" + xhr.responseText);
     });
 });
 
@@ -237,11 +229,8 @@ function showbuscarPedido() {
 $("#searchOrderBy").submit(function (event) {
     event.preventDefault();
     var $form = $(this), numberOption = $form.find("select[name='tipofiltro']").val(), filtertext = $form.find("input[name='filtro']").val(), url = $form.attr("action");
-//   console.log(numberOption+' - '+filtertext);
-//   console.log(url);
     var posting = $.post(url, {numberOption: numberOption, filtertext: filtertext});
     posting.done(function (data) {
-//       console.log(data);
         $('#listaPedidos').html(data);
     });
     posting.fail(function (xhr, textStatus, errorThrown) {

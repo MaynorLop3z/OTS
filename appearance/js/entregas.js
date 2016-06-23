@@ -53,7 +53,6 @@ function despachar() {
         $("#viewDispatchModal").modal('toggle');
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
-        console.log(xhr.responseText);
         alert("error" + xhr.responseText);
     });
 }
@@ -85,7 +84,6 @@ function updatePending() {
         $('#OrderList').html(data);
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
-        console.log(xhr.responseText);
         alert("error" + xhr.responseText);
     });
     setTimeout("updatePending()", 30000);

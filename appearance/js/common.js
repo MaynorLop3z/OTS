@@ -5,7 +5,7 @@ $('#logout').click(function () {
         console.log("Salida del sistema Exitosa.");
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
-        alert("error" + xhr.responseText);
+        //alert("error" + xhr.responseText);
     });
 });
 
