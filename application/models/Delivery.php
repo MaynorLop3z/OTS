@@ -19,7 +19,8 @@ public function listarDeliveries($idAgency) {
                 . 'IdAgency, '
                 . 'CreationDate, '
                 . 'Status,'
-                . 'Total');
+                . 'Total, '
+                . 'NumRef');
         $this->db->from('Order');
         $this->db->where('IdAgency', $idAgency);
         $this->db->where('Status', 1);

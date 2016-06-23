@@ -80,7 +80,7 @@ class Order extends CI_Model {
         }
     }
 
-    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total) {
+    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia) {
         try {
             $insert_id = 0;
             $data = array(
@@ -93,7 +93,8 @@ class Order extends CI_Model {
                 "Status" => 1,
                 "CreationTime" => date("H:i:s"),
                 "Total" => $total,
-                "IdUsuario" => $this->session->userdata('usaurio')
+                "IdUsuario" => $this->session->userdata('usaurio'),
+                "NumRef" => $referencia
             );
             $this->db->insert('Order', $data);
             $insert_id = $this->db->insert_id();

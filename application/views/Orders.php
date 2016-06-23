@@ -131,7 +131,7 @@
                                             <div class="form-group">
                                                 <label for="PagoCashComment" class="col-lg-3 control-label">¿Necesitara cambio?</label>
                                                 <div class="col-lg-9">
-                                                    <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="PagoCashComment" placeholder="Comentarios acerca del pago"></textarea>
+                                                    <textarea cols="40" rows="5" class="form-control" name="Comentarios" id="PagoCashComment" placeholder="Comentarios acerca del pago" required></textarea>
                                                 </div>
                                             </div>
 

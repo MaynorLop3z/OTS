@@ -47,6 +47,7 @@
                                 <th>Nombre</th>
                                 <th>Direccion</th>
                                 <th>Total</th>
+                                <th>Pago</th>
                                 <th>Comentarios</th>
                                 <th>Estado</th>
                                 <th>Action</th>

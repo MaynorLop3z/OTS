@@ -3,17 +3,18 @@ var indice = 0;
 var pagoTarjeta = 0;
 var pagoEfectivo = 0;
 var comentarios = "";
+var refencia = "";
 function agregarItemMenu(item) {
     codigo = item.id;
 }
 ;
 function showPaymentCash(fila) {
     if (pagoTarjeta === 0) {
-        if (pagoEfectivo === 0) {
+//        if (pagoEfectivo === 0) {
             $("#FormaDePagoEfectivo").modal('toggle');
-        } else {
-            alert("Ya se definio un metodo de pago para el pedido actual.");
-        }
+//        } else {
+//            alert("Ya se definio un metodo de pago para el pedido actual.");
+//        }
 
     } else {
         alert("Ya se establecio el pago con tarjeta como metodo de pago para el pedido actual");
@@ -22,11 +23,11 @@ function showPaymentCash(fila) {
 ;
 function showPaymentOnline(fila) {
     if (pagoEfectivo === 0) {
-        if (pagoTarjeta === 0) {
+//        if (pagoTarjeta === 0) {
             $("#FormaDePagoTarjeta").modal('toggle');
-        } else {
-            alert("Ya se definio un metodo de pago para el pedido actual.");
-        }
+//        } else {
+//            alert("Ya se definio un metodo de pago para el pedido actual.");
+//        }
 
     } else {
         alert("Ya se establecio el pago en efectivo como metodo de pago para el pedido actual");
@@ -139,14 +140,23 @@ function realizarPedido(PEDIDO) {
     var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
-    var commen = "TEST";
+    var commen = $('#PagoCashComment').val();
+    var referencia = $('#PagoTarjetaReferencia').val();
+    var total = $('#totalPedido').html();
+    //console.log(referencia);
     var agency = $("#codagency").val();
     if (dir || tel || name) {
         if (items.length > 0) {
-            var total = $('#totalPedido').html();
-            console.log(total);
-            crearPedido(name, tel, dir, commen, agency, items, total);
-            limpiarCampos();
+            if (comprobarpago() === 1) {
+                //console.log("Comprobado");
+                   //console.log(referencia);
+                crearPedido(name, tel, dir, commen, agency, items, total, referencia);
+                //limpiarCampos();
+            }
+            else {
+                alert("Falta Definir informacion de pago");
+            }
+
         } else {
             alert("Debe agregar elementos del menu al pedido.");
         }
@@ -156,18 +166,22 @@ function realizarPedido(PEDIDO) {
     }
 }
 ;
-function comprobarpago(){
-    var comprobacion =0;
-    if (pagoTarjeta === 0) {
-        if ($('#PagoTarjetaReferencia')) {
-           comprobacion=1; 
+function comprobarpago() {
+    var comprobacion = 0;
+    //console.log("Tarjeta:"+pagoTarjeta+" - "+$('#PagoTarjetaReferencia').val());
+    //console.log("Efectivo:"+pagoEfectivo+" - "+$('#PagoCashComment').val());
+    
+    if (pagoTarjeta == !0) {
+        if ($('#PagoTarjetaReferencia').val()) {
+            comprobacion = 1;
         }
     }
-    if (pagoEfectivo === 0) {
-        if ($('#PagoCashComment')) {
-            comprobacion=1;
+    if (pagoEfectivo == !0) {
+        if ($('#PagoCashComment').val()) {
+            comprobacion = 1;
         }
     }
+    //console.log(comprobacion);
     return comprobacion;
 }
 function limpiarCampos() {
@@ -182,6 +196,8 @@ function limpiarCampos() {
     pagoTarjeta = 0;
     pagoEfectivo = 0;
     comentarios = "";
+    $('#PagoTarjetaReferencia').val('');
+    $('#PagoCashComment').val('');
 }
 ;
 
@@ -190,7 +206,7 @@ $('#logout').click(function () {
     var url = "General/logout/";
     var posting = $.post(url);
     posting.done(function (data) {
-        console.log("Salida del sistema Exitosa.");
+        //console.log("Salida del sistema Exitosa.");
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
@@ -200,10 +216,11 @@ $('#logout').click(function () {
 
 function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora, total) {
     var url = "Orders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: total});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: $('#totalPedido').html(), referencia:$('#PagoTarjetaReferencia').val()});
     posting.done(function (data) {
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');
+        limpiarCampos();
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);
@@ -238,7 +255,7 @@ $('#frmPagoEfectivo').submit(function (event) {
 });
 $('#frmPagoTarjeta').submit(function (event) {
     event.preventDefault();
-    pagoEfectivo = 1;
+    pagoTarjeta = 1;
     $("#FormaDePagoTarjeta").modal('toggle');
 });
 function viewDetail(boton) {
