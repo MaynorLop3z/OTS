@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/El_Salvador');
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
