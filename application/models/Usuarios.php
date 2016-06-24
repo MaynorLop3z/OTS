@@ -28,4 +28,56 @@ class Usuarios extends CI_Model {
             echo $exc->getTraceAsString();
         }
     }
+    
+    
+    
+    public function insertUser($Nombre, $Alias, $Password, $IdRol, $IdAgency) {
+        try {
+            $data = array(
+                'Nombre' => $Nombre,
+                'Alias' => $Alias,
+                'Password' => $Password,
+                'IdRol' => $IdRol,
+                'IdAgency' => $IdAgency
+            );
+            $this->db->insert('Usuarios', $data);
+            $insert_id = $this->db->insert_id();
+            $data['IdUsuario'] = $insert_id;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
+    }
+    
+    
+    public function deleteUser($IdUsuario) {
+        $eliminado = false;
+        try {
+        $this->db->delete('Usuarios', array('IdUsuario' => $IdUsuario));
+        if ($this->db->affected_rows() == 1){
+            $eliminado = true;
+        }
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $eliminado;
+    }
+    
+    public function updateUser($Nombre, $Alias, $Password, $IdRol, $IdAgency, $IdUsuario) {
+        try {
+            $data = array(
+                'Nombre' => $Nombre,
+                'Alias' => $Alias,
+                'Password' => $Password,
+                'IdRol' => $IdRol,
+                'IdAgency' => $IdAgency
+            );
+            $this->db->where('IdUsuario', $IdUsuario);
+            $this->db->update('Usuarios', $data);
+            $data['IdUsuario'] = $IdUsuario;
+        } catch (Exception $ex) {
+            $ex->getMessage();
+        }
+        return $data;
+    }
 }
