@@ -12,7 +12,7 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
-        <link href="../appearance/css/flatly-bootstrap.min.css" rel="stylesheet">
+        <link href="../../appearance/css/flatly-bootstrap.min.css" rel="stylesheet">
         <script src="../appearance/js/jquery-2.2.3.min.js"></script>
         <script src="../appearance/js/bootstrap.min.js"></script>
         <link href="../appearance/css/login.css" rel="stylesheet">
