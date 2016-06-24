@@ -12,17 +12,17 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->          
-        <link href="../../appearance/css/flatly-bootstrap.min.css" rel="stylesheet">
-        <script src="../appearance/js/jquery-2.2.3.min.js"></script>
-        <script src="../appearance/js/bootstrap.min.js"></script>
-        <link href="../appearance/css/login.css" rel="stylesheet">
-        <link rel="stylesheet" href="../appearance/font-awesome/css/font-awesome.min.css">
-        <script src="../appearance/js/jquery.interactive_bg.js"></script>
-        <script src="../appearance/js/login.js"></script>
-        <script src="../appearance/js/pedidos.js"></script>
+        <link href="appearance/css/flatly-bootstrap.min.css" rel="stylesheet">
+        <script src="appearance/js/jquery-2.2.3.min.js"></script>
+        <script src="appearance/js/bootstrap.min.js"></script>
+        <link href="appearance/css/login.css" rel="stylesheet">
+        <link rel="stylesheet" href="appearance/font-awesome/css/font-awesome.min.css">
+        <script src="appearance/js/jquery.interactive_bg.js"></script>
+        <script src="appearance/js/login.js"></script>
+        <script src="appearance/js/pedidos.js"></script>
     </head>
     <body>
-        <div class="container wrapper bg" data-ibg-bg="../appearance/images/bg_login.jpg" >
+        <div class="container wrapper bg" data-ibg-bg="appearance/images/bg_login.jpg" >
             <div class="row vertical-offset-100" id="contenedor">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
@@ -30,7 +30,7 @@ and open the template in the editor.
                         <div class="panel-heading">
                             <h4 class="login-header">Toma de Pedidos</h4>
                             <div class="row-fluid user-row">
-                                <img src="../appearance/images/CallCenterIcon128.png" class="img-responsive" alt="Call Center"/>
+                                <img src="appearance/images/CallCenterIcon128.png" class="img-responsive" alt="Call Center"/>
                             </div>
                         </div>
                         <div class="panel-body">
