@@ -15,7 +15,7 @@ class Administration extends CI_Controller {
                 $this->load->view('Administration');
             } else {
                 $this->load->helper('url');
-                Redirect('login');
+                Redirect('Login');
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();

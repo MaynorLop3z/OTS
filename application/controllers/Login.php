@@ -29,11 +29,11 @@ class Login extends CI_Controller {
                 }
             } else {
                 $data['ErrorLogin'] = '<div id="login_error" class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Error!</strong> Usuario o contraseña no validos. </div>';
-                $this->load->view('login', $data);
+                $this->load->view('Login', $data);
             }
         } else {
             $data['ErrorLogin'] ='';
-            $this->load->view('login', $data);
+            $this->load->view('Login', $data);
         }
     }
 

@@ -18,7 +18,7 @@ class Deliveries extends CI_Controller {
                 $this->load->view('Delivery', $data);
             } else {
                 $this->load->helper('url');
-                Redirect('login');
+                Redirect('Login');
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
