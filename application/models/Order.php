@@ -49,6 +49,7 @@ class Order extends CI_Model {
                 . 'Price');
         $this->db->from('Products');
         $this->db->where('IdCategory', $idCategory);
+        $this->db->where('State', 0);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;

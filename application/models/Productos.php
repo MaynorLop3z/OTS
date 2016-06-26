@@ -18,7 +18,8 @@ class Productos extends CI_Model {
                 'Type' => $Type,
                 'Sauce' => $Sauce,
                 'Price' => $Price,
-                'IdCategory' => $IdCategory
+                'IdCategory' => $IdCategory,
+                'State' => 0
             );
             $this->db->insert('Productos', $data);
             $insert_id = $this->db->insert_id();
@@ -30,10 +31,15 @@ class Productos extends CI_Model {
     }
     
     
-    public function deleteProduct($IdUsuario) {
+    public function deleteProduct($IdProduct) {
         $eliminado = false;
         try {
-        $this->db->delete('Usuarios', array('IdUsuario' => $IdUsuario));
+            $data = array(
+                'State' => 1
+            );
+            $this->db->where('IdProduct', $IdProduct);
+            $this->db->update('Productos', $data);
+//        $this->db->delete('Usuarios', array('IdUsuario' => $IdUsuario));
         if ($this->db->affected_rows() == 1){
             $eliminado = true;
         }

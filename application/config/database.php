@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '200.35.190.18',
+	'hostname' => 'localhost',
 	'username' => 'postgres',
-	'password' => 'Y3ll0w1967',
+	'password' => 'r00t',
 	'database' => 'PedidosCallCenter',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
