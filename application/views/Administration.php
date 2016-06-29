@@ -129,8 +129,73 @@
                 <div class="col-md-1"></div>
             </div>
         </div>
-        <?php
-        // put your code here
-        ?>
+        <!--MODALES-->
+        <div id="AddProductModal" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="container-fluid ">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <form id="frmAddProduct" action="Products/agregarProducto/" class="form-horizontal" method="post" >
+                            <fieldset>
+                                <legend class="modal-header">
+                                    Agregar Producto:
+                                </legend>
+                                <div class="form-group">
+                                    <label for="nombreProductoAdd" class="col-lg-3 control-label">Nombre:</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="nombre" id="nombreProductoAdd" placeholder="Nombre del producto" maxlength="100" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcionProductAdd" class="col-lg-3 control-label">Descripcion:</label>
+                                    <div class="col-lg-9">
+                                        <textarea cols="40" rows="5" class="form-control" name="descripcion" id="descripcionProductAdd" placeholder="Descripcion" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="salsaProductAdd" class="col-lg-3 control-label">¿Salsa?:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="salsa" id="salsaProductAdd">
+                                            <option value="0">Lleva</option>
+                                            <option value="1">No Lleva</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioProductoAdd" class="col-lg-3 control-label">Nombre:</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="precio" id="precioProductoAdd" placeholder="Precio del producto" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoriaProductAdd" class="col-lg-3 control-label">Categoria:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="categoria" id="categoriaProductAdd">
+                                            <option value="0">Lleva</option>
+                                            <option value="1">No Lleva</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="estadoProductAdd" class="col-lg-3 control-label">¿Salsa?:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="estado" id="estadoProductAdd">
+                                            <option value="0">Activo</option>
+                                            <option value="1">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="reset" onclick="" class="btn btn-warning" name="Limpiar">Limpiar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Datos</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../appearance/js/mantenimientos.js"></script>
     </body>
 </html>
