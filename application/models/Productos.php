@@ -21,7 +21,7 @@ class Productos extends CI_Model {
                 'IdCategory' => $IdCategory,
                 'State' => 0
             );
-            $this->db->insert('Productos', $data);
+            $this->db->insert('Products', $data);
             $insert_id = $this->db->insert_id();
             $data['IdProducto'] = $insert_id;
         } catch (Exception $ex) {
@@ -38,7 +38,7 @@ class Productos extends CI_Model {
                 'State' => 1
             );
             $this->db->where('IdProduct', $IdProduct);
-            $this->db->update('Productos', $data);
+            $this->db->update('Products', $data);
 //        $this->db->delete('Usuarios', array('IdUsuario' => $IdUsuario));
         if ($this->db->affected_rows() == 1){
             $eliminado = true;
@@ -49,7 +49,7 @@ class Productos extends CI_Model {
         return $eliminado;
     }
     
-    public function updateProduct($NameProduct, $Dscription, $Type, $Sauce, $Price, $IdCategory, $IdProduct) {
+    public function updateProduct($NameProduct, $Dscription, $Type, $Sauce, $Price, $IdCategory, $State, $IdProduct) {
         try {
             $data = array(
                 'NameProduct' => $NameProduct,
@@ -57,10 +57,11 @@ class Productos extends CI_Model {
                 'Type' => $Type,
                 'Sauce' => $Sauce,
                 'Price' => $Price,
-                'IdCategory' => $IdCategory
+                'IdCategory' => $IdCategory,
+                'State' => $State
             );
             $this->db->where('IdProduct', $IdProduct);
-            $this->db->update('Productos', $data);
+            $this->db->update('Products', $data);
             $data['IdProduct'] = $IdProduct;
         } catch (Exception $ex) {
             $ex->getMessage();

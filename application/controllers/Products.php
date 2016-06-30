@@ -8,7 +8,7 @@ class Products extends CI_Controller {
         parent::__construct();
         $this->load->model('Productos');
     }
-    
+
     public function agregarProducto() {
         try {
             if ($this->input->post()) {
@@ -16,7 +16,7 @@ class Products extends CI_Controller {
                 $Dscription = $this->input->post('descripcion');
                 $Type = 2;
                 $Sauce = $this->input->post('salsa');
-                $Price = $this->input->post('precio'); 
+                $Price = $this->input->post('precio');
                 $IdCategory = $this->input->post('categoria');
                 $arrayData = $this->Productos->insertProduct($NameProduct, $Dscription, $Type, $Sauce, $Price, $IdCategory);
                 echo json_encode($arrayData);
@@ -25,8 +25,7 @@ class Products extends CI_Controller {
             echo json_encode($ex);
         }
     }
-    
-    
+
     public function actualizarProducto() {
         try {
             if ($this->input->post()) {
@@ -35,18 +34,17 @@ class Products extends CI_Controller {
                 $Dscription = $this->input->post('descripcion');
                 $Type = 2;
                 $Sauce = $this->input->post('salsa');
-                $Price = $this->input->post('precio'); 
+                $Price = $this->input->post('precio');
                 $IdCategory = $this->input->post('categoria');
-                $arrayData = $this->Productos->updateProduct($NameProduct, $Dscription, $Type, $Sauce, $Price, $IdCategory, $IdProduct);
+                $State = $this->input->post('estado');
+                $arrayData = $this->Productos->updateProduct($NameProduct, $Dscription, $Type, $Sauce, $Price, $IdCategory, $IdProduct, $State);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
         }
     }
-    
-    
-    
+
     public function eliminarProducto() {
         try {
             if ($this->input->post()) {
@@ -58,4 +56,5 @@ class Products extends CI_Controller {
             echo json_encode($ex);
         }
     }
+
 }

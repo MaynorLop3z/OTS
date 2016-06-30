@@ -70,7 +70,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <button onclick="showAddProduct()" title="agregarProducto" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>  Agregar Producto</button><br>
-                                    <table id="" class="table table-bordered table-striped table-hover table-responsive">
+                                    <table id="tblProductos" class="table table-bordered table-striped table-hover table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
@@ -78,6 +78,7 @@
                                                 <th>Salsa</th>
                                                 <th>Precio</th>
                                                 <th>Categoria</th>
+                                                <th>Estado</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead> 
@@ -156,13 +157,13 @@
                                     <label for="salsaProductAdd" class="col-lg-3 control-label">¿Salsa?:</label>
                                     <div class="col-lg-9">
                                         <select class="form-control" name="salsa" id="salsaProductAdd">
-                                            <option value="0">Lleva</option>
-                                            <option value="1">No Lleva</option>
+                                            <option value="0">No Lleva</option>
+                                            <option value="1">Lleva</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="precioProductoAdd" class="col-lg-3 control-label">Nombre:</label>
+                                    <label for="precioProductoAdd" class="col-lg-3 control-label">Precio:</label>
                                     <div class="col-lg-9">
                                         <input type="text" class="form-control" name="precio" id="precioProductoAdd" placeholder="Precio del producto" maxlength="20" required>
                                     </div>
@@ -171,24 +172,21 @@
                                     <label for="categoriaProductAdd" class="col-lg-3 control-label">Categoria:</label>
                                     <div class="col-lg-9">
                                         <select class="form-control" name="categoria" id="categoriaProductAdd">
-                                            <option value="0">Lleva</option>
-                                            <option value="1">No Lleva</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="estadoProductAdd" class="col-lg-3 control-label">¿Salsa?:</label>
-                                    <div class="col-lg-9">
-                                        <select class="form-control" name="estado" id="estadoProductAdd">
-                                            <option value="0">Activo</option>
-                                            <option value="1">Inactivo</option>
+                                            <?php
+                                            foreach ($Categorias as $cat) {
+                                                ?>
+                                                <option value="<?= $cat->IdCategory ?>"><?= $cat->NameCategory ?></option>
+
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" onclick="" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     <button type="reset" onclick="" class="btn btn-warning" name="Limpiar">Limpiar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Datos</button>
+                                    <button type="submit" onclick="" class="btn btn-primary" name="Save">Guardar Datos</button>
                                 </div>
                             </fieldset>
                         </form>
