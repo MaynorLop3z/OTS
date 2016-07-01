@@ -66,8 +66,8 @@ class Order extends CI_Model {
 
     public function getALLProductos() {
         try {
-            $consulta = $this->db->query('SELECT "T0"."IdProduct", "T0"."NameProduct", "T0"."Dscription", "T0"."Sauce", "T0"."Price", "T1"."IdCategory", "T1"."NameCategory", "T1"."Bunch" 
-                FROM "Products" "T0" 
+            $consulta = $this->db->query('SELECT "T0"."IdProduct", "T0"."NameProduct", "T0"."Dscription", "T0"."Sauce", "T0"."Price", "T1"."IdCategory", "T1"."NameCategory", "T1"."Bunch", "T0"."State" 
+                 FROM "Products" "T0" 
                 JOIN "Category" "T1" ON "T0"."IdCategory" = "T1"."IdCategory" 
                 ORDER BY "T1"."SortIndex" ASC');
             if ($consulta != null) {

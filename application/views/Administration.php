@@ -60,7 +60,22 @@
                                             </tr>
                                         </thead> 
                                         <tbody>
-
+                                            <?php
+                                            foreach ($Usuarios as $usua) {
+                                                ?>
+                                            <tr id="product<?= $usua->IdUsuario ?>">
+                                                <td class="NombreUsuario"><?= $usua->Nombre ?></td>
+                                            <td class="AliasUsuario"><?= $usua->Alias ?></td>
+                                            <td class="RolUsuario" id="rolUsuario<?= $usua->IdRol ?>"><?= $usua->RolName ?></td>
+                                            <td class="AgenciaUsuario" id="agencyUsuario<?= $usua->IdAgency ?>"><?= $usua->Name ?></td>
+                                            <td class="gestion_Producto">
+                                                        <button id="userEDIT<?= $usua->IdUsuario ?>" onclick="showEditarUsuario(this)" title="Editar Usuario" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> </button>
+                                                        <button id="userDELT<?= $usua->IdUsuario ?>" onclick="showEliminarUsuario(this)" title="Eliminar Usuario" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                                                    </td>
+                                            </tr>
+                                                <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -83,7 +98,24 @@
                                             </tr>
                                         </thead> 
                                         <tbody>
-
+                                            <?php
+                                            foreach ($Productos as $prod) {
+                                                ?>
+                                                <tr id="product<?= $prod->IdProduct ?>">
+                                                    <td class="NombreProducto"><?= $prod->NameProduct ?></td>
+                                                    <td class="DescripcionProducto"><?= $prod->Dscription ?></td>
+                                                    <td class="SalsaProducto"><?= ($prod->Sauce === 't') ? 'Si' : 'No' ?></td>
+                                                    <td class="PrecioProducto"><?= $prod->Price ?></td>
+                                                    <td class="CategoriaProducto" id="cateP<?= $prod->IdCategory ?>"><?= $prod->NameCategory ?></td>
+                                                    <td class="EstadoProducto" ><?= ($prod->State === '0') ? 'Activo' : 'Inactivo' ?></td>
+                                                    <td class="gestion_Producto">
+                                                        <button id="proEDIT<?= $prod->IdProduct ?>" onclick="showEditarProduct(this)" title="Editar Producto" class="btn_modificar_alum btn btn-info"><span class="glyphicon glyphicon-pencil"></span> </button>
+                                                        <button id="proDELT<?= $prod->IdProduct ?>" onclick="showEliminarProduct(this)" title="Eliminar Producto" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
