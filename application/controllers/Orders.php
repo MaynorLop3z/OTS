@@ -14,17 +14,37 @@ class Orders extends CI_Controller {
         try {
 //            $this->session->userdata('indices');
             if ($this->session->userdata('indices') == 2) {
-                $cantidadProductos = 0;
+                $cantidadCategorias = 0;
                 $categorias = $this->Order->getCategorias();
-                $allProducts[$cantidadProductos] = '';
+                $allCategories[$cantidadCategorias] = '';
                 foreach ($categorias as $cat) {
+                    $allCategories[$cantidadCategorias] = ' <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordionCat" href="#collapseCaterogia'.$cantidadCategorias.'" aria-expanded="true" aria-controls="collapseCaterogia'.$cantidadCategorias.'">
+          '.$cat->NameCategory.'
+        </a>
+      </h4>
+    </div>
+    <div id="collapseCaterogia'.$cantidadCategorias.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">';
                     $productos = $this->Order->getProductCatetory($cat->IdCategory);
+                    $clearfix = 0;
+                    $detalleProductos = '';
                     foreach ($productos as $prod) {
-                        $allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
-                        $cantidadProductos++;
+                        //$allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
+                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
+                        $clearfix++;
+                        if ($clearfix == 3) {
+                            $clearfix = 0;
+                            $detalleProductos .= '<div class="clearfix"></div>';
+                        }
                     }
+                    $allCategories[$cantidadCategorias] .= $detalleProductos;
+                    $allCategories[$cantidadCategorias] .= '</div></div></div>';
+                    $cantidadCategorias++;
                 }
-                $data['Productos'] = $allProducts;
+                $data['Categorias'] = $allCategories;
                 $data['Sucursales'] = $this->getSucursales();
                 $this->load->view('Orders', $data);
             } else {
@@ -119,8 +139,8 @@ class Orders extends CI_Controller {
             echo json_encode($ex);
         }
     }
-    
-    public function searchClient(){
+
+    public function searchClient() {
         try {
             if ($this->input->post()) {
                 $numero = $this->input->post('numberClient');
@@ -131,14 +151,14 @@ class Orders extends CI_Controller {
             echo json_encode($ex);
         }
     }
-    
-    public function buscarPedido(){
+
+    public function buscarPedido() {
         $Orders = '';
         try {
             if ($this->input->post()) {
                 $option = $this->input->post('numberOption');
                 $filter = $this->input->post('filtertext');
-                $pedidos = $this->Order->getDeliveriesBy($option,$filter);
+                $pedidos = $this->Order->getDeliveriesBy($option, $filter);
                 foreach ($pedidos as $pedido) {
                     $Orders .= '<tr id="' . $pedido->IdOrder . '">';
                     $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';

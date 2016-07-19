@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -86,22 +86,18 @@
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
                                     <div class="row">
-                                        <?php
-                                        $clearfix = 0;
-                                        foreach ($Productos as $producto) {
-                                            echo $producto;
-                                            $clearfix++;
-                                            if ($clearfix == 3) {
-                                                $clearfix = 0;
-                                                echo '<div class="clearfix"></div>';
+                                        <div class="panel-group" id="accordionCat" role="tablist" aria-multiselectable="true">
+                                            <?php
+                                            foreach ($Categorias as $cat) {
+                                                echo $cat;
                                             }
-                                        }
-                                        ?>
+                                            ?>
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingThree">
                                 <h4 class="panel-title">
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">

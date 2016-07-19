@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/Administration.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/Order.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/Usuarios.php</file>
-            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Administration.php</file>
+            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Orders.php</file>
         </group>
     </open-files>
 </project-private>
