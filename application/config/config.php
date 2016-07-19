@@ -25,6 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'https://200.35.190.18/OTS/';
 
+
 /*
 |--------------------------------------------------------------------------
 | Index File

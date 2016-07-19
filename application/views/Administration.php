@@ -60,7 +60,22 @@
                                             </tr>
                                         </thead> 
                                         <tbody>
-
+                                            <?php
+                                            foreach ($Usuarios as $usua) {
+                                                ?>
+                                            <tr id="product<?= $usua->IdUsuario ?>">
+                                                <td class="NombreUsuario"><?= $usua->Nombre ?></td>
+                                            <td class="AliasUsuario"><?= $usua->Alias ?></td>
+                                            <td class="RolUsuario" id="rolUsuario<?= $usua->IdRol ?>"><?= $usua->RolName ?></td>
+                                            <td class="AgenciaUsuario" id="agencyUsuario<?= $usua->IdAgency ?>"><?= $usua->Name ?></td>
+                                            <td class="gestion_Producto">
+                                                        <button id="userEDIT<?= $usua->IdUsuario ?>" onclick="showEditarUsuario(this)" title="Editar Usuario" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> </button>
+                                                        <button id="userDELT<?= $usua->IdUsuario ?>" onclick="showEliminarUsuario(this)" title="Eliminar Usuario" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                                                    </td>
+                                            </tr>
+                                                <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -70,7 +85,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <button onclick="showAddProduct()" title="agregarProducto" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>  Agregar Producto</button><br>
-                                    <table id="" class="table table-bordered table-striped table-hover table-responsive">
+                                    <table id="tblProductos" class="table table-bordered table-striped table-hover table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
@@ -78,11 +93,29 @@
                                                 <th>Salsa</th>
                                                 <th>Precio</th>
                                                 <th>Categoria</th>
+                                                <th>Estado</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead> 
                                         <tbody>
-
+                                            <?php
+                                            foreach ($Productos as $prod) {
+                                                ?>
+                                                <tr id="product<?= $prod->IdProduct ?>">
+                                                    <td class="NombreProducto"><?= $prod->NameProduct ?></td>
+                                                    <td class="DescripcionProducto"><?= $prod->Dscription ?></td>
+                                                    <td class="SalsaProducto"><?= ($prod->Sauce === 't') ? 'Si' : 'No' ?></td>
+                                                    <td class="PrecioProducto"><?= $prod->Price ?></td>
+                                                    <td class="CategoriaProducto" id="cateP<?= $prod->IdCategory ?>"><?= $prod->NameCategory ?></td>
+                                                    <td class="EstadoProducto" ><?= ($prod->State === '0') ? 'Activo' : 'Inactivo' ?></td>
+                                                    <td class="gestion_Producto">
+                                                        <button id="proEDIT<?= $prod->IdProduct ?>" onclick="showEditarProduct(this)" title="Editar Producto" class="btn_modificar_alum btn btn-info"><span class="glyphicon glyphicon-pencil"></span> </button>
+                                                        <button id="proDELT<?= $prod->IdProduct ?>" onclick="showEliminarProduct(this)" title="Eliminar Producto" class="btn_eliminar_alum btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -129,8 +162,70 @@
                 <div class="col-md-1"></div>
             </div>
         </div>
-        <?php
-        // put your code here
-        ?>
+        <!--MODALES-->
+        <div id="AddProductModal" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="container-fluid ">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <form id="frmAddProduct" action="Products/agregarProducto/" class="form-horizontal" method="post" >
+                            <fieldset>
+                                <legend class="modal-header">
+                                    Agregar Producto:
+                                </legend>
+                                <div class="form-group">
+                                    <label for="nombreProductoAdd" class="col-lg-3 control-label">Nombre:</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="nombre" id="nombreProductoAdd" placeholder="Nombre del producto" maxlength="100" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcionProductAdd" class="col-lg-3 control-label">Descripcion:</label>
+                                    <div class="col-lg-9">
+                                        <textarea cols="40" rows="5" class="form-control" name="descripcion" id="descripcionProductAdd" placeholder="Descripcion" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="salsaProductAdd" class="col-lg-3 control-label">¿Salsa?:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="salsa" id="salsaProductAdd">
+                                            <option value="0">No Lleva</option>
+                                            <option value="1">Lleva</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioProductoAdd" class="col-lg-3 control-label">Precio:</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" name="precio" id="precioProductoAdd" placeholder="Precio del producto" maxlength="20" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoriaProductAdd" class="col-lg-3 control-label">Categoria:</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="categoria" id="categoriaProductAdd">
+                                            <?php
+                                            foreach ($Categorias as $cat) {
+                                                ?>
+                                                <option value="<?= $cat->IdCategory ?>"><?= $cat->NameCategory ?></option>
+
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="reset" onclick="" class="btn btn-warning" name="Limpiar">Limpiar</button>
+                                    <button type="submit" onclick="" class="btn btn-primary" name="Save">Guardar Datos</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../appearance/js/mantenimientos.js"></script>
     </body>
 </html>
