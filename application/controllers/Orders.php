@@ -33,7 +33,7 @@ class Orders extends CI_Controller {
                     $detalleProductos = '';
                     foreach ($productos as $prod) {
                         //$allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
-                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
+                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price,$prod->SauceQuantity);
                         $clearfix++;
                         if ($clearfix == 3) {
                             $clearfix = 0;
@@ -57,7 +57,7 @@ class Orders extends CI_Controller {
     }
 
     public function generarHotSpicy() {
-        $nivelHot = 'Nivel de Picante:<br><select class="form-control" name="nivelHot">';
+        $nivelHot = '<select class="form-control" name="nivelHot">';
 
         $niveles = json_decode(json_encode($this->Order->getNivelHot()), true);
         foreach ($niveles as $nivel) {
@@ -68,7 +68,7 @@ class Orders extends CI_Controller {
     }
 
     public function generarSauceTypes() {
-        $sauceTypes = 'Tipo de Salsa:<br><select class="form-control" name="typeSalsa">';
+        $sauceTypes = '<select class="form-control" name="typeSalsa">';
         $salsas = json_decode(json_encode($this->Order->getTiposSalsa()), true);
         foreach ($salsas as $salsa) {
             $sauceTypes .= '<option value="' . $salsa['IdSauce'] . '">' . $salsa['NameSauce'] . '</option>';
@@ -77,15 +77,21 @@ class Orders extends CI_Controller {
         return $sauceTypes;
     }
 
-    public function generarProducto($id, $name, $sauce, $dscription, $price) {
+    public function generarProducto($id, $name, $sauce, $dscription, $price, $sauceQuantity) {
         $producto = '<form method="POST" action="" class="itemMenu" id="pro' . $id . '"><div class="col-sm-6 col-md-4">';
         $producto .= '<h3 class="itemName">' . $name . '</h3>';
         if ($sauce == 't') {
-            $producto .= $this->generarSauceTypes();
-            $producto .= $this->generarHotSpicy();
+            $producto .= '<table class="table table-bordered table-hover table-striped"><thead><tr><th>Salsa</th><th>Picante</th></tr></thead><tbody>';
+            for ($index = 0; $index < $sauceQuantity; $index++) {
+              $producto .= '<tr>';
+              $producto .= '<td>'.$this->generarSauceTypes().'</td>';
+              $producto .= '<td>'.$this->generarHotSpicy().'</td>';
+              $producto .= '</tr>';
+            }
+            $producto .= '</tbody></table>';
         }
-        $producto .= 'Cantidad:<input type="number" class="form-control" name="Quantity" min="1" max="50" value="1"><br>';
-        $producto .= 'Precio:<strong class="itemPrice">' . $price . '</strong><br>';
+        $producto .= '<div class="col-md-4">Cantidad:</div><div class="col-md-8"><input type="number" class="form-control" name="Quantity" min="1" max="50" value="1"></div><br>';
+        $producto .= 'Precio:  <strong class="itemPrice">' . $price . '</strong><br>';
         $producto .= '<button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>';
         $producto .= '</div></form>';
         return $producto;

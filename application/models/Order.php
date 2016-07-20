@@ -46,7 +46,8 @@ class Order extends CI_Model {
                 . 'NameProduct, '
                 . 'Dscription, '
                 . 'Sauce, '
-                . 'Price');
+                . 'Price, '
+                . 'SauceQuantity');
         $this->db->from('Products');
         $this->db->where('IdCategory', $idCategory);
         $this->db->where('State', 0);
