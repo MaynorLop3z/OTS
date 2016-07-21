@@ -10,11 +10,7 @@ function agregarItemMenu(item) {
 ;
 function showPaymentCash(fila) {
     if (pagoTarjeta === 0) {
-//        if (pagoEfectivo === 0) {
-            $("#FormaDePagoEfectivo").modal('toggle');
-//        } else {
-//            alert("Ya se definio un metodo de pago para el pedido actual.");
-//        }
+        $("#FormaDePagoEfectivo").modal('toggle');
 
     } else {
         alert("Ya se establecio el pago con tarjeta como metodo de pago para el pedido actual");
@@ -23,11 +19,7 @@ function showPaymentCash(fila) {
 ;
 function showPaymentOnline(fila) {
     if (pagoEfectivo === 0) {
-//        if (pagoTarjeta === 0) {
-            $("#FormaDePagoTarjeta").modal('toggle');
-//        } else {
-//            alert("Ya se definio un metodo de pago para el pedido actual.");
-//        }
+        $("#FormaDePagoTarjeta").modal('toggle');
 
     } else {
         alert("Ya se establecio el pago en efectivo como metodo de pago para el pedido actual");
@@ -78,23 +70,22 @@ $(".itemMenu").submit(function (event) {
     var $form = $(this);
     var idForm = $form.attr('id').substring(3);
     var nameItem = $form.find(".itemName").html();
-    var typeSalsa = $form.find("select[name='typeSalsa']").val();
-    var salsa = $form.find("select[name='typeSalsa'] option:selected").text();
-    var nivelHot = $form.find("select[name='nivelHot']").val();
-    var nivel = $form.find("select[name='nivelHot'] option:selected").text();
     var quantity = $form.find("input[name='Quantity']").val();
     var precio = $form.find(".itemPrice").html();
-    var fila = '<tr id="itemDetail' + indice + '">';
+    var quantitySauce = $form.find(".saucedetail tr").length;
+    var fila = '<tr id="itemDetail' + indice + '" class="itemORDR">';
     fila += '<td class="Dscription' + idForm + '">' + nameItem + '</td>';
-    if (typeSalsa) {
-        fila += '<td class="salsa' + typeSalsa + '">' + salsa + '</td>';
+    if (quantitySauce > 0) {
+        fila += '<td class="salsa1">';
+        for (var j = 0; j < quantitySauce; j++) {
+            fila += '<table class="table table-bordered table-condensed"><tr>';
+            fila += '<td class="salsa' + $form.find("select[name='typeSalsa" + j + "']").val() + '">' + $form.find("select[name='typeSalsa" + j + "'] option:selected").text() + '</td>';
+            fila += '<td class="salsa' + $form.find("select[name='nivelHot" + j + "']").val() + '">' + $form.find("select[name='nivelHot" + j + "'] option:selected").text() + '</td>';
+            fila += '</tr></table>';
+        }
+        fila += '</td>';
     } else {
         fila += '<td class="salsa0"></td>';
-    }
-    if (nivelHot) {
-        fila += '<td class="picante' + nivelHot + '">' + nivel + '</td>';
-    } else {
-        fila += '<td class="picante0"></td>';
     }
     fila += '<td class="cantidad">' + quantity + '</td>';
     fila += '<td class="Price">' + precio + '</td>';
@@ -106,11 +97,13 @@ $(".itemMenu").submit(function (event) {
 });
 function calcularTotal() {
     var total = 0;
-    $("#detailOrder tr").each(function (index)
+    $("#detailOrder .itemORDR").each(function (index)
     {
         var cantidad = $(this).find(".cantidad").html();
         var precio = $(this).find(".Price").html();
-        total += cantidad * precio;
+        //if (cantidad) {
+            total += cantidad * precio;
+        //}
     });
     $('#totalPedido').html(total.toFixed(2));
 }
@@ -148,8 +141,7 @@ function realizarPedido(PEDIDO) {
         if (items.length > 0) {
             if (comprobarpago() === 1) {
                 crearPedido(name, tel, dir, commen, agency, items, total, referencia);
-            }
-            else {
+            } else {
                 alert("Falta Definir informacion de pago");
             }
 
@@ -164,7 +156,7 @@ function realizarPedido(PEDIDO) {
 ;
 function comprobarpago() {
     var comprobacion = 0;
-    
+
     if (pagoTarjeta == !0) {
         if ($('#PagoTarjetaReferencia').val()) {
             comprobacion = 1;
@@ -208,7 +200,7 @@ $('#logout').click(function () {
 
 function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora, total) {
     var url = "Orders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: $('#totalPedido').html(), referencia:$('#PagoTarjetaReferencia').val()});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: $('#totalPedido').html(), referencia: $('#PagoTarjetaReferencia').val()});
     posting.done(function (data) {
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');

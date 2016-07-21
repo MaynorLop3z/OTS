@@ -270,7 +270,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4 class="login-header">Datos del pedido</h4>
                         </div>
@@ -288,12 +288,11 @@
                                 <p id="DireccionCliente" class="col-md-10"></p>
                             </div>
                             <div class="col-md-12">
-                                <table class="table table-bordered table-hover table-striped">
+                                <table class="table table-bordered table-hover table-striped table-condensed">
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Salsa</th>
-                                            <th>Picante</th>
+                                            <th>Salsa - Picante</th>
                                             <th>Cantidad</th>
                                             <th>Precio</th>
                                             <th>Action</th>

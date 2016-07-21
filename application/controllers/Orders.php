@@ -56,8 +56,8 @@ class Orders extends CI_Controller {
         }
     }
 
-    public function generarHotSpicy() {
-        $nivelHot = '<select class="form-control" name="nivelHot">';
+    public function generarHotSpicy($indice) {
+        $nivelHot = '<select class="form-control" name="nivelHot'.$indice.'">';
 
         $niveles = json_decode(json_encode($this->Order->getNivelHot()), true);
         foreach ($niveles as $nivel) {
@@ -67,8 +67,8 @@ class Orders extends CI_Controller {
         return $nivelHot;
     }
 
-    public function generarSauceTypes() {
-        $sauceTypes = '<select class="form-control" name="typeSalsa">';
+    public function generarSauceTypes($indice) {
+        $sauceTypes = '<select class="form-control" name="typeSalsa'.$indice.'">';
         $salsas = json_decode(json_encode($this->Order->getTiposSalsa()), true);
         foreach ($salsas as $salsa) {
             $sauceTypes .= '<option value="' . $salsa['IdSauce'] . '">' . $salsa['NameSauce'] . '</option>';
@@ -81,11 +81,11 @@ class Orders extends CI_Controller {
         $producto = '<form method="POST" action="" class="itemMenu" id="pro' . $id . '"><div class="col-sm-6 col-md-4">';
         $producto .= '<h3 class="itemName">' . $name . '</h3>';
         if ($sauce == 't') {
-            $producto .= '<table class="table table-bordered table-hover table-striped"><thead><tr><th>Salsa</th><th>Picante</th></tr></thead><tbody>';
+            $producto .= '<table class="table table-bordered table-hover table-striped"><thead><tr><th>Salsa</th><th>Picante</th></tr></thead><tbody class="saucedetail">';
             for ($index = 0; $index < $sauceQuantity; $index++) {
               $producto .= '<tr>';
-              $producto .= '<td>'.$this->generarSauceTypes().'</td>';
-              $producto .= '<td>'.$this->generarHotSpicy().'</td>';
+              $producto .= '<td>'.$this->generarSauceTypes($index).'</td>';
+              $producto .= '<td>'.$this->generarHotSpicy($index).'</td>';
               $producto .= '</tr>';
             }
             $producto .= '</tbody></table>';
