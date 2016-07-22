@@ -91,7 +91,7 @@ class Order extends CI_Model {
                 "Comments" => $comentarios,
                 "IdAgency" => $sucursal,
                 "CreationDate" => date("Y-m-d"),
-                "Status" => 1,
+                "IdStatus" => 1,
                 "CreationTime" => date("H:i:s"),
                 "Total" => $total,
                 "IdUsuario" => $this->session->userdata('usaurio'),
@@ -149,7 +149,7 @@ class Order extends CI_Model {
                 . 'Comments, '
                 . 'IdAgency, '
                 . 'CreationDate, '
-                . 'Status,'
+                . 'IdStatus,'
                 . 'Total');
         $this->db->from('Order');
         switch ($option) {

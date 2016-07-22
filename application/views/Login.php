@@ -22,7 +22,7 @@ and open the template in the editor.
         <script src="../appearance/js/pedidos.js"></script>
     </head>
     <body>
-        <div class="container wrapper bg" data-ibg-bg="../appearance/images/bg_login.jpg" >
+        <div class="container wrapper bg" data-ibg-bg="../appearance/images/fondosolido1.jpg" >
             <div class="row vertical-offset-100" id="contenedor">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
