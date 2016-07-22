@@ -21,19 +21,19 @@ class Orders extends CI_Controller {
                     $allCategories[$cantidadCategorias] = ' <div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordionCat" href="#collapseCaterogia'.$cantidadCategorias.'" aria-expanded="true" aria-controls="collapseCaterogia'.$cantidadCategorias.'">
-          '.$cat->NameCategory.'
+        <a role="button" data-toggle="collapse" data-parent="#accordionCat" href="#collapseCaterogia' . $cantidadCategorias . '" aria-expanded="true" aria-controls="collapseCaterogia' . $cantidadCategorias . '">
+          ' . $cat->NameCategory . '
         </a>
       </h4>
     </div>
-    <div id="collapseCaterogia'.$cantidadCategorias.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseCaterogia' . $cantidadCategorias . '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">';
                     $productos = $this->Order->getProductCatetory($cat->IdCategory);
                     $clearfix = 0;
                     $detalleProductos = '';
                     foreach ($productos as $prod) {
                         //$allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
-                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price,$prod->SauceQuantity);
+                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price, $prod->SauceQuantity);
                         $clearfix++;
                         if ($clearfix == 3) {
                             $clearfix = 0;
@@ -57,7 +57,7 @@ class Orders extends CI_Controller {
     }
 
     public function generarHotSpicy($indice) {
-        $nivelHot = '<select class="form-control" name="nivelHot'.$indice.'">';
+        $nivelHot = '<select class="form-control" name="nivelHot' . $indice . '">';
 
         $niveles = json_decode(json_encode($this->Order->getNivelHot()), true);
         foreach ($niveles as $nivel) {
@@ -68,7 +68,7 @@ class Orders extends CI_Controller {
     }
 
     public function generarSauceTypes($indice) {
-        $sauceTypes = '<select class="form-control" name="typeSalsa'.$indice.'">';
+        $sauceTypes = '<select class="form-control" name="typeSalsa' . $indice . '">';
         $salsas = json_decode(json_encode($this->Order->getTiposSalsa()), true);
         foreach ($salsas as $salsa) {
             $sauceTypes .= '<option value="' . $salsa['IdSauce'] . '">' . $salsa['NameSauce'] . '</option>';
@@ -83,10 +83,10 @@ class Orders extends CI_Controller {
         if ($sauce == 't') {
             $producto .= '<table class="table table-bordered table-hover table-striped"><thead><tr><th>Salsa</th><th>Picante</th></tr></thead><tbody class="saucedetail">';
             for ($index = 0; $index < $sauceQuantity; $index++) {
-              $producto .= '<tr>';
-              $producto .= '<td>'.$this->generarSauceTypes($index).'</td>';
-              $producto .= '<td>'.$this->generarHotSpicy($index).'</td>';
-              $producto .= '</tr>';
+                $producto .= '<tr>';
+                $producto .= '<td>' . $this->generarSauceTypes($index) . '</td>';
+                $producto .= '<td>' . $this->generarHotSpicy($index) . '</td>';
+                $producto .= '</tr>';
             }
             $producto .= '</tbody></table>';
         }
@@ -121,9 +121,11 @@ class Orders extends CI_Controller {
                 $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia);
                 foreach ($productos as $producto) {
                     $idItem = $this->Order->insertOrderDetail($producto['producto'], $producto['cantidad'], $producto['precio'], $idOrder);
-                    $salsas = $producto['salsas'];
-                    foreach ($salsas as $salsa) {
-                        $this->Order->insertOrderDetailSauces($salsa['producto'], $salsa['cantidad'], $idItem);
+                    if (isset($producto['salsas'])) {
+                        $salsas = $producto['salsas'];
+                        foreach ($salsas as $salsa) {
+                            $this->Order->insertOrderDetailSauces($salsa['idSalsa'], $salsa['idPicante'], $idItem);
+                        }
                     }
                 }
                 echo $idOrder;

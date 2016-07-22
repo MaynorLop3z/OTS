@@ -76,14 +76,14 @@ $(".itemMenu").submit(function (event) {
     var fila = '<tr id="itemDetail' + indice + '" class="itemORDR">';
     fila += '<td class="Dscription' + idForm + '">' + nameItem + '</td>';
     if (quantitySauce > 0) {
-        fila += '<td class="salsa1">';
+        fila += '<td class="salsa1"><table class="table table-bordered table-condensed"><tbody>';
         for (var j = 0; j < quantitySauce; j++) {
-            fila += '<table class="table table-bordered table-condensed"><tr>';
+            fila += '<tr class="tr'+j+'">';
             fila += '<td class="salsaNum' + $form.find("select[name='typeSalsa" + j + "']").val() + '">' + $form.find("select[name='typeSalsa" + j + "'] option:selected").text() + '</td>';
             fila += '<td class="picanteNum' + $form.find("select[name='nivelHot" + j + "']").val() + '">' + $form.find("select[name='nivelHot" + j + "'] option:selected").text() + '</td>';
-            fila += '</tr></table>';
+            fila += '</tr>';
         }
-        fila += '</td>';
+        fila += '</td></tbody></table>';
     } else {
         fila += '<td class="salsa0"></td>';
     }
@@ -120,23 +120,21 @@ function realizarPedido(PEDIDO) {
     var items = new Array();
     $("#detailOrder .itemORDR").each(function (index)
     {
-        var producto = 0, salsa = 0, picante = 0, cantidad = 0, precio = 0;
+        var producto = 0, cantidad = 0, precio = 0;
         producto = $(this).find("td").eq(0).attr('class').substring(10);
-//        salsa = $(this).find("td").eq(1).attr('class').substring(5);
-//        picante = $(this).find("td").eq(2).attr('class').substring(7);
-        cantidad = $(this).find("td").eq(3).html();
-        precio = $(this).find("td").eq(4).html();
+        cantidad = $(this).find(".cantidad").html();
+        precio = $(this).find(".Price").html();
         var salsas = new Array();
         for (var i = 0; i < $(this).find(".salsa1 tr").length; i++) {
-            var idSalsa = $(this).find(".salsa1 tr td").eq(0).attr('class').substring(8);
-            var idPicante = $(this).find(".salsa1 tr td").eq(1).attr('class').substring(10);
+            var idSalsa = $(this).find(".salsa1 .tr"+i+" td").eq(0).attr('class').substring(8);
+            var idPicante = $(this).find(".salsa1 .tr"+i+" td").eq(1).attr('class').substring(10);
             var salsaItem = {idSalsa:idSalsa, idPicante:idPicante};
             salsas[i] = salsaItem;
         }
         var item = {producto: producto, cantidad: cantidad, precio: precio, salsas:salsas};
         items[index] = item;
     });
-console.log(items);
+//console.log(items);
     var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
