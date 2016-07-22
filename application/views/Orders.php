@@ -12,6 +12,49 @@
         <script src="../appearance/js/bootstrap.min.js"></script>
         <script src="../appearance/js/common.js"></script>
         <link href="../appearance/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+        <script>
+            //https://jqueryui.com/autocomplete/#custom-data
+            $(function () {
+                var coverages = [
+                    {
+                        value: 1,
+                        label: "jQuery"
+                    },
+                    {
+                        value: 2,
+                        label: "jQuery UI"
+                    },
+                    {
+                        value: 3,
+                        label: "Sizzle JS"
+                    }
+                ];
+
+                $("#Coverage").autocomplete({
+                    minLength: 0,
+                    source: coverages,
+                    focus: function (event, ui) {
+                        $("#Coverage").val(ui.item.label);
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        $("#project").val(ui.item.label);
+                        console.log(ui.item.value);
+                        $("#project-id").val(ui.item.value);
+                        $("#project-description").html(ui.item.desc);
+                        $("#project-icon").attr("src", "images/" + ui.item.icon);
+
+                        return false;
+                    }
+                })
+                        .autocomplete("instance")._renderItem = function (ul, item) {
+                    return $("<li>")
+                            .append("<div>" + item.label + "<br>" + item.desc + "</div>")
+                            .appendTo(ul);
+                };
+            });
+        </script>
     </head>
     <body>
         <div class="container-fluid">
