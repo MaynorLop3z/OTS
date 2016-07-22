@@ -2,11 +2,11 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Orders extends CI_Controller {
+class COrders extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Order');
+        $this->load->model('MOrder');
         $this->load->library(array('session'));
     }
 
@@ -15,7 +15,7 @@ class Orders extends CI_Controller {
 //            $this->session->userdata('indices');
             if ($this->session->userdata('indices') == 2) {
                 $cantidadCategorias = 0;
-                $categorias = $this->Order->getCategorias();
+                $categorias = $this->MOrder->getCategorias();
                 $allCategories[$cantidadCategorias] = '';
                 foreach ($categorias as $cat) {
                     $allCategories[$cantidadCategorias] = ' <div class="panel panel-info">
@@ -28,7 +28,7 @@ class Orders extends CI_Controller {
     </div>
     <div id="collapseCaterogia' . $cantidadCategorias . '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">';
-                    $productos = $this->Order->getProductCatetory($cat->IdCategory);
+                    $productos = $this->MOrder->getProductCatetory($cat->IdCategory);
                     $clearfix = 0;
                     $detalleProductos = '';
                     foreach ($productos as $prod) {
@@ -59,7 +59,7 @@ class Orders extends CI_Controller {
     public function generarHotSpicy($indice) {
         $nivelHot = '<select class="form-control" name="nivelHot' . $indice . '">';
 
-        $niveles = json_decode(json_encode($this->Order->getNivelHot()), true);
+        $niveles = json_decode(json_encode($this->MOrder->getNivelHot()), true);
         foreach ($niveles as $nivel) {
             $nivelHot .= '<option value="' . $nivel['IdSpicy'] . '">' . $nivel['NameSpicy'] . '</option>';
         }
@@ -69,7 +69,7 @@ class Orders extends CI_Controller {
 
     public function generarSauceTypes($indice) {
         $sauceTypes = '<select class="form-control" name="typeSalsa' . $indice . '">';
-        $salsas = json_decode(json_encode($this->Order->getTiposSalsa()), true);
+        $salsas = json_decode(json_encode($this->MOrder->getTiposSalsa()), true);
         foreach ($salsas as $salsa) {
             $sauceTypes .= '<option value="' . $salsa['IdSauce'] . '">' . $salsa['NameSauce'] . '</option>';
         }
@@ -90,7 +90,8 @@ class Orders extends CI_Controller {
             }
             $producto .= '</tbody></table>';
         }
-        $producto .= '<div class="col-md-4">Cantidad:</div><div class="col-md-8"><input type="number" class="form-control" name="Quantity" min="1" max="50" value="1"></div><br>';
+        $producto .= '<div class="input-group"><div class="input-group-addon">Cantidad</div><input type="number" class="form-control" name="Quantity" min="1" max="50" value="1"></div><br>';
+        $producto .= '<textarea name="ordrComment" class="form-control" rows="2" maxlength="30" placeholder="Comentarios"></textarea>';
         $producto .= 'Precio:  <strong class="itemPrice">' . $price . '</strong><br>';
         $producto .= '<button type="submit" class=" btn btn-success" name="Aceptar">Agregar</button>';
         $producto .= '</div></form>';
@@ -99,7 +100,7 @@ class Orders extends CI_Controller {
 
     public function getSucursales() {
         $Sucursales = '<select class="form-control" name="Restaurante" id="codagency">';
-        $agencies = $this->Order->getAgencies();
+        $agencies = $this->MOrder->getAgencies();
         foreach ($agencies as $agency) {
             $Sucursales .= '<option value="' . $agency->IdAgency . '">' . $agency->Name . '</option>';
         }
@@ -118,13 +119,13 @@ class Orders extends CI_Controller {
                 $productos = $this->input->post('items');
                 $total = $this->input->post('total');
                 $referencia = $this->input->post('referencia');
-                $idOrder = $this->Order->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia);
+                $idOrder = $this->MOrder->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia);
                 foreach ($productos as $producto) {
-                    $idItem = $this->Order->insertOrderDetail($producto['producto'], $producto['cantidad'], $producto['precio'], $idOrder);
+                    $idItem = $this->MOrder->insertOrderDetail($producto['producto'], $producto['cantidad'], $producto['precio'], $idOrder,$producto['comentarios']);
                     if (isset($producto['salsas'])) {
                         $salsas = $producto['salsas'];
                         foreach ($salsas as $salsa) {
-                            $this->Order->insertOrderDetailSauces($salsa['idSalsa'], $salsa['idPicante'], $idItem);
+                            $this->MOrder->insertOrderDetailSauces($salsa['idSalsa'], $salsa['idPicante'], $idItem);
                         }
                     }
                 }
@@ -144,7 +145,7 @@ class Orders extends CI_Controller {
                 $cantidad = $this->input->post('comments');
                 $precio = $this->input->post('agency');
                 $orden = $this->input->post('orden');
-                $arrayData = $this->Order->insertOrder($idproducto, $idsalsa, $idpicante, $cantidad, $precio, $orden);
+                $arrayData = $this->MOrder->insertOrder($idproducto, $idsalsa, $idpicante, $cantidad, $precio, $orden);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -156,7 +157,7 @@ class Orders extends CI_Controller {
         try {
             if ($this->input->post()) {
                 $numero = $this->input->post('numberClient');
-                $arrayData = $this->Order->searchClient($numero);
+                $arrayData = $this->MOrder->searchClient($numero);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
@@ -170,7 +171,7 @@ class Orders extends CI_Controller {
             if ($this->input->post()) {
                 $option = $this->input->post('numberOption');
                 $filter = $this->input->post('filtertext');
-                $pedidos = $this->Order->getDeliveriesBy($option, $filter);
+                $pedidos = $this->MOrder->getDeliveriesBy($option, $filter);
                 foreach ($pedidos as $pedido) {
                     $Orders .= '<tr id="' . $pedido->IdOrder . '">';
                     $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';

@@ -34,7 +34,7 @@ function searchClient(event) {
     if (tecla === 9) {
         $('#telefonoCliente').html($('#ClientNumber').val());
         var telefono = $('#ClientNumber').val();
-        var url = "Orders/searchClient/";
+        var url = "COrders/searchClient/";
         var posting = $.post(url, {numberClient: telefono});
         posting.done(function (data) {
             var obj = jQuery.parseJSON(data);
@@ -71,6 +71,7 @@ $(".itemMenu").submit(function (event) {
     var idForm = $form.attr('id').substring(3);
     var nameItem = $form.find(".itemName").html();
     var quantity = $form.find("input[name='Quantity']").val();
+    var comment = $form.find("textarea[name='ordrComment']").val();
     var precio = $form.find(".itemPrice").html();
     var quantitySauce = $form.find(".saucedetail tr").length;
     var fila = '<tr id="itemDetail' + indice + '" class="itemORDR">';
@@ -89,6 +90,7 @@ $(".itemMenu").submit(function (event) {
     }
     fila += '<td class="cantidad">' + quantity + '</td>';
     fila += '<td class="Price">' + precio + '</td>';
+    fila += '<td class="comentariosItem">' + comment + '</td>';
     fila += '<td class="Acciones"><button id="itemDEL' + indice + '" onclick="eliminarItem(this)" title="Eliminar Item" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button></td>';
     fila += "</tr>";
     $('#detailOrder').append(fila);
@@ -124,6 +126,7 @@ function realizarPedido(PEDIDO) {
         producto = $(this).find("td").eq(0).attr('class').substring(10);
         cantidad = $(this).find(".cantidad").html();
         precio = $(this).find(".Price").html();
+        var comentarios = $(this).find(".comentariosItem").html();
         var salsas = new Array();
         for (var i = 0; i < $(this).find(".salsa1 tr").length; i++) {
             var idSalsa = $(this).find(".salsa1 .tr"+i+" td").eq(0).attr('class').substring(8);
@@ -131,10 +134,10 @@ function realizarPedido(PEDIDO) {
             var salsaItem = {idSalsa:idSalsa, idPicante:idPicante};
             salsas[i] = salsaItem;
         }
-        var item = {producto: producto, cantidad: cantidad, precio: precio, salsas:salsas};
+        var item = {producto: producto, cantidad: cantidad, precio: precio, salsas:salsas, comentarios:comentarios};
         items[index] = item;
     });
-//console.log(items);
+console.log(items);
     var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
@@ -204,7 +207,7 @@ $('#logout').click(function () {
 
 
 function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora, total) {
-    var url = "Orders/crearPedido/";
+    var url = "COrders/crearPedido/";
     var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: $('#totalPedido').html(), referencia: $('#PagoTarjetaReferencia').val()});
     posting.done(function (data) {
         $("#OrderNumber").html(data);

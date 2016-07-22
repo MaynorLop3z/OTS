@@ -19,7 +19,7 @@ class Login extends CI_Controller {
                 $this->session->set_userdata($usuario_data);
                 $this->load->helper('url');
                 if ($UserData->IdRol == 2) {
-                    Redirect('Orders');
+                    Redirect('COrders');
                 }
                 if ($UserData->IdRol == 3) {
                     Redirect('Deliveries');

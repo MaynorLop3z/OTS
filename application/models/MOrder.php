@@ -4,7 +4,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class Order extends CI_Model {
+class MOrder extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -106,13 +106,14 @@ class Order extends CI_Model {
         return $insert_id;
     }
 
-    public function insertOrderDetail($IdProduct, $Quantity, $UnitPrice, $IdOrder) {
+    public function insertOrderDetail($IdProduct, $Quantity, $UnitPrice, $IdOrder, $Comment) {
         try {
             $data = array(
                 "IdProduct" => $IdProduct,
                 "Quantity" => $Quantity,
                 "UnitPrice" => $UnitPrice,
-                "IdOrder" => $IdOrder
+                "IdOrder" => $IdOrder,
+                "Comment" => $Comment
             );
             $this->db->insert('DetailOrder', $data);
             $insert_id = $this->db->insert_id();
