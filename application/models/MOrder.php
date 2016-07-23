@@ -19,6 +19,15 @@ class MOrder extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    public function getCoverages() {
+        $this->db->select('IdCoverage, '
+                . 'Name, '
+                . 'IdAgency');
+        $this->db->from('Coverage');
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 
     public function getTiposSalsa() {
         $this->db->select('IdSauce, '

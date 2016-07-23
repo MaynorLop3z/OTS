@@ -6,7 +6,8 @@
         <title>Pedidos</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Bootstrap -->          
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
         <link href="../appearance/css/flatly-bootstrap.min.css" rel="stylesheet">
         <script src="../appearance/js/jquery-2.2.3.min.js"></script>
         <script src="../appearance/js/bootstrap.min.js"></script>
@@ -17,40 +18,34 @@
             //https://jqueryui.com/autocomplete/#custom-data
             $(function () {
                 var coverages = [
-                    {
-                        value: 1,
-                        label: "jQuery"
-                    },
-                    {
-                        value: 2,
-                        label: "jQuery UI"
-                    },
-                    {
-                        value: 3,
-                        label: "Sizzle JS"
+                    <?php
+                    $tmp = 0;
+                    foreach ($Zonas as $zona) {
+                        if ($tmp > 0) {
+                            echo ',';
+                        }
+                       echo '{ value: '.$zona->IdAgency.', label: "'.$zona->Name.'"}'; 
+                       $tmp++;
                     }
+                    ?>
                 ];
 
-                $("#Coverage").autocomplete({
+                $("#ClientZone").autocomplete({
                     minLength: 0,
                     source: coverages,
                     focus: function (event, ui) {
-                        $("#Coverage").val(ui.item.label);
+                        $("#ClientZone").val(ui.item.label);
                         return false;
                     },
                     select: function (event, ui) {
-                        $("#project").val(ui.item.label);
+                        $("#ClientZone").val(ui.item.label);
                         console.log(ui.item.value);
-                        $("#project-id").val(ui.item.value);
-                        $("#project-description").html(ui.item.desc);
-                        $("#project-icon").attr("src", "images/" + ui.item.icon);
-
                         return false;
                     }
                 })
                         .autocomplete("instance")._renderItem = function (ul, item) {
                     return $("<li>")
-                            .append("<div>" + item.label + "<br>" + item.desc + "</div>")
+                            .append("<div>" + item.label + "</div>")
                             .appendTo(ul);
                 };
             });
@@ -103,6 +98,12 @@
                                             <label for="ClientName" class="col-sm-2 control-label">Nombre:</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="ClientName" placeholder="Nombre del cliente" onkeydown="setClient(event)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ClientZone" class="col-sm-2 control-label">Zona:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="ClientZone" placeholder="Zona de Enrtega">
                                             </div>
                                         </div>
                                     </div>

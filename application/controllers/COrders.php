@@ -46,6 +46,7 @@ class COrders extends CI_Controller {
                 }
                 $data['Categorias'] = $allCategories;
                 $data['Sucursales'] = $this->getSucursales();
+                $data['Zonas'] = $this->MOrder->getCoverages();
                 $this->load->view('Orders', $data);
             } else {
                 $this->load->helper('url');
