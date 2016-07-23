@@ -266,9 +266,10 @@
                                                 <th>Numero</th>
                                                 <th>Nombre</th>
                                                 <th>Direccion</th>
+                                                <th>Estado</th>
+                                                <th>Motorizado</th>
                                                 <th>Total</th>
                                                 <th>Comentarios</th>
-                                                <th>Estado</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -294,10 +295,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th>Salsa</th>
-                                                <th>Picante</th>
+                                                <th>Salsa - Picante</th>
                                                 <th>Cantidad</th>
                                                 <th>Precio</th>
+                                                <th>Comentarios</th>
                                             </tr>
                                         </thead>
                                         <tbody id="OrderDetail">

@@ -75,10 +75,10 @@
                                 <thead>
                                     <tr>
                                         <th>Item</th>
-                                        <th>Salsa</th>
-                                        <th>Picante</th>
+                                        <th>Salsa - Picante</th>
                                         <th>Cantidad</th>
                                         <th>Precio</th>
+                                        <th>Comentarios</th>
                                     </tr>
                                 </thead>
                                 <tbody id="OrderDetail">

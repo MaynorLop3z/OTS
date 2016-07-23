@@ -84,7 +84,7 @@ $(".itemMenu").submit(function (event) {
             fila += '<td class="picanteNum' + $form.find("select[name='nivelHot" + j + "']").val() + '">' + $form.find("select[name='nivelHot" + j + "'] option:selected").text() + '</td>';
             fila += '</tr>';
         }
-        fila += '</td></tbody></table>';
+        fila += '</tbody></table></td>';
     } else {
         fila += '<td class="salsa0"></td>';
     }
@@ -249,33 +249,11 @@ $('#frmPagoTarjeta').submit(function (event) {
 });
 function viewDetail(boton) {
     var codigo = boton.id.substring(10);
-    var url = "Deliveries/viewDetailOrder/";
+    var url = "CDeliveries/viewDetailOrder/";
     var posting = $.post(url, {codigo: codigo});
     posting.done(function (data) {
         $("#ModalTittleView").html("Detalle del Pedido #" + codigo);
-
-        var obj = jQuery.parseJSON(data);
-        var tabla = "";
-        for (var x in obj) {
-            tabla += '<tr>';
-            tabla += '<td>' + obj[x].nameproduct + '</td>';
-            if (obj[x].namesauce) {
-                tabla += '<td>' + obj[x].namesauce + '</td>';
-            } else {
-                tabla += '<td></td>';
-            }
-            if (obj[x].namespicy) {
-                tabla += '<td>' + obj[x].namespicy + '</td>';
-            } else {
-                tabla += '<td></td>';
-            }
-
-            tabla += '<td>' + obj[x].quantity + '</td>';
-            tabla += '<td>' + obj[x].unitprice + '</td>';
-            tabla += '</tr>';
-
-        }
-        $("#OrderDetail").html(tabla);
+        $("#OrderDetail").html(data);
         $("#viewDetailModal").modal('toggle');
     });
     posting.fail(function (xhr, textStatus, errorThrown) {

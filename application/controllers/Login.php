@@ -22,7 +22,7 @@ class Login extends CI_Controller {
                     Redirect('COrders');
                 }
                 if ($UserData->IdRol == 3) {
-                    Redirect('Deliveries');
+                    Redirect('CDeliveries');
                 }
                 if ($UserData->IdRol == 1) {
                     Redirect('Administration');

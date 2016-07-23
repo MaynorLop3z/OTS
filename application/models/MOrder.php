@@ -92,7 +92,7 @@ class MOrder extends CI_Model {
                 "Comments" => $comentarios,
                 "IdAgency" => $sucursal,
                 "CreationDate" => date("Y-m-d"),
-                "IdStatus" => 1,
+                "IdStatus" => 0,
                 "CreationTime" => date("H:i:s"),
                 "Total" => $total,
                 "IdUsuario" => $this->session->userdata('usaurio'),
@@ -155,37 +155,46 @@ public function insertOrderDetailSauces($IdSauce, $IdSpicy, $IdDetail) {
     }
 
     public function getDeliveriesBy($option, $filter) {
-        $this->db->select('IdOrder, '
-                . 'NumberClient, '
-                . 'NameClient, '
-                . 'DirectionClient, '
-                . 'Comments, '
-                . 'IdAgency, '
-                . 'CreationDate, '
-                . 'IdStatus,'
-                . 'Total');
-        $this->db->from('Order');
+        $criterio = '';
         switch ($option) {
             case 0:
-                $this->db->like('NumberClient', $filter);
+                $criterio = '"T0"."NumberClient" LIKE \'%'.$filter.'%\'';
                 break;
             case 1:
-                $this->db->like('NameClient', $filter);
+                $criterio = '"T0"."NameClient" LIKE \'%'.$filter.'%\'';
                 break;
             case 2:
-                $this->db->like('DirectionClient', $filter);
+                $criterio = '"T0"."DirectionClient" LIKE \'%'.$filter.'%\'';
                 break;
             case 3:
-                $this->db->where('IdOrder', $filter);
+                $criterio = '"T0"."IdOrder" = '.$filter;
                 break;
             default:
-                $this->db->where('IdOrder', $filter);
+                $criterio = '"T0"."IdOrder" = '.$filter;
         }
-        $this->db->where('CreationDate', date("Y-m-d"));
-        $this->db->order_by("IdOrder", "desc");
-        $consulta = $this->db->get();
-        $resultado = $consulta->result();
-        return $resultado;
+        try {
+            $consulta = $this->db->query('SELECT 
+  "T0"."IdOrder", 
+  "T0"."NumberClient", 
+  "T0"."NameClient", 
+  "T0"."DirectionClient", 
+  "T0"."Comments", 
+  "T0"."IdAgency", 
+  "T0"."CreationDate", 
+  "T0"."Total", 
+  "T1"."StatusDescription", 
+  "T2"."Nombre"
+FROM "Order" "T0", "Motorizados" "T2", "Status" "T1"
+WHERE "T0"."IdStatus" = "T1"."IdStatus" AND "T0"."IdMotorizado" = "T2"."IdMotorizado" AND '.$criterio.'
+ORDER BY
+  "T0"."IdOrder" ASC;');
+            if ($consulta != null) {
+                $resultado = $consulta->result();
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
     }
 
 }

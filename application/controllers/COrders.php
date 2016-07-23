@@ -176,12 +176,8 @@ class COrders extends CI_Controller {
                     $Orders .= '<tr id="' . $pedido->IdOrder . '">';
                     $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
                     $Orders .='<td>' . $pedido->NameClient . '</td><td>' . $pedido->DirectionClient . '</td>';
+                    $Orders .='<td>' . $pedido->StatusDescription . '</td><td>' . $pedido->Nombre . '</td>';
                     $Orders .='<td>$ ' . $pedido->Total . '</td><td>' . $pedido->Comments . '</td>';
-                    if ($pedido->IdStatus == 1) {
-                        $Orders .='<td>Pendiente</td>';
-                    } else {
-                        $Orders .='<td>Despachado</td>';
-                    }
                     $Orders .= '<td>'
                             . '<button id="viewDetail' . $pedido->IdOrder . '" onclick="viewDetail(this)" title="Ver Detalle" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> </button>'
                             . '</td>';

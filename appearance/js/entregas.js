@@ -1,32 +1,10 @@
 function viewDetail(boton) {
     var codigo = boton.id.substring(10);
-    var url = "Deliveries/viewDetailOrder/";
+    var url = "CDeliveries/viewDetailOrder/";
     var posting = $.post(url, {codigo: codigo});
     posting.done(function (data) {
         $("#ModalTittleView").html("Detalle del Pedido #" + codigo);
-
-        var obj = jQuery.parseJSON(data);
-        var tabla = "";
-        for (var x in obj) {
-            tabla += '<tr>';
-            tabla += '<td>' + obj[x].nameproduct + '</td>';
-            if (obj[x].namesauce) {
-                tabla += '<td>' + obj[x].namesauce + '</td>';
-            } else {
-                tabla += '<td></td>';
-            }
-            if (obj[x].namespicy) {
-                tabla += '<td>' + obj[x].namespicy + '</td>';
-            } else {
-                tabla += '<td></td>';
-            }
-
-            tabla += '<td>' + obj[x].quantity + '</td>';
-            tabla += '<td>' + obj[x].unitprice + '</td>';
-            tabla += '</tr>';
-
-        }
-        $("#OrderDetail").html(tabla);
+        $("#OrderDetail").html(data);
         $("#viewDetailModal").modal('toggle');
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
@@ -44,7 +22,7 @@ function viewDispatcher(boton) {
 
 function despachar() {
     var codigo = $("#OrderNumber").html();
-    var url = "Deliveries/dispatchOrder/";
+    var url = "CDeliveries/dispatchOrder/";
     var hora = getHoraActual();
     var status = $('#IdEstado'+codigo).val();
     var motorizado = $('#IdMotorizado'+codigo).val();
@@ -86,7 +64,7 @@ function getHoraActual() {
 var veces = 0;
 
 function updatePending() {
-    var url = "Deliveries/syncPedingOrders/";
+    var url = "CDeliveries/syncPedingOrders/";
     var posting = $.post(url, {estado: "pendiente"});
     posting.done(function (data) {
         $('#OrderList').html(data);

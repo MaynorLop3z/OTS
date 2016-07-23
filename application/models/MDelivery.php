@@ -5,7 +5,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class Delivery extends CI_Model {
+class MDelivery extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -36,12 +36,40 @@ class Delivery extends CI_Model {
 
     public function getDetalleOrder($codigo) {
         try {
-            $comando = 'SELECT * FROM getdetailorder (' . $codigo . ');';
+            $comando = 'SELECT 
+  "DetailOrder"."IdDetail", 
+  "Products"."NameProduct", 
+  "DetailOrder"."Quantity", 
+  "DetailOrder"."UnitPrice", 
+  "DetailOrder"."Comment"
+FROM "Products", "DetailOrder"
+WHERE "DetailOrder"."IdProduct" = "Products"."IdProduct" AND "DetailOrder"."IdOrder" = ' . $codigo . '
+ORDER BY "DetailOrder"."IdDetail" ASC;';
             $consulta = $this->db->query($comando);
             if ($consulta != null) {
                 $resultado = $consulta->result();
-            } else {
-                
+            } else {   
+            }
+            return $resultado;
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
+    }
+    public function getDetalleSalsas($codigo) {
+        try {
+            $comando = 'SELECT 
+  "T1"."NameSauce", 
+  "T2"."NameSpicy"
+FROM 
+  "DetailSauces" "T0", "Sauce" "T1", "Spicy" "T2"
+WHERE 
+  "T0"."IdSauce" = "T1"."IdSauce" AND
+  "T0"."IdSpicy" = "T2"."IdSpicy" AND "T0"."IdDetail" = '.$codigo.'
+ORDER BY
+  "T0"."IdDSauces" ASC;';
+            $consulta = $this->db->query($comando);
+            if ($consulta != null) {
+                $resultado = $consulta->result();
             }
             return $resultado;
         } catch (Exception $exc) {
@@ -68,12 +96,13 @@ class Delivery extends CI_Model {
         $this->db->select('IdStatus, '
                 . 'StatusDescription');
         $this->db->from('Status');
+        $this->db->where('IdStatus >',0);
         $consulta = $this->db->get();
         $resultado = $consulta->result();
         return $resultado;
     }
-    
-      public function getMotorizados($Sucursal) {
+
+    public function getMotorizados($Sucursal) {
         $this->db->select('IdMotorizado, '
                 . 'Nombre');
         $this->db->from('Motorizados');

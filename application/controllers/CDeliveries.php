@@ -2,12 +2,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Deliveries extends CI_Controller {
+class CDeliveries extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Delivery');
-        $this->load->model('Order');
+        $this->load->model('MDelivery');
+        $this->load->model('MOrder');
         $this->load->library(array('session'));
     }
 
@@ -32,7 +32,7 @@ class Deliveries extends CI_Controller {
         $IdStatus = 0;
         $IdMotorizado = 0;
         $sucursal = $this->session->userdata('sucursal');
-        $pedidos = $this->Delivery->listarDeliveries($sucursal);
+        $pedidos = $this->MDelivery->listarDeliveries($sucursal);
         foreach ($pedidos as $pedido) {
             $Orders .= '<tr id="' . $pedido->IdOrder . '">';
             $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
@@ -62,7 +62,7 @@ class Deliveries extends CI_Controller {
         $IdStatus = 0;
         $IdMotorizado = 0;
         $sucursal = $this->session->userdata('sucursal');
-        $pedidos = $this->Delivery->listarDeliveries($sucursal);
+        $pedidos = $this->MDelivery->listarDeliveries($sucursal);
         foreach ($pedidos as $pedido) {
             $Orders .= '<tr id="' . $pedido->IdOrder . '">';
             $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
@@ -94,8 +94,26 @@ class Deliveries extends CI_Controller {
         try {
             if ($this->input->post()) {
                 $codigo = $this->input->post('codigo');
-                $detalles = $this->Delivery->getDetalleOrder($codigo);
-                echo json_encode($detalles);
+                $detalles = $this->MDelivery->getDetalleOrder($codigo);
+                $tablabody = '';
+                foreach ($detalles as $detalle) {
+                    $tablabody .= '<tr>';
+                    $tablabody .= '<td>' . $detalle->NameProduct . '</td>';
+                    $salsas = $this->MDelivery->getDetalleSalsas($detalle->IdDetail);
+                    $tablabody .= '<td><table class="table table-bordered table-condensed"><tbody>';
+                    foreach ($salsas as $salsa) {
+                     $tablabody .= '<tr>';
+                     $tablabody .= '<td>' . $salsa->NameSauce . '</td>';
+                     $tablabody .= '<td>' . $salsa->NameSpicy . '</td>';
+                     $tablabody .= '</tr>';
+                    }
+                    $tablabody .= '</tbody></table></td>';
+                    $tablabody .= '<td>' . $detalle->Quantity . '</td>';
+                    $tablabody .= '<td>' . $detalle->UnitPrice . '</td>';
+                    $tablabody .= '<td>' . $detalle->Comment . '</td>';
+                    $tablabody .= '</tr>';
+                }
+                echo $tablabody;
             }
         } catch (Exception $ex) {
             echo json_encode($ex);
@@ -104,7 +122,7 @@ class Deliveries extends CI_Controller {
 
     public function getStatusC($IdStatus) {
         $Estados = '';
-        $Status = $this->Delivery->getStatus();
+        $Status = $this->MDelivery->getStatus();
         foreach ($Status as $Estado) {
             $Estados .= '<option value="' . $Estado->IdStatus . '">' . $Estado->StatusDescription . '</option>';
         }
@@ -115,7 +133,7 @@ class Deliveries extends CI_Controller {
     public function getMotorizados($IdMotorizado) {
         $sucursal = $this->session->userdata('sucursal');
         $Motorizados = '';
-        $Bikers = $this->Delivery->getMotorizados($sucursal);
+        $Bikers = $this->MDelivery->getMotorizados($sucursal);
         foreach ($Bikers as $Motorizado) {
 //            if ($Motorizado->IdMotorizado = $IdMotorizado) {
                 $Motorizados .= '<option value="' . $Motorizado->IdMotorizado . '" >' . $Motorizado->Nombre . '</option>';
@@ -133,7 +151,7 @@ class Deliveries extends CI_Controller {
                 $codigo = $this->input->post('codigo');
                 $status = $this->input->post('status');
                 $motorizado = $this->input->post('motorizado');
-                $arrayData = $this->Delivery->dispatchOrder($codigo, $status, $motorizado);
+                $arrayData = $this->MDelivery->dispatchOrder($codigo, $status, $motorizado);
                 echo json_encode($arrayData);
             }
         } catch (Exception $ex) {
