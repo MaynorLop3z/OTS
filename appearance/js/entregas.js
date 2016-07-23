@@ -37,7 +37,7 @@ function viewDetail(boton) {
 ;
 
 function viewDispatcher(boton) {
-    var codigo = boton.id.substring(8);
+    var codigo = boton.id.substring(8);    
     $("#OrderNumber").html(codigo);
     $("#viewDispatchModal").modal('toggle');
 }
@@ -46,10 +46,18 @@ function despachar() {
     var codigo = $("#OrderNumber").html();
     var url = "Deliveries/dispatchOrder/";
     var hora = getHoraActual();
-    var posting = $.post(url, {codigo: codigo, hora: hora});
+    var status = $('#IdEstado'+codigo).val();
+    var motorizado = $('#IdMotorizado'+codigo).val();
+//    console.log(codigo);
+//    console.log(status);
+//    console.log(motorizado);
+    var posting = $.post(url, {codigo: codigo, hora: hora, status: status, motorizado: motorizado});
     posting.done(function (data) {
-        $('#OrderList').find('#' + codigo).fadeOut("slow");
-        $('#OrderList').find('#' + codigo).remove();
+        if (status == 4) {
+//            console.log(status);
+            $('#OrderList').find('#' + codigo).fadeOut("slow");
+            $('#OrderList').find('#' + codigo).remove();
+        }
         $("#viewDispatchModal").modal('toggle');
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
@@ -89,3 +97,12 @@ function updatePending() {
     setTimeout("updatePending()", 30000);
 }
 updatePending();
+
+function Selecciona(IdOrder, IdStatus, IdMotorizado) {
+    $('#IdEstado'+IdOrder).val(IdStatus);
+    $('#IdMotorizado'+IdOrder).val(IdMotorizado);
+//    console.log(IdOrder);
+//    console.log(IdStatus);
+//    console.log(IdMotorizado);
+}
+;

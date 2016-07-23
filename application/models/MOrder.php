@@ -92,7 +92,7 @@ class MOrder extends CI_Model {
                 "Comments" => $comentarios,
                 "IdAgency" => $sucursal,
                 "CreationDate" => date("Y-m-d"),
-                "Status" => 1,
+                "IdStatus" => 1,
                 "CreationTime" => date("H:i:s"),
                 "Total" => $total,
                 "IdUsuario" => $this->session->userdata('usaurio'),
@@ -162,7 +162,7 @@ public function insertOrderDetailSauces($IdSauce, $IdSpicy, $IdDetail) {
                 . 'Comments, '
                 . 'IdAgency, '
                 . 'CreationDate, '
-                . 'Status,'
+                . 'IdStatus,'
                 . 'Total');
         $this->db->from('Order');
         switch ($option) {

@@ -177,7 +177,7 @@ class COrders extends CI_Controller {
                     $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
                     $Orders .='<td>' . $pedido->NameClient . '</td><td>' . $pedido->DirectionClient . '</td>';
                     $Orders .='<td>$ ' . $pedido->Total . '</td><td>' . $pedido->Comments . '</td>';
-                    if ($pedido->Status == 1) {
+                    if ($pedido->IdStatus == 1) {
                         $Orders .='<td>Pendiente</td>';
                     } else {
                         $Orders .='<td>Despachado</td>';

@@ -232,7 +232,7 @@ CREATE TABLE "Order" (
     "Comments" character varying(500),
     "IdAgency" integer,
     "CreationDate" date NOT NULL,
-    "Status" integer NOT NULL,
+    "IdStatus" integer NOT NULL,
     "CreationTime" time without time zone NOT NULL,
     "DispatchTime" time without time zone,
     "Total" double precision,
