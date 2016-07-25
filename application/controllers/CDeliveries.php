@@ -48,10 +48,12 @@ class CDeliveries extends CI_Controller {
             $Orders .= '<td>' . $pedido->Comments . '</td>';
             $Orders .= '<td> <select class="form-control" name="Estado" id="IdEstado' . $pedido->IdOrder . '"> ' . $this->getStatusC($IdStatus) . '</td>';
             $Orders .= '<td> <select class="form-control" name="Motorizado" id="IdMotorizado' . $pedido->IdOrder . '">' . $this->getMotorizados($IdMotorizado) . '</td>';
-            $Orders .= '<td>'
+            $Orders .= '<td><div class="btn-group" role="group">'
                     . '<button id="Dispatch' . $pedido->IdOrder . '" onclick="viewDispatcher(this)" title="Despachar" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>'
                     . '<button id="viewDetail' . $pedido->IdOrder . '" onclick="viewDetail(this)" title="Ver Detalle" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> </button>'
-                    . '</td>';
+                    . '<button id="printOrder' . $pedido->IdOrder . '" onclick="" title="Imprimir Comanda" class="btn btn-warning"><i class="fa fa-print fa-lg" aria-hidden="true"></i> </button>'
+                    . '<button id="printBill' . $pedido->IdOrder . '" onclick="" title="Imprimir Factura" class="btn btn-primary"><i class="fa fa-money fa-lg" aria-hidden="true"></i> </button>'
+                    . '</div></td>';
             $Orders .='</tr>';
         }
         return $Orders;
@@ -78,10 +80,12 @@ class CDeliveries extends CI_Controller {
             $Orders .= '<td>' . $pedido->Comments . '</td>';
             $Orders .= '<td> <select class="form-control" name="Estado" id="IdEstado' . $pedido->IdOrder . '"> ' . $this->getStatusC($IdStatus) . '</td>';
             $Orders .= '<td> <select class="form-control" name="Motorizado" id="IdMotorizado' . $pedido->IdOrder . '">' . $this->getMotorizados($IdMotorizado) . '</td>';
-            $Orders .= '<td>'
+            $Orders .= '<td><div class="btn-group" role="group">'
                     . '<button id="Dispatch' . $pedido->IdOrder . '" onclick="viewDispatcher(this)" title="Despachar" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> </button>'
                     . '<button id="viewDetail' . $pedido->IdOrder . '" onclick="viewDetail(this)" title="Ver Detalle" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> </button>'
-                    . '</td>';
+                    . '<button id="printOrder' . $pedido->IdOrder . '" onclick="" title="Imprimir Comanda" class="btn btn-warning"><i class="fa fa-print fa-lg" aria-hidden="true"></i> </button>'
+                    . '<button id="printBill' . $pedido->IdOrder . '" onclick="" title="Imprimir Factura" class="btn btn-primary"><i class="fa fa-money fa-lg" aria-hidden="true"></i> </button>'
+                    . '</div></td>';
             $Orders .='</tr>';
             $Orders .= '<script>';
             $Orders .= 'Selecciona(' . $pedido->IdOrder . ', ' .$IdStatus . ', ' .$IdMotorizado . ')';
