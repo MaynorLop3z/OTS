@@ -39,7 +39,7 @@
                     },
                     select: function (event, ui) {
                         $("#ClientZone").val(ui.item.label);
-                        console.log(ui.item.value);
+                        $("#codagency").val(ui.item.value); //console.log(ui.item.value);
                         return false;
                     }
                 })
