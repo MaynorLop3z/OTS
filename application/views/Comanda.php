@@ -7,7 +7,7 @@
     <body>
         <?php
         echo '<pre>Item                                      Descripcion<br>';
-        echo 'Wings Dobles                              Salsa Aparte</pre>';
+        echo 'Wings Dobles                              Salsa Aparte</pre>'.$test;
         ?>
         <script>
         window.print();

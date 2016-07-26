@@ -86,5 +86,5 @@ function Selecciona(IdOrder, IdStatus, IdMotorizado) {
 ;
 function printComanda(fila){
     //window.print();
-    window.open('CPrinter/');
+    window.open("CPrinter/?Id="+fila.id+"");
 };

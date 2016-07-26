@@ -9,7 +9,8 @@ class CPrinter extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('Comanda');
+        $data["test"]=$this->input->get('Id');
+        $this->load->view('Comanda',$data);
     }
 
 }
