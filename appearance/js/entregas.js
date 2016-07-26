@@ -31,7 +31,7 @@ function despachar() {
 //    console.log(motorizado);
     var posting = $.post(url, {codigo: codigo, hora: hora, status: status, motorizado: motorizado});
     posting.done(function (data) {
-        if (status == 4) {
+        if (status === 4) {
 //            console.log(status);
             $('#OrderList').find('#' + codigo).fadeOut("slow");
             $('#OrderList').find('#' + codigo).remove();
@@ -73,7 +73,7 @@ function updatePending() {
         alert("error" + xhr.responseText);
     });
     setTimeout("updatePending()", 30000);
-}
+};
 updatePending();
 
 function Selecciona(IdOrder, IdStatus, IdMotorizado) {
@@ -84,3 +84,7 @@ function Selecciona(IdOrder, IdStatus, IdMotorizado) {
 //    console.log(IdMotorizado);
 }
 ;
+function printComanda(fila){
+    //window.print();
+    window.open('CPrinter/');
+};
