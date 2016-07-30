@@ -33,6 +33,17 @@ class MDelivery extends CI_Model {
         $resultado = $consulta->result();
         return $resultado;
     }
+    public function getOrder($idOrder) {
+        $this->db->select('NameClient, '
+                . 'DirectionClient, '
+                . 'Comments, '
+                . 'Total');
+        $this->db->from('Order');
+        $this->db->where('IdOrder', $idOrder);
+        $consulta = $this->db->get();
+        $resultado = $consulta->result();
+        return $resultado;
+    }
 
     public function getDetalleOrder($codigo) {
         try {

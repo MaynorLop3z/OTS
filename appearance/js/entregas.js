@@ -85,6 +85,10 @@ function Selecciona(IdOrder, IdStatus, IdMotorizado) {
 }
 ;
 function printComanda(fila){
+    window.open("CPrinter/");
+};
+function printBill(fila){
     //window.print();
-    window.open("CPrinter/?Id="+fila.id+"");
+    var Id =fila.id.substring(9);
+    window.open("CPrinter/getComanda/?Id="+Id+"");
 };

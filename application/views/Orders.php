@@ -336,7 +336,7 @@ foreach ($Zonas as $zona) {
                     <button id="btnORDR" title="verPedido" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>  
                     <button onclick="showbuscarPedido()" title="buscarPedido" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
-                <div class="col-md-8" id="ORDR">
+                <div class="col-md-10" id="ORDR">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4 class="login-header">Datos del pedido</h4>

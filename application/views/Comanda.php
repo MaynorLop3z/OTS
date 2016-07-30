@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Print Preview</title>
-        <script>
+<!--        <script>
             function createFile() {
             var fso = new new ActiveXObject("Scripting.FileSystemObject");
             var s = fso.OpenTextFile("C:\test.txt", 8,true,0);
@@ -14,16 +14,16 @@
             console.log("CREADO");
             };
             createFile();
-        </script>
+        </script>-->
     </head>
     <body>
-        <?php
-        echo '<pre>Item                                      Descripcion<br>';
-        echo 'Wings Dobles                              Salsa Aparte</pre>' . $test;
+        <pre>
+            <?php
+        echo  $comanda;
         ?>
+        </pre>
         <script>
-            window.print();
-            
+            window.print();   
         </script>
     </body>
 </html>
