@@ -18,16 +18,16 @@
             //https://jqueryui.com/autocomplete/#custom-data
             $(function () {
                 var coverages = [
-                    <?php
-                    $tmp = 0;
-                    foreach ($Zonas as $zona) {
-                        if ($tmp > 0) {
-                            echo ',';
-                        }
-                       echo '{ value: '.$zona->IdAgency.', label: "'.$zona->Name.'"}'; 
-                       $tmp++;
-                    }
-                    ?>
+<?php
+$tmp = 0;
+foreach ($Zonas as $zona) {
+    if ($tmp > 0) {
+        echo ',';
+    }
+    echo '{ value: ' . $zona->IdAgency . ', label: "' . $zona->Name . '"}';
+    $tmp++;
+}
+?>
                 ];
 
                 $("#ClientZone").autocomplete({
@@ -49,7 +49,26 @@
                             .appendTo(ul);
                 };
             });
+//            function verPedido() {
+//                $("#ORDR").animate({
+//                    left: parseInt($("#ORDR").css("left")) === 0 ? "-=" + $("#ORDR").outerWidth() : 0,
+//                    opacity: parseInt($("#ORDR").css("opacity")) === 1 ? 0 : 1
+//                }, 1000);
+//            }
+//            ;
+            $(document).ready(function () {
+                $('#btnORDR').click(function () {
+                    $("#ORDR").slideToggle("slow");
+                });
+                $("#ORDR").css({display: 'none'});
+            });
         </script>
+        <style>
+            #ORDR {
+                position: absolute;
+                left: 0;
+            }
+        </style>
     </head>
     <body>
         <div class="container-fluid">
@@ -74,7 +93,7 @@
 
             </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-11">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingOne">
@@ -313,8 +332,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
+                <div class="col-md-1">
+                    <button id="btnORDR" title="verPedido" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button>  
+                    <button onclick="showbuscarPedido()" title="buscarPedido" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+                <div class="col-md-8" id="ORDR">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4 class="login-header">Datos del pedido</h4>
@@ -362,7 +384,6 @@
                                     ?>
                                 </p>
                                 <button onclick="realizarPedido(this)" title="crearPedido" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>  CREAR PEDIDO</button>
-                                <button onclick="showbuscarPedido()" title="buscarPedido" class="btn btn-success"><span class="glyphicon glyphicon-search"></span>  BUSCAR PEDIDO</button>
                             </div>
                         </div>
                     </div>
