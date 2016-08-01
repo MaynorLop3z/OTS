@@ -16,11 +16,15 @@ class CPrinter extends CI_Controller {
     }
 
     public function index() {
-        $this->load->library('fpdf');
-        $pdf = new FPDF();
+        $this->load->library('pdf');
+        $pdf = new PDF('P','cm',array(15,15));
+        $pdf->setTotal(125.35);
+        $pdf->setClientName('Maynor Lopez');
+        $pdf->setDateFac(date('d-m-Y G:i:s'));
+        $pdf->setDirection('Residencial Arizona, Senda Maya #23');
         $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(40, 10, '¡Hola, Mundo!');
+        $pdf->SetFont('Times', 'B', 16);
+        $pdf->Cell(5, 5, 'Hola, Mundo!');
         $pdf->Output();
     }
 
