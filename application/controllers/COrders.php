@@ -18,17 +18,17 @@ class COrders extends CI_Controller {
                 $categorias = $this->MOrder->getCategorias();
                 $allCategories[$cantidadCategorias] = '';
                 foreach ($categorias as $cat) {
+                    $productos = $this->MOrder->getProductCatetory($cat->IdCategory);
                     $allCategories[$cantidadCategorias] = ' <div class="panel panel-info">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordionCat" href="#collapseCaterogia' . $cantidadCategorias . '" aria-expanded="true" aria-controls="collapseCaterogia' . $cantidadCategorias . '">
-          ' . $cat->NameCategory . '
+          ' . $cat->NameCategory . ' ('.count($productos) .')
         </a>
       </h4>
     </div>
     <div id="collapseCaterogia' . $cantidadCategorias . '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">';
-                    $productos = $this->MOrder->getProductCatetory($cat->IdCategory);
                     $clearfix = 0;
                     $detalleProductos = '';
                     foreach ($productos as $prod) {
