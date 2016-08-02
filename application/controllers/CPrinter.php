@@ -17,7 +17,7 @@ class CPrinter extends CI_Controller {
 
     public function index() {
         $this->load->library('pdf');
-        $pdf = new PDF('P','cm',array(15,15));
+        $pdf = new PDF('P', 'cm', array(21.5, 27.9));
         $pdf->setTotal(125.35);
         $pdf->setClientName('Maynor Lopez');
         $pdf->setDateFac(date('d-m-Y G:i:s'));
@@ -28,26 +28,36 @@ class CPrinter extends CI_Controller {
         $pdf->Output();
     }
 
-    public function getComanda() {
+    public function printBill() {
         $IdPedido = $this->input->get('Id');
         $this->load->model('MDelivery');
-        $comanda = '';
+        $this->load->library('pdf');
+        $pdf = new PDF('P', 'cm', array(21.5, 27.9));
         $Orders = $this->MDelivery->getOrder($IdPedido);
         foreach ($Orders as $Order) {
-            $comanda .= $Order->NameClient . '                                      ' . date('d-m-Y G:i:s') . '<br><br><br>';
+            $pdf->setTotal($Order->Total);
+            $pdf->setClientName($Order->NameClient);
+            $pdf->setDateFac(date('d-m-Y G:i:s'));
+            $pdf->setDirection($Order->DirectionClient);
+            $pdf->AddPage();
+            $pdf->SetFont('Times', 'B', 10);
             $detalles = $this->MDelivery->getDetalleOrder($IdPedido);
             foreach ($detalles as $detalle) {
-                $comanda .= $detalle->Quantity . '            ' . $detalle->NameProduct . '           ' . $detalle->UnitPrice . '          ' . ($detalle->Quantity * $detalle->UnitPrice) . '<br>';
+                $pdf->Cell(1, 2, $detalle->Quantity, 0, 0, 'L');
+                $pdf->Cell(7, 2, $detalle->NameProduct, 0, 0, 'L');
+                $pdf->Cell(2, 2, $detalle->UnitPrice, 0, 0, 'L');
+                $pdf->Cell(2, 2, ($detalle->Quantity * $detalle->UnitPrice), 0, 0, 'L');
                 $salsas = $this->MDelivery->getDetalleSalsas($detalle->IdDetail);
                 foreach ($salsas as $salsa) {
-                    $comanda .='           --' . $salsa->NameSauce . ' - ' . $salsa->NameSpicy . '<br>';
+                    $pdf->Ln(0.5);
+                    $pdf->Cell(1, 2, '', 0, 0, 'L');
+                    $pdf->Cell(7, 2, '--' . $salsa->NameSauce . ' - ' . $salsa->NameSpicy, 0, 0, 'L');
+                    $pdf->Cell(2, 2, '', 0, 0, 'L');
+                    $pdf->Cell(2, 2, '', 0, 0, 'L');
                 }
+                $pdf->Ln(0.5);
             }
-            $comanda .='<br><br><br>';
-            $comanda .='        ' . $Order->DirectionClient . '                     $' . $Order->Total;
         }
-        $data['comanda'] = $comanda;
-        $this->load->view('Comanda', $data);
+        $pdf->Output();
     }
-
 }

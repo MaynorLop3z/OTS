@@ -14,21 +14,19 @@ class PDF extends FPDF {
         // Movernos a la derecha
 //        $this->Cell(8);
         // Título
-        $this->Cell(4, 3, $this->clientFac, 0, 0, 'C');
-        $this->Cell(5, 3, $this->dateFac, 0, 0, 'C');
+        $this->Cell(6, 3, $this->clientFac, 0, 0, 'C');
+        $this->Cell(6, 3, $this->dateFac, 0, 0, 'C');
         // Salto de línea
        $this->Ln(2);
     }
 
 // Pie de página
     function Footer() {
-        // Posición: a 1,5 cm del final
+        // Posición: a 5 cm del final
         $this->SetY(-5);
-        // Arial italic 8
         $this->SetFont('Arial', 'I', 10);
-        // Número de página
-        $this->MultiCell(7, 5, $this->dirFac);
-        $this->MultiCell(7, 5, '$ '.$this->totalFac); 
+        $this->Cell(7, 5, $this->dirFac, 0, 0, 'C');
+        $this->Cell(7, 5, '$ '.$this->totalFac, 0, 0, 'C'); 
     }
 
     function setTotal($total) {
