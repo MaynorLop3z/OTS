@@ -74,12 +74,13 @@ $(".itemMenu").submit(function (event) {
     var comment = $form.find("textarea[name='ordrComment']").val();
     var precio = $form.find(".itemPrice").html();
     var quantitySauce = $form.find(".saucedetail tr").length;
+    var garniture = $form.find("select[name='garniture']").val();
     var fila = '<tr id="itemDetail' + indice + '" class="itemORDR">';
     fila += '<td class="Dscription' + idForm + '">' + nameItem + '</td>';
     if (quantitySauce > 0) {
         fila += '<td class="salsa1"><table class="table table-bordered table-condensed"><tbody>';
         for (var j = 0; j < quantitySauce; j++) {
-            fila += '<tr class="tr'+j+'">';
+            fila += '<tr class="tr' + j + '">';
             fila += '<td class="salsaNum' + $form.find("select[name='typeSalsa" + j + "']").val() + '">' + $form.find("select[name='typeSalsa" + j + "'] option:selected").text() + '</td>';
             fila += '<td class="picanteNum' + $form.find("select[name='nivelHot" + j + "']").val() + '">' + $form.find("select[name='nivelHot" + j + "'] option:selected").text() + '</td>';
             fila += '</tr>';
@@ -90,7 +91,12 @@ $(".itemMenu").submit(function (event) {
     }
     fila += '<td class="cantidad">' + quantity + '</td>';
     fila += '<td class="Price">' + precio + '</td>';
-    fila += '<td class="comentariosItem">' + comment + '</td>';
+    if (garniture) {
+        fila += '<td class="comentariosItem">' + comment + ' - ' + garniture + '</td>';
+    } else {
+        fila += '<td class="comentariosItem">' + comment + '</td>';
+    }
+
     fila += '<td class="Acciones"><button id="itemDEL' + indice + '" onclick="eliminarItem(this)" title="Eliminar Item" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> </button></td>';
     fila += "</tr>";
     $('#detailOrder').append(fila);
@@ -104,7 +110,7 @@ function calcularTotal() {
         var cantidad = $(this).find(".cantidad").html();
         var precio = $(this).find(".Price").html();
         //if (cantidad) {
-            total += cantidad * precio;
+        total += cantidad * precio;
         //}
     });
     $('#totalPedido').html(total.toFixed(2));
@@ -129,15 +135,15 @@ function realizarPedido(PEDIDO) {
         var comentarios = $(this).find(".comentariosItem").html();
         var salsas = new Array();
         for (var i = 0; i < $(this).find(".salsa1 tr").length; i++) {
-            var idSalsa = $(this).find(".salsa1 .tr"+i+" td").eq(0).attr('class').substring(8);
-            var idPicante = $(this).find(".salsa1 .tr"+i+" td").eq(1).attr('class').substring(10);
-            var salsaItem = {idSalsa:idSalsa, idPicante:idPicante};
+            var idSalsa = $(this).find(".salsa1 .tr" + i + " td").eq(0).attr('class').substring(8);
+            var idPicante = $(this).find(".salsa1 .tr" + i + " td").eq(1).attr('class').substring(10);
+            var salsaItem = {idSalsa: idSalsa, idPicante: idPicante};
             salsas[i] = salsaItem;
         }
-        var item = {producto: producto, cantidad: cantidad, precio: precio, salsas:salsas, comentarios:comentarios};
+        var item = {producto: producto, cantidad: cantidad, precio: precio, salsas: salsas, comentarios: comentarios};
         items[index] = item;
     });
-console.log(items);
+    console.log(items);
     var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();

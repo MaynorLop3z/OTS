@@ -56,7 +56,8 @@ class MOrder extends CI_Model {
                 . 'Dscription, '
                 . 'Sauce, '
                 . 'Price, '
-                . 'SauceQuantity');
+                . 'SauceQuantity, '
+                . 'Garniture');
         $this->db->from('Products');
         $this->db->where('IdCategory', $idCategory);
         $this->db->where('State', 0);

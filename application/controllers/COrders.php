@@ -33,7 +33,7 @@ class COrders extends CI_Controller {
                     $detalleProductos = '';
                     foreach ($productos as $prod) {
                         //$allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
-                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price, $prod->SauceQuantity);
+                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price, $prod->SauceQuantity, $prod->Garniture);
                         $clearfix++;
                         if ($clearfix == 3) {
                             $clearfix = 0;
@@ -77,11 +77,20 @@ class COrders extends CI_Controller {
         $sauceTypes .= '</select>';
         return $sauceTypes;
     }
+    public function generarGarnitures(){
+        $garnitures = '<select class="form-control" name="garniture">';
+        $garnitures .='<option value="Vegetales">Vegetales</option>';
+        $garnitures .= '<option value="Apio">Apio</option>';
+        $garnitures .= '<option value="Zanahoria">Zanahoria</option>';
+        $garnitures .= '<option value="Papas">Papas</option>';
+        $garnitures .= '</select>';
+        return $garnitures;
+    }
 
-    public function generarProducto($id, $name, $sauce, $dscription, $price, $sauceQuantity) {
+    public function generarProducto($id, $name, $sauce, $dscription, $price, $sauceQuantity, $vegetables) {
         $producto = '<form method="POST" action="" class="itemMenu" id="pro' . $id . '"><div class="col-sm-6 col-md-4">';
         $producto .= '<h3 class="itemName">' . $name . '</h3>';
-        if ($sauce == 't') {
+        if ($sauce === 't') {
             $producto .= '<table class="table table-bordered table-hover table-striped"><thead><tr><th>Salsa</th><th>Picante</th></tr></thead><tbody class="saucedetail">';
             for ($index = 0; $index < $sauceQuantity; $index++) {
                 $producto .= '<tr>';
@@ -90,6 +99,9 @@ class COrders extends CI_Controller {
                 $producto .= '</tr>';
             }
             $producto .= '</tbody></table>';
+        }
+        if ($vegetables === 't') {
+            $producto .= $this->generarGarnitures();
         }
         $producto .= '<div class="input-group"><div class="input-group-addon">Cantidad</div><input type="number" class="form-control" name="Quantity" min="1" max="50" value="1"></div><br>';
         $producto .= '<textarea name="ordrComment" class="form-control" rows="2" maxlength="30" placeholder="Comentarios"></textarea>';
