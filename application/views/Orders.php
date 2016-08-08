@@ -122,18 +122,42 @@ foreach ($Zonas as $zona) {
                                         <div class="form-group">
                                             <label for="ClientZone" class="col-sm-2 control-label">Zona:</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="ClientZone" placeholder="Zona de Enrtega">
+                                                <input type="text" class="form-control" id="ClientZone" placeholder="Zona de Entrega">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="ClientDirection" class="col-sm-2 control-label">Direccion:</label>
+                                            <label for="ClientStreet" class="col-sm-2 control-label">Calle:</label>
                                             <div class="col-sm-10">
-                                                <textarea id="ClientDirection" class="form-control" rows="3" placeholder="Direccion de entrega" onkeydown="setClientDir(event)"></textarea>
+                                                <input type="text" id="ClientStreet" class="form-control" placeholder="Calle de Entrega">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ClientPassage" class="col-sm-2 control-label">Pasaje:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="ClientPassage" class="form-control" placeholder="Pasaje de Entrega">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ClientNumberHouse" class="col-sm-2 control-label"># Casa:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="ClientNumberHouse" class="form-control" placeholder="Casa de Entrega">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="ClientDirection" class="col-sm-2 control-label">Direccion:</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <textarea id="ClientDirection" class="form-control" rows="3" placeholder="Direccion de entrega" onkeydown="setClientDir(event)"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
                                     <!--</div>-->
                                 </div>
                             </div>

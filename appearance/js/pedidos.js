@@ -42,7 +42,13 @@ function searchClient(event) {
                 $('#nombreCliente').html(obj[0].NameClient);
                 $('#DireccionCliente').html(obj[0].DirectionClient);
                 $('#ClientName').val(obj[0].NameClient);
-                $('#ClientDirection').val(obj[0].DirectionClient);
+                var dirseg = obj[0].DirectionClient.split(", ");
+                $('#ClientNumberHouse').val(dirseg[3].substring(1));
+                $('#ClientPassage').val(dirseg[2]);
+                $('#ClientStreet').val(dirseg[1]);
+                $('#ClientZone').val(dirseg[0]);
+                $("#codagency").val(obj[0].IdAgency);
+                //$('#ClientDirection').val(obj[0].DirectionClient);
             }
         });
         posting.fail(function (xhr, textStatus, errorThrown) {
@@ -144,27 +150,36 @@ function realizarPedido(PEDIDO) {
         items[index] = item;
     });
     console.log(items);
-    var dir = $('#DireccionCliente').html();
+    //var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
     var commen = $('#PagoCashComment').val();
     var referencia = $('#PagoTarjetaReferencia').val();
     var total = $('#totalPedido').html();
     var agency = $("#codagency").val();
-    if (dir || tel || name) {
-        if (items.length > 0) {
-            if (comprobarpago() === 1) {
-                crearPedido(name, tel, dir, commen, agency, items, total, referencia);
+    var house = $('#ClientNumberHouse').val();
+    var pasaje = $('#ClientPassage').val();
+    var calle = $('#ClientStreet').val();
+    var zona = $('#ClientZone').val();
+    if (zona || house || pasaje || calle) {
+        var dir = zona + ', ' + calle + ', ' + pasaje + ', #' + house;
+        if (tel || name) {
+            if (items.length > 0) {
+                if (comprobarpago() === 1) {
+                    crearPedido(name, tel, dir, commen, agency, items, total, referencia);
+                } else {
+                    alert("Falta Definir informacion de pago");
+                }
+
             } else {
-                alert("Falta Definir informacion de pago");
+                alert("Debe agregar elementos del menu al pedido.");
             }
 
         } else {
-            alert("Debe agregar elementos del menu al pedido.");
+            alert("Debe especificar todos los datos del cliente");
         }
-
     } else {
-        alert("Debe especificar todos los campos");
+        alert("Debe especificar todos los campos de la direccion");
     }
 }
 ;
@@ -189,9 +204,13 @@ function limpiarCampos() {
     $('#nombreCliente').html('');
     $('#telefonoCliente').html('');
     $('#totalPedido').html('0.00');
-    $('#ClientDirection').val('');
+    //$('#ClientDirection').val('');
     $('#ClientNumber').val('');
     $('#ClientName').val('');
+    $('#ClientNumberHouse').val('');
+    $('#ClientPassage').val('');
+    $('#ClientStreet').val('');
+    $('#ClientZone').val('');
     pagoTarjeta = 0;
     pagoEfectivo = 0;
     comentarios = "";
@@ -199,8 +218,6 @@ function limpiarCampos() {
     $('#PagoCashComment').val('');
 }
 ;
-
-
 $('#logout').click(function () {
     var url = "General/logout/";
     var posting = $.post(url);
@@ -210,8 +227,6 @@ $('#logout').click(function () {
         //alert("error" + xhr.responseText);
     });
 });
-
-
 function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora, total) {
     var url = "COrders/crearPedido/";
     var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: $('#totalPedido').html(), referencia: $('#PagoTarjetaReferencia').val()});
@@ -225,13 +240,10 @@ function crearPedido(nameClient, numberClient, directionClient, comments, agency
     });
 }
 ;
-
 function showbuscarPedido() {
     $("#modalPedidoBusqueda").modal('toggle');
 }
 ;
-
-
 $("#searchOrderBy").submit(function (event) {
     event.preventDefault();
     var $form = $(this), numberOption = $form.find("select[name='tipofiltro']").val(), filtertext = $form.find("input[name='filtro']").val(), url = $form.attr("action");

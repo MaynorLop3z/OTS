@@ -94,7 +94,6 @@ class MOrder extends CI_Model {
 
     public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia) {
         try {
-            $insert_id = 0;
             $data = array(
                 "NumberClient" => $numero,
                 "NameClient" => $nombre,
@@ -151,7 +150,8 @@ public function insertOrderDetailSauces($IdSauce, $IdSpicy, $IdDetail) {
         try {
             $this->db->select('NumberClient, '
                     . 'NameClient, '
-                    . 'DirectionClient');
+                    . 'DirectionClient, '
+                    . 'IdAgency');
             $this->db->from('Order');
             $this->db->where('NumberClient', $number);
             $this->db->order_by("IdOrder", "desc");
