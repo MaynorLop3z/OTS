@@ -1,9 +1,13 @@
 <?php
 
-//include 'WebClientPrint.php';
-//
-//use Neodynamic\SDK\Web\WebClientPrint;
-//use Neodynamic\SDK\Web\Utils;
+include 'WebClientPrint.php';
+
+use Neodynamic\SDK\Web\WebClientPrint;
+use Neodynamic\SDK\Web\Utils;
+use Neodynamic\SDK\Web\DefaultPrinter;
+use Neodynamic\SDK\Web\InstalledPrinter;
+use Neodynamic\SDK\Web\PrintFile;
+use Neodynamic\SDK\Web\ClientPrintJob;
 //http://www.neodynamic.com/Products/Help/WebClientPrintPHP2.0/index.html
 //http://www.neodynamic.com/products/printing/raw-data/php/
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -27,7 +31,9 @@ class CPrinter extends CI_Controller {
         $pdf->Cell(5, 5, 'Hola, Mundo!');
         $pdf->Output();
     }
-
+public function printOrder(){
+    
+}
     public function printBill() {
         $IdPedido = $this->input->get('Id');
         $this->load->model('MDelivery');

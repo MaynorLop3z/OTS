@@ -6,7 +6,9 @@
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/appearance/js/pedidos.js</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/COrders.php</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/views/Orders.php</file>
+            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/CPrinter.php</file>
             <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/models/MOrder.php</file>
+            <file>file:/C:/Bitnami/wappstack-5.5.28-0/apache2/htdocs/OTS/application/controllers/WebClientPrint.php</file>
         </group>
     </open-files>
 </project-private>
