@@ -1,13 +1,13 @@
 <?php
 
-include 'WebClientPrint.php';
-
-use Neodynamic\SDK\Web\WebClientPrint;
-use Neodynamic\SDK\Web\Utils;
-use Neodynamic\SDK\Web\DefaultPrinter;
-use Neodynamic\SDK\Web\InstalledPrinter;
-use Neodynamic\SDK\Web\PrintFile;
-use Neodynamic\SDK\Web\ClientPrintJob;
+//include 'WebClientPrint.php';
+//
+//use Neodynamic\SDK\Web\WebClientPrint;
+//use Neodynamic\SDK\Web\Utils;
+//use Neodynamic\SDK\Web\DefaultPrinter;
+//use Neodynamic\SDK\Web\InstalledPrinter;
+//use Neodynamic\SDK\Web\PrintFile;
+//use Neodynamic\SDK\Web\ClientPrintJob;
 //http://www.neodynamic.com/Products/Help/WebClientPrintPHP2.0/index.html
 //http://www.neodynamic.com/products/printing/raw-data/php/
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -31,9 +31,35 @@ class CPrinter extends CI_Controller {
         $pdf->Cell(5, 5, 'Hola, Mundo!');
         $pdf->Output();
     }
-public function printOrder(){
-    
-}
+
+    public function printOrder() {
+        $IdPedido = $this->input->get('Id');
+        $this->load->model('MDelivery');
+        $this->load->library('comandaprint');
+        $pdf = new ComandaPrint('P', 'cm', array(7.6, 29.7));
+        $pdf->SetLeftMargin(0.2);
+        $Orders = $this->MDelivery->getOrder($IdPedido);
+        foreach ($Orders as $Order) {
+            $pdf->IdOrder($IdPedido);
+            $pdf->AddPage();
+            $pdf->SetFont('Arial', 'B', 10);
+            $detalles = $this->MDelivery->getDetalleOrder($IdPedido);
+            foreach ($detalles as $detalle) {
+                $pdf->Cell(0, 2, $detalle->Quantity.' - '.$detalle->NameProduct, 0, 0, 'L');
+                $salsas = $this->MDelivery->getDetalleSalsas($detalle->IdDetail);
+                foreach ($salsas as $salsa) {
+                    $pdf->Ln(0.5);
+                    $pdf->Cell(1, 2, '', 0, 0, 'L');
+                    $pdf->Cell(7, 2, '--' . $salsa->NameSauce . '-' . $salsa->NameSpicy, 0, 0, 'L');
+                    $pdf->Cell(2, 2, '', 0, 0, 'L');
+                    $pdf->Cell(2, 2, '', 0, 0, 'L');
+                }
+                $pdf->Ln(0.5);
+            }
+        }
+        $pdf->Output();
+    }
+
     public function printBill() {
         $IdPedido = $this->input->get('Id');
         $this->load->model('MDelivery');
@@ -66,4 +92,5 @@ public function printOrder(){
         }
         $pdf->Output();
     }
+
 }
