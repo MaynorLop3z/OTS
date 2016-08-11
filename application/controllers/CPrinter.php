@@ -1,13 +1,14 @@
 <?php
 
-//include 'WebClientPrint.php';
-//
-//use Neodynamic\SDK\Web\WebClientPrint;
-//use Neodynamic\SDK\Web\Utils;
-//use Neodynamic\SDK\Web\DefaultPrinter;
-//use Neodynamic\SDK\Web\InstalledPrinter;
-//use Neodynamic\SDK\Web\PrintFile;
-//use Neodynamic\SDK\Web\ClientPrintJob;
+include 'WebClientPrint.php';
+
+use Neodynamic\SDK\Web\WebClientPrint;
+use Neodynamic\SDK\Web\Utils;
+use Neodynamic\SDK\Web\DefaultPrinter;
+use Neodynamic\SDK\Web\InstalledPrinter;
+use Neodynamic\SDK\Web\PrintFile;
+use Neodynamic\SDK\Web\ClientPrintJob;
+
 //http://www.neodynamic.com/Products/Help/WebClientPrintPHP2.0/index.html
 //http://www.neodynamic.com/products/printing/raw-data/php/
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -33,7 +34,8 @@ class CPrinter extends CI_Controller {
     }
 
     public function printOrder() {
-        $IdPedido = $this->input->get('Id');
+        //$IdPedido = $this->input->get('Id');
+        $IdPedido = $this->input->post('Id');
         $this->load->model('MDelivery');
         $this->load->library('comandaprint');
         $pdf = new ComandaPrint('P', 'cm', array(7.6, 29.7));
@@ -45,7 +47,7 @@ class CPrinter extends CI_Controller {
             $pdf->SetFont('Arial', 'B', 10);
             $detalles = $this->MDelivery->getDetalleOrder($IdPedido);
             foreach ($detalles as $detalle) {
-                $pdf->Cell(0, 2, $detalle->Quantity.' - '.$detalle->NameProduct, 0, 0, 'L');
+                $pdf->Cell(0, 2, $detalle->Quantity . ' - ' . $detalle->NameProduct, 0, 0, 'L');
                 $salsas = $this->MDelivery->getDetalleSalsas($detalle->IdDetail);
                 foreach ($salsas as $salsa) {
                     $pdf->Ln(0.5);
@@ -57,7 +59,18 @@ class CPrinter extends CI_Controller {
                 $pdf->Ln(0.5);
             }
         }
-        $pdf->Output();
+        $filePath = "TEMP_FILES/ORDR" . $IdPedido . ".pdf";
+        $pdf->Output("F", $filePath);
+
+        $fileName = uniqid() . ".pdf";
+        $cpj = new ClientPrintJob();
+        $cpj->printFile = new PrintFile($filePath, $fileName, null);
+        $cpj->clientPrinter = new DefaultPrinter();
+        ob_start();
+        ob_clean();
+        echo WebClientPrint::createScript($cpj->sendToClient());
+        ob_end_flush();
+        exit();
     }
 
     public function printBill() {

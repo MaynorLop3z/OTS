@@ -15,7 +15,7 @@ function viewDetail(boton) {
 ;
 
 function viewDispatcher(boton) {
-    var codigo = boton.id.substring(8);    
+    var codigo = boton.id.substring(8);
     $("#OrderNumber").html(codigo);
     $("#viewDispatchModal").modal('toggle');
 }
@@ -24,8 +24,8 @@ function despachar() {
     var codigo = $("#OrderNumber").html();
     var url = "CDeliveries/dispatchOrder/";
     var hora = getHoraActual();
-    var status = $('#IdEstado'+codigo).val();
-    var motorizado = $('#IdMotorizado'+codigo).val();
+    var status = $('#IdEstado' + codigo).val();
+    var motorizado = $('#IdMotorizado' + codigo).val();
 //    console.log(codigo);
 //    console.log(status);
 //    console.log(motorizado);
@@ -73,23 +73,35 @@ function updatePending() {
         alert("error" + xhr.responseText);
     });
     setTimeout("updatePending()", 30000);
-};
+}
+;
 updatePending();
 
 function Selecciona(IdOrder, IdStatus, IdMotorizado) {
-    $('#IdEstado'+IdOrder).val(IdStatus);
-    $('#IdMotorizado'+IdOrder).val(IdMotorizado);
+    $('#IdEstado' + IdOrder).val(IdStatus);
+    $('#IdMotorizado' + IdOrder).val(IdMotorizado);
 //    console.log(IdOrder);
 //    console.log(IdStatus);
 //    console.log(IdMotorizado);
 }
 ;
-function printComanda(fila){
-    var Id =fila.id.substring(10);
-    window.open("CPrinter/printOrder/?Id="+Id+"");
-};
-function printBill(fila){
+function printComanda(fila) {
+    var Id = fila.id.substring(10);
+    //window.open("CPrinter/printOrder/?Id="+Id+"");
+    var url = "CPrinter/printOrder/";
+    var posting = $.post(url, {Id: Id});
+    posting.done(function (data) {
+        alert("Documento enviado a la impresora");
+        $('#Something').html(data);
+    });
+    posting.fail(function (xhr, textStatus, errorThrown) {
+        alert("error" + xhr.responseText);
+    });
+}
+;
+function printBill(fila) {
     //window.print();
-    var Id =fila.id.substring(9);
-    window.open("CPrinter/printBill/?Id="+Id+"");
-};
+    var Id = fila.id.substring(9);
+    window.open("CPrinter/printBill/?Id=" + Id + "");
+}
+;

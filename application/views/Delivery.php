@@ -1,7 +1,13 @@
+<?php
+include APPPATH.'controllers/WebClientPrint.php';
+
+use Neodynamic\SDK\Web\WebClientPrint;
+use Neodynamic\SDK\Web\Utils;
+?>
 <!DOCTYPE html>
 <html>
     <head>
-        <?php $this->load->helper('url'); ?>
+<?php $this->load->helper('url'); ?>
         <meta charset="UTF-8">
         <title>Delivery</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -108,5 +114,10 @@
             </div>
         </div>
         <script src="../appearance/js/entregas.js"></script>
+        <div id="Something"></div>
+        <?php
+//Specify the ABSOLUTE URL to the php file that will create the ClientPrintJob obj
+//        echo WebClientPrint::createScript(Utils::getRoot() . '/Delivery.php');
+        ?>
     </body>
 </html>
