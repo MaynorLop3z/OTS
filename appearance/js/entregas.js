@@ -93,6 +93,7 @@ function printComanda(fila) {
     posting.done(function (data) {
         alert("Documento enviado a la impresora");
         $('#Something').html(data);
+        jsWebClientPrint.print();
     });
     posting.fail(function (xhr, textStatus, errorThrown) {
         alert("error" + xhr.responseText);

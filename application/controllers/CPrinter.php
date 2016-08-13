@@ -1,13 +1,13 @@
 <?php
 
-include 'WebClientPrint.php';
-
-use Neodynamic\SDK\Web\WebClientPrint;
-use Neodynamic\SDK\Web\Utils;
-use Neodynamic\SDK\Web\DefaultPrinter;
-use Neodynamic\SDK\Web\InstalledPrinter;
-use Neodynamic\SDK\Web\PrintFile;
-use Neodynamic\SDK\Web\ClientPrintJob;
+//include 'WebClientPrint.php';
+//
+//use Neodynamic\SDK\Web\WebClientPrint;
+//use Neodynamic\SDK\Web\Utils;
+//use Neodynamic\SDK\Web\DefaultPrinter;
+//use Neodynamic\SDK\Web\InstalledPrinter;
+//use Neodynamic\SDK\Web\PrintFile;
+//use Neodynamic\SDK\Web\ClientPrintJob;
 
 //http://www.neodynamic.com/Products/Help/WebClientPrintPHP2.0/index.html
 //http://www.neodynamic.com/products/printing/raw-data/php/
@@ -62,15 +62,17 @@ class CPrinter extends CI_Controller {
         $filePath = "TEMP_FILES/ORDR" . $IdPedido . ".pdf";
         $pdf->Output("F", $filePath);
 
-        $fileName = uniqid() . ".pdf";
-        $cpj = new ClientPrintJob();
-        $cpj->printFile = new PrintFile($filePath, $fileName, null);
-        $cpj->clientPrinter = new DefaultPrinter();
-        ob_start();
-        ob_clean();
-        echo WebClientPrint::createScript($cpj->sendToClient());
-        ob_end_flush();
-        exit();
+        $data["nombreArchivo"] = $filePath;
+        $this->load->view('TEST',$data);
+//        $fileName = uniqid() . ".pdf";
+//        $cpj = new ClientPrintJob();
+//        $cpj->printFile = new PrintFile($filePath, $fileName, null);
+//        $cpj->clientPrinter = new DefaultPrinter();
+//        ob_start();
+//        ob_clean();
+//        echo WebClientPrint::createScript($cpj->sendToClient());
+//        ob_end_flush();
+//        exit();
     }
 
     public function printBill() {
