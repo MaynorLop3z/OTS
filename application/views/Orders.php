@@ -120,6 +120,12 @@ foreach ($Zonas as $zona) {
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label for="ClientMail" class="col-sm-2 control-label">E-mail:</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="ClientMail" placeholder="Correo electronico del cliente">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="ClientZone" class="col-sm-2 control-label">Zona:</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="ClientZone" placeholder="Zona de Entrega">
@@ -393,6 +399,12 @@ foreach ($Zonas as $zona) {
                                     <tbody id="detailOrder">
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="col-md-12">
+                                <h4><span class="label label-warning">
+                                        <strong>Cargo por envio: $</strong>
+                                        <strong id="cargoEnvio">1.45</strong>
+                                    </span></h4>
                             </div>
                             <div class="col-md-12">
                                 <h4><span class="label label-info">

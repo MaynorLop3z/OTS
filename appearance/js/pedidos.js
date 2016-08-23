@@ -89,6 +89,7 @@ $(".itemMenu").submit(function (event) {
             fila += '<tr class="tr' + j + '">';
             fila += '<td class="salsaNum' + $form.find("select[name='typeSalsa" + j + "']").val() + '">' + $form.find("select[name='typeSalsa" + j + "'] option:selected").text() + '</td>';
             fila += '<td class="picanteNum' + $form.find("select[name='nivelHot" + j + "']").val() + '">' + $form.find("select[name='nivelHot" + j + "'] option:selected").text() + '</td>';
+            fila += '<td class="vegetales' + $form.find("select[name='garniture" + j + "']").val() + '">' + $form.find("select[name='garniture" + j + "'] option:selected").text() + '</td>';
             fila += '</tr>';
         }
         fila += '</tbody></table></td>';
@@ -97,7 +98,7 @@ $(".itemMenu").submit(function (event) {
     }
     fila += '<td class="cantidad">' + quantity + '</td>';
     fila += '<td class="Price">' + precio + '</td>';
-    if (garniture) {
+    if (garniture && quantitySauce > 0) {
         fila += '<td class="comentariosItem">' + comment + ' - ' + garniture + '</td>';
     } else {
         fila += '<td class="comentariosItem">' + comment + '</td>';
@@ -143,7 +144,8 @@ function realizarPedido(PEDIDO) {
         for (var i = 0; i < $(this).find(".salsa1 tr").length; i++) {
             var idSalsa = $(this).find(".salsa1 .tr" + i + " td").eq(0).attr('class').substring(8);
             var idPicante = $(this).find(".salsa1 .tr" + i + " td").eq(1).attr('class').substring(10);
-            var salsaItem = {idSalsa: idSalsa, idPicante: idPicante};
+            var vegetables = $(this).find(".salsa1 .tr" + i + " td").eq(2).html();
+            var salsaItem = {idSalsa: idSalsa, idPicante: idPicante, vegetables: vegetables};
             salsas[i] = salsaItem;
         }
         var item = {producto: producto, cantidad: cantidad, precio: precio, salsas: salsas, comentarios: comentarios};
@@ -154,19 +156,20 @@ function realizarPedido(PEDIDO) {
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
     var commen = $('#PagoCashComment').val();
-    var referencia = $('#PagoTarjetaReferencia').val();
-    var total = $('#totalPedido').html();
+    var total =  parseInt($('#totalPedido').html(),10);
+    total += 1.45;
     var agency = $("#codagency").val();
     var house = $('#ClientNumberHouse').val();
     var pasaje = $('#ClientPassage').val();
     var calle = $('#ClientStreet').val();
     var zona = $('#ClientZone').val();
+    var email = $('#ClientMail').val();
     if (zona || house || pasaje || calle) {
         var dir = zona + ', ' + calle + ', ' + pasaje + ', #' + house;
         if (tel || name) {
             if (items.length > 0) {
                 if (comprobarpago() === 1) {
-                    crearPedido(name, tel, dir, commen, agency, items, total, referencia);
+                    crearPedido(name, tel, dir, commen, agency, items, total, email);
                 } else {
                     alert("Falta Definir informacion de pago");
                 }
@@ -227,9 +230,9 @@ $('#logout').click(function () {
         //alert("error" + xhr.responseText);
     });
 });
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, fecha, hora, total) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email) {
     var url = "COrders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, fecha: fecha, hora: hora, total: $('#totalPedido').html(), referencia: $('#PagoTarjetaReferencia').val()});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email});
     posting.done(function (data) {
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');

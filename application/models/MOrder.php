@@ -92,7 +92,7 @@ class MOrder extends CI_Model {
         }
     }
 
-    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia) {
+    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email) {
         try {
             $data = array(
                 "NumberClient" => $numero,
@@ -105,7 +105,8 @@ class MOrder extends CI_Model {
                 "CreationTime" => date("H:i:s"),
                 "Total" => $total,
                 "IdUsuario" => $this->session->userdata('usaurio'),
-                "NumRef" => $referencia
+                "NumRef" => $referencia,
+                "email" => $email
             );
             $this->db->insert('Order', $data);
             $insert_id = $this->db->insert_id();
@@ -132,12 +133,13 @@ class MOrder extends CI_Model {
         }
         return $insert_id;
     }
-public function insertOrderDetailSauces($IdSauce, $IdSpicy, $IdDetail) {
+public function insertOrderDetailSauces($IdSauce, $IdSpicy, $IdDetail, $vegetables) {
         try {
             $data = array(
                 "IdDetail" => $IdDetail,
                 "IdSauce" => $IdSauce,
-                "IdSpicy" => $IdSpicy
+                "IdSpicy" => $IdSpicy,
+                "Vegetables" => $vegetables
             );
             $this->db->insert('DetailSauces', $data);
             $insert_id = $this->db->insert_id();
