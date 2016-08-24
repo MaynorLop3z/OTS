@@ -48,6 +48,7 @@ function searchClient(event) {
                 $('#ClientStreet').val(dirseg[1]);
                 $('#ClientZone').val(dirseg[0]);
                 $("#codagency").val(obj[0].IdAgency);
+                $("#ClientMail").val(obj[0].email);
                 //$('#ClientDirection').val(obj[0].DirectionClient);
             }
         });
@@ -151,11 +152,12 @@ function realizarPedido(PEDIDO) {
         var item = {producto: producto, cantidad: cantidad, precio: precio, salsas: salsas, comentarios: comentarios};
         items[index] = item;
     });
-    console.log(items);
+    //console.log(items);
     //var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
     var commen = $('#PagoCashComment').val();
+    commen += "     "+$('#ClientComment').val();
     var total =  parseInt($('#totalPedido').html(),10);
     total += 1.45;
     var agency = $("#codagency").val();
@@ -164,12 +166,13 @@ function realizarPedido(PEDIDO) {
     var calle = $('#ClientStreet').val();
     var zona = $('#ClientZone').val();
     var email = $('#ClientMail').val();
+    var cargoEnvio = document.getElementById("cargoEnvio").checked ? 1.45:0.00;
     if (zona || house || pasaje || calle) {
         var dir = zona + ', ' + calle + ', ' + pasaje + ', #' + house;
         if (tel || name) {
             if (items.length > 0) {
                 if (comprobarpago() === 1) {
-                    crearPedido(name, tel, dir, commen, agency, items, total, email);
+                    crearPedido(name, tel, dir, commen, agency, items, total, email, cargoEnvio);
                 } else {
                     alert("Falta Definir informacion de pago");
                 }
@@ -219,6 +222,7 @@ function limpiarCampos() {
     comentarios = "";
     $('#PagoTarjetaReferencia').val('');
     $('#PagoCashComment').val('');
+    $('#cargoEnvio').prop("checked", true);
 }
 ;
 $('#logout').click(function () {
@@ -230,9 +234,9 @@ $('#logout').click(function () {
         //alert("error" + xhr.responseText);
     });
 });
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email, cargoEnvio) {
     var url = "COrders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email, cargo: cargoEnvio});
     posting.done(function (data) {
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');

@@ -156,6 +156,14 @@ foreach ($Zonas as $zona) {
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="ClientComment" class="col-sm-2 control-label">Comentario:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="ClientComment" class="form-control" placeholder="Comentarios">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!--                                    <div class="col-md-6">
                                                                             <div class="form-group">
                                                                                 <label for="ClientDirection" class="col-sm-2 control-label">Direccion:</label>
@@ -402,8 +410,7 @@ foreach ($Zonas as $zona) {
                             </div>
                             <div class="col-md-12">
                                 <h4><span class="label label-warning">
-                                        <strong>Cargo por envio: $</strong>
-                                        <strong id="cargoEnvio">1.45</strong>
+                                        <input type="checkbox" id="cargoEnvio" value="1.45" checked> Cargo por envio: 1.45
                                     </span></h4>
                             </div>
                             <div class="col-md-12">
