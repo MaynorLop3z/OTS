@@ -414,15 +414,17 @@ foreach ($Zonas as $zona) {
                                     </span></h4>
                             </div>
                             <div class="col-md-12">
-                                <label class="radio-inline">
-                                    <input type="radio" name="descuento" value="0" checked="true">0%
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="descuento" value="0.15">15%
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="descuento" value="0.2">20%
-                                </label>
+                                <form action="" id="radioDescuento">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="descuento" value="0" checked="true">0%
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="descuento" value="0.15">15%
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="descuento" value="0.2">20%
+                                    </label>
+                                </form>
                             </div>
                             <div class="col-md-12">
                                 <h4><span class="label label-info">
