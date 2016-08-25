@@ -57,7 +57,8 @@ class MOrder extends CI_Model {
                 . 'Sauce, '
                 . 'Price, '
                 . 'SauceQuantity, '
-                . 'Garniture');
+                . 'Garniture, '
+                . 'Options');
         $this->db->from('Products');
         $this->db->where('IdCategory', $idCategory);
         $this->db->where('State', 0);
@@ -92,7 +93,7 @@ class MOrder extends CI_Model {
         }
     }
 
-    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email,$charge) {
+    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email,$charge, $dscnt) {
         try {
             $data = array(
                 "NumberClient" => $numero,
@@ -107,7 +108,8 @@ class MOrder extends CI_Model {
                 "IdUsuario" => $this->session->userdata('usaurio'),
                 "NumRef" => $referencia,
                 "email" => $email,
-                "ChargeForService" => $charge
+                "ChargeForService" => $charge,
+                "Dscnt" => $dscnt
             );
             $this->db->insert('Order', $data);
             $insert_id = $this->db->insert_id();

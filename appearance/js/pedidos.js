@@ -90,7 +90,13 @@ $(".itemMenu").submit(function (event) {
             fila += '<tr class="tr' + j + '">';
             fila += '<td class="salsaNum' + $form.find("select[name='typeSalsa" + j + "']").val() + '">' + $form.find("select[name='typeSalsa" + j + "'] option:selected").text() + '</td>';
             fila += '<td class="picanteNum' + $form.find("select[name='nivelHot" + j + "']").val() + '">' + $form.find("select[name='nivelHot" + j + "'] option:selected").text() + '</td>';
-            fila += '<td class="vegetales' + $form.find("select[name='garniture" + j + "']").val() + '">' + $form.find("select[name='garniture" + j + "'] option:selected").text() + '</td>';
+            var opciones = $form.find("select[name='opciones" + j + "']").val();
+            if (opciones) {
+                fila += '<td class="vegetales' + $form.find("select[name='garniture" + j + "']").val() + '">' + $form.find("select[name='garniture" + j + "'] option:selected").text() + " - " + opciones + '</td>';
+            } else {
+                fila += '<td class="vegetales' + $form.find("select[name='garniture" + j + "']").val() + '">' + $form.find("select[name='garniture" + j + "'] option:selected").text() + '</td>';
+            }
+
             fila += '</tr>';
         }
         fila += '</tbody></table></td>';
@@ -157,22 +163,23 @@ function realizarPedido(PEDIDO) {
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
     var commen = $('#PagoCashComment').val();
-    commen += "     "+$('#ClientComment').val();
-    var total =  parseInt($('#totalPedido').html(),10);
-    total += 1.45;
+    commen += "     " + $('#ClientComment').val();
+    var total = parseInt($('#totalPedido').html(), 10);
+    //total += 1.45;
+    var discount = total * $('input[name="descuento"]').val();
     var agency = $("#codagency").val();
     var house = $('#ClientNumberHouse').val();
     var pasaje = $('#ClientPassage').val();
     var calle = $('#ClientStreet').val();
     var zona = $('#ClientZone').val();
     var email = $('#ClientMail').val();
-    var cargoEnvio = document.getElementById("cargoEnvio").checked ? 1.45:0.00;
+    var cargoEnvio = document.getElementById("cargoEnvio").checked ? 1.45 : 0.00;
     if (zona || house || pasaje || calle) {
         var dir = zona + ', ' + calle + ', ' + pasaje + ', #' + house;
         if (tel || name) {
             if (items.length > 0) {
                 if (comprobarpago() === 1) {
-                    crearPedido(name, tel, dir, commen, agency, items, total, email, cargoEnvio);
+                    crearPedido(name, tel, dir, commen, agency, items, total, email, cargoEnvio, discount);
                 } else {
                     alert("Falta Definir informacion de pago");
                 }
@@ -223,6 +230,7 @@ function limpiarCampos() {
     $('#PagoTarjetaReferencia').val('');
     $('#PagoCashComment').val('');
     $('#cargoEnvio').prop("checked", true);
+    $('input[name="descuento"]').val(0);
 }
 ;
 $('#logout').click(function () {
@@ -234,9 +242,9 @@ $('#logout').click(function () {
         //alert("error" + xhr.responseText);
     });
 });
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email, cargoEnvio) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email, cargoEnvio, discount) {
     var url = "COrders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email, cargo: cargoEnvio});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email, cargo: cargoEnvio, discount: discount});
     posting.done(function (data) {
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');

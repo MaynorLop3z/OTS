@@ -23,7 +23,7 @@ class COrders extends CI_Controller {
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordionCat" href="#collapseCaterogia' . $cantidadCategorias . '" aria-expanded="true" aria-controls="collapseCaterogia' . $cantidadCategorias . '">
-          ' . $cat->NameCategory . ' ('.count($productos) .')
+          ' . $cat->NameCategory . ' (' . count($productos) . ')
         </a>
       </h4>
     </div>
@@ -33,7 +33,7 @@ class COrders extends CI_Controller {
                     $detalleProductos = '';
                     foreach ($productos as $prod) {
                         //$allProducts[$cantidadProductos] = $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price);
-                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price, $prod->SauceQuantity, $prod->Garniture);
+                        $detalleProductos .= $this->generarProducto($prod->IdProduct, $prod->NameProduct, $prod->Sauce, $prod->Dscription, $prod->Price, $prod->SauceQuantity, $prod->Garniture, $prod->Options);
                         $clearfix++;
                         if ($clearfix == 2) {
                             $clearfix = 0;
@@ -77,7 +77,8 @@ class COrders extends CI_Controller {
         $sauceTypes .= '</select>';
         return $sauceTypes;
     }
-    public function generarGarnitures($indice){
+
+    public function generarGarnitures($indice) {
         $garnitures = '<select class="form-control" name="garniture' . $indice . '">';
         $garnitures .='<option value="Vegetales">Vegetales</option>';
         $garnitures .= '<option value="Apio">Apio</option>';
@@ -87,16 +88,35 @@ class COrders extends CI_Controller {
         return $garnitures;
     }
 
-    public function generarProducto($id, $name, $sauce, $dscription, $price, $sauceQuantity, $vegetables) {
+    public function generarOpciones($indice) {
+        $options = '<select class="form-control" name="opciones' . $indice . '">';
+        $options .='<option value="Alas">Alas</option>';
+        $options .= '<option value="Chunks">Chunks</option>';
+        $options .= '<option value="Camarones">Camarones</option>';
+        $options .= '<option value="Ribs">Ribs</option>';
+        $options .= '<option value="Strippers">Strippers</option>';
+        $options .= '</select>';
+        return $options;
+    }
+
+    public function generarProducto($id, $name, $sauce, $dscription, $price, $sauceQuantity, $vegetables, $options) {
         $producto = '<form method="POST" action="" class="itemMenu" id="pro' . $id . '"><div class="col-sm-6 col-md-6">';
         $producto .= '<h3 class="itemName">' . $name . '</h3>';
+        $producto .= '<p>' . $dscription . '</p>';
         if ($sauce === 't') {
-            $producto .= '<table class="table table-bordered table-hover table-striped"><thead><tr><th>Salsa</th><th>Picante</th><th>Vegetales</th></tr></thead><tbody class="saucedetail">';
+            $producto .= '<table class="table table-bordered table-hover table-striped"><thead><tr><th>Salsa</th><th>Picante</th><th>Vegetales</th>';
+            if ($options === 't') {
+                $producto .= "<th>Opciones</th>";
+            }
+            $producto .= '</tr></thead><tbody class="saucedetail">';
             for ($index = 0; $index < $sauceQuantity; $index++) {
                 $producto .= '<tr>';
                 $producto .= '<td>' . $this->generarSauceTypes($index) . '</td>';
                 $producto .= '<td>' . $this->generarHotSpicy($index) . '</td>';
                 $producto .= '<td>' . $this->generarGarnitures($index) . '</td>';
+                if ($options === 't') {
+                    $producto .= '<td>' . $this->generarOpciones($index) . '</td>';
+                }
                 $producto .= '</tr>';
             }
             $producto .= '</tbody></table>';
@@ -135,9 +155,10 @@ class COrders extends CI_Controller {
                 $email = $this->input->post('email');
                 $referencia = $this->input->post('referencia');
                 $cargo = $this->input->post('cargo');
-                $idOrder = $this->MOrder->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email, $cargo);
+                $descuento = $this->input->post('discount');
+                $idOrder = $this->MOrder->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email, $cargo, $descuento);
                 foreach ($productos as $producto) {
-                    $idItem = $this->MOrder->insertOrderDetail($producto['producto'], $producto['cantidad'], $producto['precio'], $idOrder,$producto['comentarios']);
+                    $idItem = $this->MOrder->insertOrderDetail($producto['producto'], $producto['cantidad'], $producto['precio'], $idOrder, $producto['comentarios']);
                     if (isset($producto['salsas'])) {
                         $salsas = $producto['salsas'];
                         foreach ($salsas as $salsa) {
