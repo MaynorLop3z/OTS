@@ -295,3 +295,11 @@ function viewDetail(boton) {
 
 }
 ;
+
+$("#cargoEnvio").change(function () {
+    console.log(document.getElementById("cargoEnvio").checked ? 1.45 : 0.00);
+});
+
+$("[name=descuento]").change(function () {
+    console.log($("[name=descuento]:checked").val());
+});
