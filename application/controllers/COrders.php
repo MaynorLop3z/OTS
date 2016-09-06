@@ -90,7 +90,7 @@ class COrders extends CI_Controller {
 
     public function generarOpciones($indice) {
         $options = '<select class="form-control" name="opciones' . $indice . '">';
-        $options .='<option value="Alas">Alas</option>';
+//        $options .='<option value="Alas">Alas</option>';
         $options .= '<option value="Chunks">Chunks</option>';
         $options .= '<option value="Camarones">Camarones</option>';
         $options .= '<option value="Ribs">Ribs</option>';

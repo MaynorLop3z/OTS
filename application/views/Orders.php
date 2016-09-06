@@ -410,7 +410,7 @@ foreach ($Zonas as $zona) {
                             </div>
                             <div class="col-md-12">
                                 <h4><span class="label label-warning">
-                                        <input type="checkbox" id="cargoEnvio" value="1.45" checked> Cargo por envio: 1.45
+                                        <input type="checkbox" id="cargoEnvio" value="1.45" checked> Cargo por envio: $1.45
                                     </span></h4>
                             </div>
                             <div class="col-md-12">
@@ -419,12 +419,18 @@ foreach ($Zonas as $zona) {
                                         <input type="radio" name="descuento" value="0" checked="true">0%
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="descuento" value="0.15">15%
+                                        <input type="radio" name="descuento" value="0.10">10%
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="descuento" value="0.2">20%
+                                        <input type="radio" name="descuento" value="0.15">15%
                                     </label>
                                 </form>
+                            </div>
+                            <div class="col-md-12">
+                                <h4><span class="label label-info">
+                                        <strong>Subtotal: $</strong>
+                                        <strong id="subTotalPedido">0.00</strong>
+                                    </span></h4>
                             </div>
                             <div class="col-md-12">
                                 <h4><span class="label label-info">

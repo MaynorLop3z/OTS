@@ -127,6 +127,11 @@ function calcularTotal() {
         total += cantidad * precio;
         //}
     });
+    $('#subTotalPedido').html(total.toFixed(2));
+    var cargo = document.getElementById("cargoEnvio").checked ? 1.45 : 0.00;
+    total += cargo;
+    var dsc = total * $("[name=descuento]:checked").val();
+    total -= dsc;
     $('#totalPedido').html(total.toFixed(2));
 }
 ;
@@ -298,8 +303,10 @@ function viewDetail(boton) {
 
 $("#cargoEnvio").change(function () {
     console.log(document.getElementById("cargoEnvio").checked ? 1.45 : 0.00);
+   calcularTotal()
 });
 
 $("[name=descuento]").change(function () {
     console.log($("[name=descuento]:checked").val());
+    calcularTotal()
 });
