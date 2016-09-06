@@ -229,6 +229,7 @@ function limpiarCampos() {
     $('#ClientPassage').val('');
     $('#ClientStreet').val('');
     $('#ClientZone').val('');
+    $('#ClientMail').val('');
     pagoTarjeta = 0;
     pagoEfectivo = 0;
     comentarios = "";
@@ -236,6 +237,7 @@ function limpiarCampos() {
     $('#PagoCashComment').val('');
     $('#cargoEnvio').prop("checked", true);
     $('input[name="descuento"]').val(0);
+    
 }
 ;
 $('#logout').click(function () {
