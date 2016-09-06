@@ -326,8 +326,10 @@ foreach ($Zonas as $zona) {
                                                 <th>Direccion</th>
                                                 <th>Estado</th>
                                                 <th>Motorizado</th>
+                                                <th>Forma de Pago</th>
                                                 <th>Total</th>
-                                                <th>Comentarios</th>
+                                                <th>Tiempo (Minutos)</th>
+                                                <!--<th>Comentarios</th>-->
                                                 <th>Action</th>
                                             </tr>
                                         </thead>

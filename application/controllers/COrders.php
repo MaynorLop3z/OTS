@@ -214,7 +214,13 @@ class COrders extends CI_Controller {
                     $Orders .='<td>' . $pedido->IdOrder . '</td><td>' . $pedido->NumberClient . '</td>';
                     $Orders .='<td>' . $pedido->NameClient . '</td><td>' . $pedido->DirectionClient . '</td>';
                     $Orders .='<td>' . $pedido->StatusDescription . '</td><td>' . $pedido->Nombre . '</td>';
-                    $Orders .='<td>$ ' . $pedido->Total . '</td><td>' . $pedido->Comments . '</td>';
+                     $Orders .='<td>' . $pedido->pago . '</td><td>$' . $pedido->total . '</td>';
+                     if ($pedido->minutes < 0) {
+                         $Orders .='<td> ' . $pedido->minutes * (-1). '</td>';
+                     }else  {
+                         $Orders .='<td> ' . $pedido->minutes . '</td>';
+                     }
+                    //$Orders .='<td> ' . $pedido->Comments . '</td>';
                     $Orders .= '<td>'
                             . '<button id="viewDetail' . $pedido->IdOrder . '" onclick="viewDetail(this)" title="Ver Detalle" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> </button>'
                             . '</td>';

@@ -199,9 +199,11 @@ public function insertOrderDetailSauces($IdSauce, $IdSpicy, $IdDetail, $vegetabl
   "T0"."Comments", 
   "T0"."IdAgency", 
   "T0"."CreationDate", 
-  "T0"."Total", 
+  ("T0"."Total" + "ChargeForService" - "Dscnt") AS TOTAL, 
   "T1"."StatusDescription", 
-  "T2"."Nombre"
+  "T2"."Nombre",
+  EXTRACT(MINUTES FROM "T0"."CreationTime") - EXTRACT(MINUTES FROM CURRENT_TIME) AS Minutes,
+  CASE WHEN "T0"."NumRef" IS NULL THEN \'EFECTIVO\' ELSE \'TARJETA\' END AS PAGO
 FROM "Order" "T0", "Motorizados" "T2", "Status" "T1"
 WHERE "T0"."IdStatus" = "T1"."IdStatus" AND "T0"."IdMotorizado" = "T2"."IdMotorizado" AND '.$criterio.'
 ORDER BY
