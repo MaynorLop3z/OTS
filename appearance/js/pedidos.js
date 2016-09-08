@@ -169,7 +169,7 @@ function realizarPedido(PEDIDO) {
     var name = $('#nombreCliente').html();
     var commen = $('#PagoCashComment').val();
     commen += "     " + $('#ClientComment').val();
-    var total = parseInt($('#subTotalPedido').html(), 10);
+    var total = $('#subTotalPedido').html();
     //total += 1.45;
     var discount = total * $('input[name="descuento"]').val();
     var agency = $("#codagency").val();

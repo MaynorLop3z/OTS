@@ -109,6 +109,7 @@ class CDeliveries extends CI_Controller {
                      $tablabody .= '<tr>';
                      $tablabody .= '<td>' . $salsa->NameSauce . '</td>';
                      $tablabody .= '<td>' . $salsa->NameSpicy . '</td>';
+                     $tablabody .= '<td>' . $salsa->Vegetables . '</td>';
                      $tablabody .= '</tr>';
                     }
                     $tablabody .= '</tbody></table></td>';

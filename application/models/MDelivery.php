@@ -70,7 +70,8 @@ ORDER BY "DetailOrder"."IdDetail" ASC;';
         try {
             $comando = 'SELECT 
   "T1"."NameSauce", 
-  "T2"."NameSpicy"
+  "T2"."NameSpicy",
+  "T0"."Vegetables"
 FROM 
   "DetailSauces" "T0", "Sauce" "T1", "Spicy" "T2"
 WHERE 
