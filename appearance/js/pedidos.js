@@ -167,8 +167,8 @@ function realizarPedido(PEDIDO) {
     //var dir = $('#DireccionCliente').html();
     var tel = $('#telefonoCliente').html();
     var name = $('#nombreCliente').html();
-    var commen = $('#PagoCashComment').val();
-    commen += "     " + $('#ClientComment').val();
+    var payment = $('#PagoCashComment').val();
+    var commen = $('#ClientComment').val();
     var total = $('#subTotalPedido').html();
     //total += 1.45;
     var discount = total * $('input[name="descuento"]').val();
@@ -184,7 +184,7 @@ function realizarPedido(PEDIDO) {
         if (tel || name) {
             if (items.length > 0) {
                 if (comprobarpago() === 1) {
-                    crearPedido(name, tel, dir, commen, agency, items, total, email, cargoEnvio, discount);
+                    crearPedido(name, tel, dir, commen, agency, items, total, email, cargoEnvio, discount,payment);
                 } else {
                     alert("Falta Definir informacion de pago");
                 }
@@ -249,9 +249,9 @@ $('#logout').click(function () {
         //alert("error" + xhr.responseText);
     });
 });
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email, cargoEnvio, discount) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email, cargoEnvio, discount, payment) {
     var url = "COrders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email, cargo: cargoEnvio, discount: discount});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email, cargo: cargoEnvio, discount: discount, payment: payment});
     posting.done(function (data) {
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');

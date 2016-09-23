@@ -156,7 +156,8 @@ class COrders extends CI_Controller {
                 $referencia = $this->input->post('referencia');
                 $cargo = $this->input->post('cargo');
                 $descuento = $this->input->post('discount');
-                $idOrder = $this->MOrder->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email, $cargo, $descuento);
+                $pago = $this->input->post('payment');
+                $idOrder = $this->MOrder->insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email, $cargo, $descuento, $pago);
                 foreach ($productos as $producto) {
                     $idItem = $this->MOrder->insertOrderDetail($producto['producto'], $producto['cantidad'], $producto['precio'], $idOrder, $producto['comentarios']);
                     if (isset($producto['salsas'])) {

@@ -93,7 +93,7 @@ class MOrder extends CI_Model {
         }
     }
 
-    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email,$charge, $dscnt) {
+    public function insertOrder($numero, $nombre, $direccion, $comentarios, $sucursal, $total, $referencia, $email,$charge, $dscnt, $payment) {
         try {
             $data = array(
                 "NumberClient" => $numero,
@@ -109,7 +109,8 @@ class MOrder extends CI_Model {
                 "NumRef" => $referencia,
                 "email" => $email,
                 "ChargeForService" => $charge,
-                "Dscnt" => $dscnt
+                "Dscnt" => $dscnt,
+                "Payment" => $payment
             );
             $this->db->insert('Order', $data);
             $insert_id = $this->db->insert_id();
