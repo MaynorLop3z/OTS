@@ -184,7 +184,7 @@ function realizarPedido(PEDIDO) {
         if (tel || name) {
             if (items.length > 0) {
                 if (comprobarpago() === 1) {
-                    crearPedido(name, tel, dir, commen, agency, items, total, email, cargoEnvio, discount,payment);
+                    crearPedido(name, tel, dir, commen, agency, items, total, email, cargoEnvio, discount,payment,zona);
                 } else {
                     alert("Falta Definir informacion de pago");
                 }
@@ -249,9 +249,9 @@ $('#logout').click(function () {
         //alert("error" + xhr.responseText);
     });
 });
-function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email, cargoEnvio, discount, payment) {
+function crearPedido(nameClient, numberClient, directionClient, comments, agency, items, total, email, cargoEnvio, discount, payment,zona) {
     var url = "COrders/crearPedido/";
-    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email, cargo: cargoEnvio, discount: discount, payment: payment});
+    var posting = $.post(url, {numberClient: numberClient, nameClient: nameClient, directionClient: directionClient, comments: comments, agency: agency, items: items, total: total, referencia: $('#PagoTarjetaReferencia').val(), email: email, cargo: cargoEnvio, discount: discount, payment: payment,zona:zona});
     posting.done(function (data) {
         $("#OrderNumber").html(data);
         $("#modalPedidoExitoso").modal('toggle');
